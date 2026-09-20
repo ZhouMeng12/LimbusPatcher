@@ -1,0 +1,204 @@
+{
+  "entities": [
+    {
+      "id": "10210",
+      "name": "多裂纹事务所 代表",
+      "season": 4,
+      "acq": "event",
+      "name_en": "MultiCrack Office Rep Faust",
+      "reason": "第4赛季活动提取"
+    },
+    {
+      "id": "10211",
+      "name": "LCE E.G.O:: 红艳煞",
+      "season": 5,
+      "acq": "event",
+      "name_en": "LCE E.G.O::Ardor Blossom Star Faust",
+      "reason": "第5赛季活动提取"
+    },
+    {
+      "id": "10212",
+      "name": "黑兽 - 卯 魁首",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "Heishou Pack - Mao Branch Adept Faust",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "10213",
+      "name": "し协会 东部3科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Shi Assoc. East Section 3 Faust",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10214",
+      "name": "食指 苦行者: 【纸条】",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "The Index Proselyte:【Paper Slip】Faust",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "10215",
+      "name": "蜘蛛巢 环指 子辈",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "The House of Spiders: The Ring Apprentice Faust",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "10216",
+      "name": "黎明事务所 收尾人",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Dawn Office Fixer Faust",
+      "reason": "瓦尔普吉斯之夜-9提取"
+    },
+    {
+      "id": "10301",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Don Quixote",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "10302",
+      "name": "W公司 3级 清扫人员",
+      "season": 0,
+      "acq": "base",
+      "name_en": "W Corp. L3 Cleanup Agent Don Quixote",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10303",
+      "name": "し协会 南部5科科长",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Shi Assoc. South Section 5 Director Don Quixote",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10304",
+      "name": "N公司 中锤",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "N Corp. Mittelhammer Don Quixote",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "10305",
+      "name": "Cinq协会 南部5科科长",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Cinq Assoc. South Section 5 Director Don Quixote",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10306",
+      "name": "中指 幼妹",
+      "season": 3,
+      "acq": "seasonal",
+      "name_en": "The Middle Little Sister Don Quixote",
+      "reason": "第3赛季提取"
+    },
+    {
+      "id": "10307",
+      "name": "脑叶公司E.G.O:: 提灯",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Lobotomy E.G.O::Lantern Don Quixote",
+      "reason": "瓦尔普吉斯之夜-2提取"
+    },
+    {
+      "id": "10308",
+      "name": "剑契组 杀手",
+      "season": 3,
+      "acq": "event",
+      "name_en": "Blade Lineage Salsu Don Quixote",
+      "reason": "第3赛季活动赠送"
+    },
+    {
+      "id": "10309",
+      "name": "T公司 3级 征收人员",
+      "season": 0,
+      "acq": "base",
+      "name_en": "T Corp. Class 3 Collection Staff Don Quixote",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10310",
+      "name": "拉·曼却领 总督",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "The Manager of La Manchaland Don Quixote",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "10311",
+      "name": "Cinq协会 东部3科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Cinq Assoc. East Section 3 Don Quixote",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10312",
+      "name": "脑叶公司E.G.O:: 以爱与憎之名",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Lobotomy E.G.O::In the Name of Love and Hate Don Quixote",
+      "reason": "瓦尔普吉斯之夜-6提取"
+    },
+    {
+      "id": "10313",
+      "name": "黑兽 - 未",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "Heishou Pack - Wei Branch Don Quixote",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "10314",
+      "name": "食指 代行者 绽放E.G.O:: 代行",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "The Index Proxy - Effloresced E.G.O::Procuration Don Quixote",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "10401",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Ryōshū",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "10402",
+      "name": "Seven协会 南部6科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Seven Assoc. South Section 6 Ryōshū",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10403",
+      "name": "黑云会 若众",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Kurokumo Clan Wakashu Ryōshū",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10404",
+      "name": "良·派 厨师长",
+      "season": 1,
+      "acq": "event",
+      "name_en": "R.B. Chef de Cuisine Ryōshū",
+      "reason": "第1赛季活动提取"
+    }
+  ]
+}

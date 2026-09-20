@@ -1,0 +1,188 @@
+{
+  "entities": [
+    {
+      "id": "10515",
+      "name": "环指 野兽派 学徒",
+      "season": 7,
+      "acq": "event",
+      "name_en": "The Ring Fauvist Student Meursault",
+      "reason": "第7赛季活动赠送"
+    },
+    {
+      "id": "10601",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Hong Lu",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "10602",
+      "name": "黑云会 若众",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Kurokumo Clan Wakashu Hong Lu",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10603",
+      "name": "豆豆帮 帮主",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "Tingtang Gang Gangleader Hong Lu",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "10604",
+      "name": "六协会 南部5科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Liu Assoc. South Section 5 Hong Lu",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10605",
+      "name": "K公司 3级 摘除人员",
+      "season": 2,
+      "acq": "seasonal",
+      "name_en": "K Corp. Class 3 Excision Staff Hong Lu",
+      "reason": "第2赛季提取"
+    },
+    {
+      "id": "10606",
+      "name": "W公司 2级 清扫人员",
+      "season": 0,
+      "acq": "base",
+      "name_en": "W Corp. L2 Cleanup Agent Hong Lu",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10607",
+      "name": "吊钩事务所 收尾人",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Hook Office Fixer Hong Lu",
+      "reason": "瓦尔普吉斯之夜-1提取"
+    },
+    {
+      "id": "10608",
+      "name": "Dieci协会 南部4科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Dieci Assoc. South Section 4 Hong Lu",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10609",
+      "name": "20区 圣愚",
+      "season": 4,
+      "acq": "event",
+      "name_en": "District 20 Yurodivy Hong Lu",
+      "reason": "第4赛季活动提取"
+    },
+    {
+      "id": "10610",
+      "name": "猎牙事务所 收尾人",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "Fanghunt Office Fixer Hong Lu",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "10611",
+      "name": "句点事务所 代表",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Full-Stop Office Rep Hong Lu",
+      "reason": "瓦尔普吉斯之夜-5提取"
+    },
+    {
+      "id": "10612",
+      "name": "R公司 第四集团军 驯鹿队",
+      "season": 0,
+      "acq": "base",
+      "name_en": "R Corp. 4th Pack Reindeer Hong Lu",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10613",
+      "name": "鸿园的君主",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "The Lord of Hongyuan Hong Lu",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "10614",
+      "name": "蜘蛛巢 环指 父辈",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "The House of Spiders: The Ring Nursefather Hong Lu",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "10615",
+      "name": "S公司 推奴人",
+      "season": 7,
+      "acq": "event",
+      "name_en": "S Corp. Ch'unokkun Hong Lu",
+      "reason": "第7赛季活动赠送"
+    },
+    {
+      "id": "10701",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Heathcliff",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "10702",
+      "name": "し协会 南部5科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Shi Assoc. South Section 5 Heathcliff",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10703",
+      "name": "R公司 第四集团军 兔子队",
+      "season": 0,
+      "acq": "base",
+      "name_en": "R Corp. 4th Pack Rabbit Heathcliff",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10704",
+      "name": "N公司 小锤",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "N Corp. Kleinhammer Heathcliff",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "10705",
+      "name": "脑叶公司E.G.O:: 狐雨",
+      "season": 2,
+      "acq": "seasonal",
+      "name_en": "Lobotomy E.G.O::Sunshower Heathcliff",
+      "reason": "第2赛季提取"
+    },
+    {
+      "id": "10706",
+      "name": "Seven协会 南部4科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Seven Assoc. South Section 4 Heathcliff",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10707",
+      "name": "裴廓德号 鱼叉手",
+      "season": 3,
+      "acq": "seasonal",
+      "name_en": "The Pequod Harpooneer Heathcliff",
+      "reason": "第3赛季提取"
+    }
+  ]
+}

@@ -1,0 +1,1817 @@
+{
+  "format_version": 1,
+  "generated_at": "2026-09-11T17:58:30",
+  "source": "D:\\Desktop\\lbc\\data\\misc_story\\ans",
+  "count": 201,
+  "kinds": {
+    "1D101A": {
+      "file": "1D101A",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 1,
+      "confidence": "high",
+      "reason": "4区L公司支部入口，第1章迷宫"
+    },
+    "1D102A": {
+      "file": "1D102A",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 2,
+      "confidence": "high",
+      "reason": "4区L公司支部内探索"
+    },
+    "1D103A": {
+      "file": "1D103A",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 3,
+      "confidence": "high",
+      "reason": "4区L公司支部内对话"
+    },
+    "1D104B": {
+      "file": "1D104B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 4,
+      "confidence": "high",
+      "reason": "支部内，浮士德指引"
+    },
+    "1D105A": {
+      "file": "1D105A",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 5,
+      "confidence": "high",
+      "reason": "支部内，异想体收容"
+    },
+    "1D105B": {
+      "file": "1D105B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 6,
+      "confidence": "high",
+      "reason": "支部内，霍普金斯"
+    },
+    "1D201B": {
+      "file": "1D201B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 7,
+      "confidence": "high",
+      "reason": "L公司支部地下层探索"
+    },
+    "1D202A": {
+      "file": "1D202A",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 8,
+      "confidence": "high",
+      "reason": "没落G公司，格里高尔"
+    },
+    "1D202B": {
+      "file": "1D202B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 9,
+      "confidence": "high",
+      "reason": "没落G公司，旧部长"
+    },
+    "1D203B": {
+      "file": "1D203B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 10,
+      "confidence": "high",
+      "reason": "L公司员工尸体，迷宫深处"
+    },
+    "1D204B": {
+      "file": "1D204B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 11,
+      "confidence": "high",
+      "reason": "石像头异想体，迷宫探索"
+    },
+    "1D301B": {
+      "file": "1D301B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 12,
+      "confidence": "high",
+      "reason": "烟霾战争，格里高尔记忆"
+    },
+    "1D302B": {
+      "file": "1D302B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 13,
+      "confidence": "high",
+      "reason": "烟霾战争中部战线"
+    },
+    "1D303B": {
+      "file": "1D303B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 14,
+      "confidence": "high",
+      "reason": "烟霾战争，士兵回忆"
+    },
+    "1D304B": {
+      "file": "1D304B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 15,
+      "confidence": "high",
+      "reason": "烟霾战争，尤莉同行"
+    },
+    "1D305B": {
+      "file": "1D305B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 16,
+      "confidence": "high",
+      "reason": "烟霾战争，格里高尔回忆"
+    },
+    "1D306A": {
+      "file": "1D306A",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 17,
+      "confidence": "high",
+      "reason": "尤莉真相，迷宫收尾"
+    },
+    "1D306B": {
+      "file": "1D306B",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 18,
+      "confidence": "high",
+      "reason": "金枝异想体收容单元"
+    },
+    "1D306I": {
+      "file": "1D306I",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 19,
+      "confidence": "high",
+      "reason": "异想体吞噬尤莉过场"
+    },
+    "1D306I2": {
+      "file": "1D306I2",
+      "kind": "迷宫剧情",
+      "chapter": "第1章",
+      "chapter_number": "01",
+      "order": 20,
+      "confidence": "high",
+      "reason": "金枝显现，结局过场"
+    },
+    "2D102B": {
+      "file": "2D102B",
+      "kind": "迷宫剧情",
+      "chapter": "第2章",
+      "chapter_number": "02",
+      "order": 1,
+      "confidence": "high",
+      "reason": "J公司赌场矿山1层"
+    },
+    "2D107A": {
+      "file": "2D107A",
+      "kind": "迷宫剧情",
+      "chapter": "第2章",
+      "chapter_number": "02",
+      "order": 2,
+      "confidence": "high",
+      "reason": "赌场矿山1层，人质"
+    },
+    "2D202B": {
+      "file": "2D202B",
+      "kind": "迷宫剧情",
+      "chapter": "第2章",
+      "chapter_number": "02",
+      "order": 3,
+      "confidence": "high",
+      "reason": "赌场矿山2层，集装箱"
+    },
+    "2D301B": {
+      "file": "2D301B",
+      "kind": "迷宫剧情",
+      "chapter": "第2章",
+      "chapter_number": "02",
+      "order": 4,
+      "confidence": "high",
+      "reason": "赌场矿山3层，结冰"
+    },
+    "2D306A": {
+      "file": "2D306A",
+      "kind": "迷宫剧情",
+      "chapter": "第2章",
+      "chapter_number": "02",
+      "order": 5,
+      "confidence": "high",
+      "reason": "冰霜城堡，N公司现身"
+    },
+    "2D306B": {
+      "file": "2D306B",
+      "kind": "迷宫剧情",
+      "chapter": "第2章",
+      "chapter_number": "02",
+      "order": 6,
+      "confidence": "high",
+      "reason": "冰霜城堡，索尼亚"
+    },
+    "2D306I": {
+      "file": "2D306I",
+      "kind": "迷宫剧情",
+      "chapter": "第2章",
+      "chapter_number": "02",
+      "order": 7,
+      "confidence": "high",
+      "reason": "冰之城坍塌过场"
+    },
+    "3D101A": {
+      "file": "3D101A",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 1,
+      "confidence": "high",
+      "reason": "11区L公司支部，LCCB"
+    },
+    "3D102A": {
+      "file": "3D102A",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 2,
+      "confidence": "high",
+      "reason": "11区支部，钉与锤"
+    },
+    "3D103B": {
+      "file": "3D103B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 3,
+      "confidence": "high",
+      "reason": "11区支部，异想体"
+    },
+    "3D301B": {
+      "file": "3D301B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 4,
+      "confidence": "high",
+      "reason": "尸山，克罗默登场"
+    },
+    "3D302B": {
+      "file": "3D302B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 5,
+      "confidence": "high",
+      "reason": "教室，辛克莱回忆"
+    },
+    "3D303B": {
+      "file": "3D303B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 6,
+      "confidence": "high",
+      "reason": "教室，德米安转校"
+    },
+    "3D304B": {
+      "file": "3D304B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 7,
+      "confidence": "high",
+      "reason": "地下室，辛克莱回忆"
+    },
+    "3D305B": {
+      "file": "3D305B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 8,
+      "confidence": "high",
+      "reason": "德米安对话，回忆"
+    },
+    "3D306B": {
+      "file": "3D306B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 9,
+      "confidence": "high",
+      "reason": "圣诞夜，辛克莱家人"
+    },
+    "3D307B": {
+      "file": "3D307B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 10,
+      "confidence": "high",
+      "reason": "小巷，德米安"
+    },
+    "3D308B": {
+      "file": "3D308B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 11,
+      "confidence": "high",
+      "reason": "尸山，克罗默夺硬币"
+    },
+    "3D309A": {
+      "file": "3D309A",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 12,
+      "confidence": "high",
+      "reason": "德米安，结局对话"
+    },
+    "3D309B": {
+      "file": "3D309B",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 13,
+      "confidence": "high",
+      "reason": "尸山，克罗默对峙"
+    },
+    "3D309I1": {
+      "file": "3D309I1",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 14,
+      "confidence": "high",
+      "reason": "克罗默夺硬币过场"
+    },
+    "3D309I2": {
+      "file": "3D309I2",
+      "kind": "迷宫剧情",
+      "chapter": "第3章",
+      "chapter_number": "03",
+      "order": 15,
+      "confidence": "high",
+      "reason": "尸山决战过场"
+    },
+    "4D102A": {
+      "file": "4D102A",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 1,
+      "confidence": "high",
+      "reason": "绽放的九人会，李箱"
+    },
+    "4D103B": {
+      "file": "4D103B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 2,
+      "confidence": "high",
+      "reason": "九人会，鸿璐发明"
+    },
+    "4D104B": {
+      "file": "4D104B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 3,
+      "confidence": "high",
+      "reason": "九人会，东朗"
+    },
+    "4D105B": {
+      "file": "4D105B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 4,
+      "confidence": "high",
+      "reason": "研心镜，李箱"
+    },
+    "4D106B": {
+      "file": "4D106B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 5,
+      "confidence": "high",
+      "reason": "郊区之外，斯蒂芬妮"
+    },
+    "4D107B": {
+      "file": "4D107B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 6,
+      "confidence": "high",
+      "reason": "T公司街道，研心"
+    },
+    "4D201B": {
+      "file": "4D201B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 7,
+      "confidence": "high",
+      "reason": "嘈杂的九人会"
+    },
+    "4D202B": {
+      "file": "4D202B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 8,
+      "confidence": "high",
+      "reason": "九人会，冬柏"
+    },
+    "4D203B": {
+      "file": "4D203B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 9,
+      "confidence": "high",
+      "reason": "斯蒂芬妮讲故事"
+    },
+    "4D204B": {
+      "file": "4D204B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 10,
+      "confidence": "high",
+      "reason": "枯萎的九人会，T公司"
+    },
+    "4D205B": {
+      "file": "4D205B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 11,
+      "confidence": "high",
+      "reason": "九人凋零，征收"
+    },
+    "4D206A": {
+      "file": "4D206A",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 12,
+      "confidence": "high",
+      "reason": "T公司征收人员"
+    },
+    "4D206B": {
+      "file": "4D206B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 13,
+      "confidence": "high",
+      "reason": "征收人员搜查"
+    },
+    "4D207B": {
+      "file": "4D207B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 14,
+      "confidence": "high",
+      "reason": "九人会崩裂"
+    },
+    "4D208B": {
+      "file": "4D208B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 15,
+      "confidence": "high",
+      "reason": "K公司实验室，斯蒂芬妮"
+    },
+    "4D301B": {
+      "file": "4D301B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 16,
+      "confidence": "high",
+      "reason": "N公司四方形房间"
+    },
+    "4D302B": {
+      "file": "4D302B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 17,
+      "confidence": "high",
+      "reason": "N公司，赫尔曼"
+    },
+    "4D303B": {
+      "file": "4D303B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 18,
+      "confidence": "high",
+      "reason": "研心，箱李警告"
+    },
+    "4D304B": {
+      "file": "4D304B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 19,
+      "confidence": "high",
+      "reason": "N公司走廊，仇甫"
+    },
+    "4D305A": {
+      "file": "4D305A",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 20,
+      "confidence": "high",
+      "reason": "K公司研究所，东朗死"
+    },
+    "4D305B": {
+      "file": "4D305B",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 21,
+      "confidence": "high",
+      "reason": "东朗临终，实验室"
+    },
+    "4D305I": {
+      "file": "4D305I",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 22,
+      "confidence": "high",
+      "reason": "研心，箱李对话"
+    },
+    "4D305I2": {
+      "file": "4D305I2",
+      "kind": "迷宫剧情",
+      "chapter": "第4章",
+      "chapter_number": "04",
+      "order": 23,
+      "confidence": "high",
+      "reason": "东朗，星光过场"
+    },
+    "5D101B": {
+      "file": "5D101B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 1,
+      "confidence": "high",
+      "reason": "白鲸体内，苏醒"
+    },
+    "5D102A": {
+      "file": "5D102A",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 2,
+      "confidence": "high",
+      "reason": "白鲸体内，人鱼"
+    },
+    "5D102B": {
+      "file": "5D102B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 3,
+      "confidence": "high",
+      "reason": "白鲸体内，寻船"
+    },
+    "5D103B": {
+      "file": "5D103B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 4,
+      "confidence": "high",
+      "reason": "白鲸胃，胃酸"
+    },
+    "5D104B": {
+      "file": "5D104B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 5,
+      "confidence": "high",
+      "reason": "裴廓德镇，船长"
+    },
+    "5D105A": {
+      "file": "5D105A",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 6,
+      "confidence": "high",
+      "reason": "裴廓德镇，水手"
+    },
+    "5D105B": {
+      "file": "5D105B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 7,
+      "confidence": "high",
+      "reason": "裴廓德镇，亚哈"
+    },
+    "5D106B": {
+      "file": "5D106B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 8,
+      "confidence": "high",
+      "reason": "亚哈办公室，金币"
+    },
+    "5D107B": {
+      "file": "5D107B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 9,
+      "confidence": "high",
+      "reason": "亚哈办公室，条件"
+    },
+    "5D108B": {
+      "file": "5D108B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 10,
+      "confidence": "high",
+      "reason": "裴廓德镇，分船计划"
+    },
+    "5D201B": {
+      "file": "5D201B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 11,
+      "confidence": "high",
+      "reason": "右心房入口，魁魁格"
+    },
+    "5D202A": {
+      "file": "5D202A",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 12,
+      "confidence": "high",
+      "reason": "裴廓德号，以实玛利回忆"
+    },
+    "5D202B": {
+      "file": "5D202B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 13,
+      "confidence": "high",
+      "reason": "右心房，异想体"
+    },
+    "5D203B": {
+      "file": "5D203B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 14,
+      "confidence": "high",
+      "reason": "右心房，发带"
+    },
+    "5D204B": {
+      "file": "5D204B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 15,
+      "confidence": "high",
+      "reason": "右心室，魁魁格"
+    },
+    "5D205A": {
+      "file": "5D205A",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 16,
+      "confidence": "high",
+      "reason": "右心室，比普回忆"
+    },
+    "5D205B": {
+      "file": "5D205B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 17,
+      "confidence": "high",
+      "reason": "右心室，肌腱桥"
+    },
+    "5D206B": {
+      "file": "5D206B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 18,
+      "confidence": "high",
+      "reason": "右心室，心跳"
+    },
+    "5D301A": {
+      "file": "5D301A",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 19,
+      "confidence": "high",
+      "reason": "心脏集合点，亚哈"
+    },
+    "5D301B": {
+      "file": "5D301B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 20,
+      "confidence": "high",
+      "reason": "心脏前集合点"
+    },
+    "5D302B": {
+      "file": "5D302B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 21,
+      "confidence": "high",
+      "reason": "心脏前，船员之死"
+    },
+    "5D303B": {
+      "file": "5D303B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 22,
+      "confidence": "high",
+      "reason": "白鲸心脏，对峙"
+    },
+    "5D304A": {
+      "file": "5D304A",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 23,
+      "confidence": "high",
+      "reason": "心脏，亚哈发狂"
+    },
+    "5D304B": {
+      "file": "5D304B",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 24,
+      "confidence": "high",
+      "reason": "心脏，亚哈辩白"
+    },
+    "5D304I": {
+      "file": "5D304I",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 25,
+      "confidence": "high",
+      "reason": "燃气捕鲸叉战斗"
+    },
+    "5D304I2": {
+      "file": "5D304I2",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 26,
+      "confidence": "high",
+      "reason": "战斗，比普"
+    },
+    "5D304I3": {
+      "file": "5D304I3",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 27,
+      "confidence": "high",
+      "reason": "战斗，斯达巴克"
+    },
+    "5D304I4": {
+      "file": "5D304I4",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 28,
+      "confidence": "high",
+      "reason": "战斗，魁魁格"
+    },
+    "5D304I5": {
+      "file": "5D304I5",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 29,
+      "confidence": "high",
+      "reason": "心脏，觉悟"
+    },
+    "5D304I6": {
+      "file": "5D304I6",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 30,
+      "confidence": "high",
+      "reason": "战斗，终局"
+    },
+    "5D304I7": {
+      "file": "5D304I7",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 31,
+      "confidence": "high",
+      "reason": "回忆，马林鱼港"
+    },
+    "5D304I8": {
+      "file": "5D304I8",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 32,
+      "confidence": "high",
+      "reason": "以实玛利自白"
+    },
+    "5D304I9": {
+      "file": "5D304I9",
+      "kind": "迷宫剧情",
+      "chapter": "第5章",
+      "chapter_number": "05",
+      "order": 33,
+      "confidence": "high",
+      "reason": "终局战斗过场"
+    },
+    "7D101B": {
+      "file": "7D101B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 1,
+      "confidence": "high",
+      "reason": "自我心道，堂吉诃德真身"
+    },
+    "7D102A": {
+      "file": "7D102A",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 2,
+      "confidence": "high",
+      "reason": "自我心道迷宫"
+    },
+    "7D102B": {
+      "file": "7D102B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 3,
+      "confidence": "high",
+      "reason": "拉·曼却回忆"
+    },
+    "7D103A": {
+      "file": "7D103A",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 4,
+      "confidence": "high",
+      "reason": "迷宫，异想体"
+    },
+    "7D103B": {
+      "file": "7D103B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 5,
+      "confidence": "high",
+      "reason": "拉·曼却领回忆"
+    },
+    "7D104B": {
+      "file": "7D104B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 6,
+      "confidence": "high",
+      "reason": "过去拉·曼却领"
+    },
+    "7D105B": {
+      "file": "7D105B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 7,
+      "confidence": "high",
+      "reason": "迷宫，侵蚀血魔"
+    },
+    "7D106B": {
+      "file": "7D106B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 8,
+      "confidence": "high",
+      "reason": "迷宫，收容所"
+    },
+    "7D107B": {
+      "file": "7D107B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 9,
+      "confidence": "high",
+      "reason": "迷宫，剑客"
+    },
+    "7D108B": {
+      "file": "7D108B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 10,
+      "confidence": "high",
+      "reason": "羊群牧场回忆"
+    },
+    "7D109B": {
+      "file": "7D109B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 11,
+      "confidence": "high",
+      "reason": "拉·曼却之眼，巴里"
+    },
+    "7D110B": {
+      "file": "7D110B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 12,
+      "confidence": "high",
+      "reason": "两百年，父亲"
+    },
+    "7D111A": {
+      "file": "7D111A",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 13,
+      "confidence": "high",
+      "reason": "拉·曼却之眼，决战"
+    },
+    "7D111B": {
+      "file": "7D111B",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 14,
+      "confidence": "high",
+      "reason": "决战前，父亲"
+    },
+    "7D111I": {
+      "file": "7D111I",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 15,
+      "confidence": "high",
+      "reason": "旁观者视角过场"
+    },
+    "7D111I2": {
+      "file": "7D111I2",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 16,
+      "confidence": "high",
+      "reason": "心象对话，门"
+    },
+    "7D111I3": {
+      "file": "7D111I3",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 17,
+      "confidence": "high",
+      "reason": "心象，罪人回忆"
+    },
+    "7D112A": {
+      "file": "7D112A",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 18,
+      "confidence": "high",
+      "reason": "战后，堂吉诃德"
+    },
+    "7D112I": {
+      "file": "7D112I",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 19,
+      "confidence": "high",
+      "reason": "父亲，桑丘对峙"
+    },
+    "7D112I2": {
+      "file": "7D112I2",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 20,
+      "confidence": "high",
+      "reason": "心象，和解"
+    },
+    "7D112I3": {
+      "file": "7D112I3",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 21,
+      "confidence": "high",
+      "reason": "血流冲击，战斗"
+    },
+    "7D112I4": {
+      "file": "7D112I4",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 22,
+      "confidence": "high",
+      "reason": "父亲提议"
+    },
+    "7D112I5": {
+      "file": "7D112I5",
+      "kind": "迷宫剧情",
+      "chapter": "第7章",
+      "chapter_number": "07",
+      "order": 23,
+      "confidence": "high",
+      "reason": "摩天轮回忆"
+    },
+    "8D101B": {
+      "file": "8D101B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 1,
+      "confidence": "high",
+      "reason": "评审场1层，家主选拔"
+    },
+    "8D102B": {
+      "file": "8D102B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 2,
+      "confidence": "high",
+      "reason": "评审场，铜钱规则"
+    },
+    "8D103B": {
+      "file": "8D103B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 3,
+      "confidence": "high",
+      "reason": "评审场走廊，传闻"
+    },
+    "8D104A": {
+      "file": "8D104A",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 4,
+      "confidence": "high",
+      "reason": "实验室废墟，夺铜钱"
+    },
+    "8D104B": {
+      "file": "8D104B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 5,
+      "confidence": "high",
+      "reason": "实验室废墟，史华贞"
+    },
+    "8D105B": {
+      "file": "8D105B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 6,
+      "confidence": "high",
+      "reason": "评审场，鸿璐回忆"
+    },
+    "8D106A": {
+      "file": "8D106A",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 7,
+      "confidence": "high",
+      "reason": "囚犯房间，铜钱"
+    },
+    "8D106B": {
+      "file": "8D106B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 8,
+      "confidence": "high",
+      "reason": "囚犯房间，鸿园囚犯"
+    },
+    "8D107A": {
+      "file": "8D107A",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 9,
+      "confidence": "high",
+      "reason": "实验室废墟，王清山"
+    },
+    "8D107B": {
+      "file": "8D107B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 10,
+      "confidence": "high",
+      "reason": "实验室废墟，清山"
+    },
+    "8D108B": {
+      "file": "8D108B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 11,
+      "confidence": "high",
+      "reason": "评审场地下1层"
+    },
+    "8D201A": {
+      "file": "8D201A",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 12,
+      "confidence": "high",
+      "reason": "怡红院回忆，囚犯"
+    },
+    "8D201B": {
+      "file": "8D201B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 13,
+      "confidence": "high",
+      "reason": "地下1层实验室废墟"
+    },
+    "8D202A": {
+      "file": "8D202A",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 14,
+      "confidence": "high",
+      "reason": "地下1层，夺铜钱"
+    },
+    "8D202B": {
+      "file": "8D202B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 15,
+      "confidence": "high",
+      "reason": "地下1层，候选人"
+    },
+    "8D203A": {
+      "file": "8D203A",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 16,
+      "confidence": "high",
+      "reason": "地下1层，薛蟠"
+    },
+    "8D203B": {
+      "file": "8D203B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 17,
+      "confidence": "high",
+      "reason": "地下1层，黛玉"
+    },
+    "8D204A": {
+      "file": "8D204A",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 18,
+      "confidence": "high",
+      "reason": "地下1层，羽毛"
+    },
+    "8D204B": {
+      "file": "8D204B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 19,
+      "confidence": "high",
+      "reason": "地下1层，缩小"
+    },
+    "8D205B": {
+      "file": "8D205B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 20,
+      "confidence": "high",
+      "reason": "地下1层，铜钱失去"
+    },
+    "8D206B": {
+      "file": "8D206B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 21,
+      "confidence": "high",
+      "reason": "地下2层，惜春"
+    },
+    "8D207A": {
+      "file": "8D207A",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 22,
+      "confidence": "high",
+      "reason": "地下2层，袭击"
+    },
+    "8D207B": {
+      "file": "8D207B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 23,
+      "confidence": "high",
+      "reason": "地下2层，播报"
+    },
+    "8D208B": {
+      "file": "8D208B",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 24,
+      "confidence": "high",
+      "reason": "最终房间，贾丘"
+    },
+    "8D209A": {
+      "file": "8D209A",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 25,
+      "confidence": "high",
+      "reason": "最终房间，贾环"
+    },
+    "8D209I": {
+      "file": "8D209I",
+      "kind": "迷宫剧情",
+      "chapter": "第8章",
+      "chapter_number": "08",
+      "order": 26,
+      "confidence": "high",
+      "reason": "最终房间，决战"
+    },
+    "ES000B": {
+      "file": "ES000B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 1,
+      "confidence": "high",
+      "reason": "大观园特殊教室，索德"
+    },
+    "ES011A": {
+      "file": "ES011A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 2,
+      "confidence": "high",
+      "reason": "教室，镜子课"
+    },
+    "ES011B": {
+      "file": "ES011B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 3,
+      "confidence": "high",
+      "reason": "教室，李箱授课"
+    },
+    "ES012A": {
+      "file": "ES012A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 4,
+      "confidence": "high",
+      "reason": "教室，H公司知识"
+    },
+    "ES012B": {
+      "file": "ES012B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 5,
+      "confidence": "high",
+      "reason": "教室，浮士德"
+    },
+    "ES013A": {
+      "file": "ES013A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 6,
+      "confidence": "high",
+      "reason": "教室，堂吉诃德问答"
+    },
+    "ES013B": {
+      "file": "ES013B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 7,
+      "confidence": "high",
+      "reason": "教室，讲课"
+    },
+    "ES030A": {
+      "file": "ES030A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 8,
+      "confidence": "high",
+      "reason": "教室，探险课"
+    },
+    "ES030B": {
+      "file": "ES030B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 9,
+      "confidence": "high",
+      "reason": "教室，切磋"
+    },
+    "ES040A": {
+      "file": "ES040A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 10,
+      "confidence": "high",
+      "reason": "教室，烟霾战争课"
+    },
+    "ES040B": {
+      "file": "ES040B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 11,
+      "confidence": "high",
+      "reason": "教室，战争课"
+    },
+    "ES050A": {
+      "file": "ES050A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 12,
+      "confidence": "high",
+      "reason": "教室，鸿璐"
+    },
+    "ES050B": {
+      "file": "ES050B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 13,
+      "confidence": "high",
+      "reason": "教室，黛玉"
+    },
+    "ES060B": {
+      "file": "ES060B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 14,
+      "confidence": "high",
+      "reason": "大观园街道，中期测验"
+    },
+    "ES061A": {
+      "file": "ES061A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 15,
+      "confidence": "high",
+      "reason": "武斗对练场，史华贞"
+    },
+    "ES061B": {
+      "file": "ES061B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 16,
+      "confidence": "high",
+      "reason": "武斗对练场"
+    },
+    "ES070B": {
+      "file": "ES070B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 17,
+      "confidence": "high",
+      "reason": "演武场，默尔索"
+    },
+    "ES090B": {
+      "file": "ES090B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 18,
+      "confidence": "high",
+      "reason": "演武场，奥提斯"
+    },
+    "ES120A": {
+      "file": "ES120A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 19,
+      "confidence": "high",
+      "reason": "武斗对练场，元春"
+    },
+    "ES120B": {
+      "file": "ES120B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 20,
+      "confidence": "high",
+      "reason": "武斗对练场"
+    },
+    "ES130A": {
+      "file": "ES130A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 21,
+      "confidence": "high",
+      "reason": "教室，良秀哄孩子"
+    },
+    "ES130B": {
+      "file": "ES130B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 22,
+      "confidence": "high",
+      "reason": "教室，良秀"
+    },
+    "ES150B": {
+      "file": "ES150B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 23,
+      "confidence": "high",
+      "reason": "教室，罗佳赌桌课"
+    },
+    "ES180A": {
+      "file": "ES180A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 24,
+      "confidence": "high",
+      "reason": "武斗对练场，王清山"
+    },
+    "ES180B": {
+      "file": "ES180B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 25,
+      "confidence": "high",
+      "reason": "武斗对练场，堂妹"
+    },
+    "ES190B": {
+      "file": "ES190B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 26,
+      "confidence": "high",
+      "reason": "演武场，希斯克利夫"
+    },
+    "ES210B": {
+      "file": "ES210B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 27,
+      "confidence": "high",
+      "reason": "演武场，客座讲师"
+    },
+    "ES240A": {
+      "file": "ES240A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 28,
+      "confidence": "high",
+      "reason": "武斗对练场，薛蟠"
+    },
+    "ES240B": {
+      "file": "ES240B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 29,
+      "confidence": "high",
+      "reason": "武斗对练场，薛蟠"
+    },
+    "ES250B": {
+      "file": "ES250B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 30,
+      "confidence": "high",
+      "reason": "教室，惜春迷茫"
+    },
+    "ES260A": {
+      "file": "ES260A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 31,
+      "confidence": "high",
+      "reason": "演武场，希斯克利夫"
+    },
+    "ES260B": {
+      "file": "ES260B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 32,
+      "confidence": "high",
+      "reason": "演武场，先发制人"
+    },
+    "ES280A": {
+      "file": "ES280A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 33,
+      "confidence": "high",
+      "reason": "演武场，酒兴讲师"
+    },
+    "ES290B": {
+      "file": "ES290B",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 34,
+      "confidence": "high",
+      "reason": "教室，心声信箱"
+    },
+    "ES300A": {
+      "file": "ES300A",
+      "kind": "间章活动",
+      "chapter": "间章 8.5",
+      "chapter_number": "8.5",
+      "order": 35,
+      "confidence": "high",
+      "reason": "正门，最终测验送行"
+    },
+    "PC01A": {
+      "file": "PC01A",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 1,
+      "confidence": "high",
+      "reason": "伊比利亚海岸，恐鱼"
+    },
+    "PC01B": {
+      "file": "PC01B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 2,
+      "confidence": "high",
+      "reason": "海岸，斯卡蒂"
+    },
+    "PC02B": {
+      "file": "PC02B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 3,
+      "confidence": "high",
+      "reason": "法洛·穆尔托，废墟村"
+    },
+    "PC03B": {
+      "file": "PC03B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 4,
+      "confidence": "high",
+      "reason": "法洛·穆尔托空屋"
+    },
+    "PC04B": {
+      "file": "PC04B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 5,
+      "confidence": "high",
+      "reason": "海岸，大众号"
+    },
+    "PC05A": {
+      "file": "PC05A",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 6,
+      "confidence": "high",
+      "reason": "海岸，恐鱼退却"
+    },
+    "PC06B": {
+      "file": "PC06B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 7,
+      "confidence": "high",
+      "reason": "空地，大静谧"
+    },
+    "PC07A": {
+      "file": "PC07A",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 8,
+      "confidence": "high",
+      "reason": "空地，大众号启航"
+    },
+    "PC07B": {
+      "file": "PC07B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 9,
+      "confidence": "high",
+      "reason": "空地，审判官"
+    },
+    "PC08B": {
+      "file": "PC08B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 10,
+      "confidence": "high",
+      "reason": "空地，追船计划"
+    },
+    "PC09B": {
+      "file": "PC09B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 11,
+      "confidence": "high",
+      "reason": "伊比利亚之眼，灯塔"
+    },
+    "PC11A": {
+      "file": "PC11A",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 12,
+      "confidence": "high",
+      "reason": "伊比利亚之眼，战斗"
+    },
+    "PC11B": {
+      "file": "PC11B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 13,
+      "confidence": "high",
+      "reason": "灯塔控制室"
+    },
+    "PC12A": {
+      "file": "PC12A",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 14,
+      "confidence": "high",
+      "reason": "大众号，费边"
+    },
+    "PC12B": {
+      "file": "PC12B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 15,
+      "confidence": "high",
+      "reason": "甲板，罗德岛博士"
+    },
+    "PC13B": {
+      "file": "PC13B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 16,
+      "confidence": "high",
+      "reason": "甲板，深海教会"
+    },
+    "PC14A": {
+      "file": "PC14A",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 17,
+      "confidence": "high",
+      "reason": "心象迷宫，梅厄斯"
+    },
+    "PC14B": {
+      "file": "PC14B",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 18,
+      "confidence": "high",
+      "reason": "阿戈尔回忆，海灾"
+    },
+    "PC14I": {
+      "file": "PC14I",
+      "kind": "间章活动",
+      "chapter": "8.5-EX",
+      "chapter_number": "8.5",
+      "order": 19,
+      "confidence": "high",
+      "reason": "心象迷宫，村长"
+    }
+  }
+}

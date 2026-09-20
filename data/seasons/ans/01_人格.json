@@ -1,0 +1,204 @@
+{
+  "entities": [
+    {
+      "id": "10101",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Yi Sang",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "10102",
+      "name": "Seven协会 南部6科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Seven Assoc. South Section 6 Yi Sang",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10103",
+      "name": "剑契组 杀手",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Blade Lineage Salsu Yi Sang",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10104",
+      "name": "绽放E.G.O:: 山茶花",
+      "season": 2,
+      "acq": "seasonal",
+      "name_en": "Effloresced E.G.O::Spicebush Yi Sang",
+      "reason": "第2赛季提取"
+    },
+    {
+      "id": "10105",
+      "name": "臼齿事务所 收尾人",
+      "season": 2,
+      "acq": "event",
+      "name_en": "Molar Office Fixer Yi Sang",
+      "reason": "每日签到第二期赠送"
+    },
+    {
+      "id": "10106",
+      "name": "W公司 3级 清扫人员",
+      "season": 0,
+      "acq": "base",
+      "name_en": "W Corp. L3 Cleanup Agent Yi Sang",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10107",
+      "name": "裴廓德号 大副",
+      "season": 3,
+      "acq": "seasonal",
+      "name_en": "The Pequod First Mate Yi Sang",
+      "reason": "第3赛季提取"
+    },
+    {
+      "id": "10108",
+      "name": "Dieci协会 南部4科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Dieci Assoc. South Section 4 Yi Sang",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10109",
+      "name": "环指 点彩派 学徒",
+      "season": 0,
+      "acq": "base",
+      "name_en": "The Ring Pointillist Student Yi Sang",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10110",
+      "name": "脑叶公司E.G.O:: 庄严哀悼",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Lobotomy E.G.O::Solemn Lament Yi Sang",
+      "reason": "瓦尔普吉斯之夜-4提取"
+    },
+    {
+      "id": "10111",
+      "name": "LCE E.G.O:: 提灯",
+      "season": 5,
+      "acq": "event",
+      "name_en": "LCE E.G.O::Lantern Yi Sang",
+      "reason": "第5赛季活动赠送"
+    },
+    {
+      "id": "10112",
+      "name": "六协会 南部3科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Liu Assoc. South Section 3 Yi Sang",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10113",
+      "name": "N公司E.G.O:: 凶弹",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "N Corp. E.G.O::Fell Bullet Yi Sang",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "10114",
+      "name": "黑兽 - 午 魁首",
+      "season": 6,
+      "acq": "event",
+      "name_en": "Heishou Pack - Wu Branch Adept Yi Sang",
+      "reason": "第6赛季活动提取"
+    },
+    {
+      "id": "10115",
+      "name": "蜘蛛巢 食指 父辈",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "The House of Spiders: The Index Nursefather Yi Sang",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "10116",
+      "name": "LCE E.G.O:: 次元撕裂者",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "LCE E.G.O::Dimension Shredder Yi Sang",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "10201",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Faust",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "10202",
+      "name": "W公司 2级 清扫人员",
+      "season": 0,
+      "acq": "base",
+      "name_en": "W Corp. L2 Cleanup Agent Faust",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10203",
+      "name": "脑叶公司 幸存者",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "Lobotomy Corp. Remnant Faust",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "10204",
+      "name": "执柄者",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "The One Who Grips Faust",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "10205",
+      "name": "Zwei协会 南部4科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Zwei Assoc. South Section 4 Faust",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10206",
+      "name": "Seven协会 南部4科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Seven Assoc. South Section 4 Faust",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10207",
+      "name": "脑叶公司E.G.O:: 悔恨",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Lobotomy E.G.O::Regret Faust",
+      "reason": "瓦尔普吉斯之夜-1提取"
+    },
+    {
+      "id": "10208",
+      "name": "剑契组 杀手",
+      "season": 3,
+      "acq": "event",
+      "name_en": "Blade Lineage Salsu Faust",
+      "reason": "第3赛季活动提取"
+    },
+    {
+      "id": "10209",
+      "name": "呼啸山庄 管家",
+      "season": 4,
+      "acq": "seasonal",
+      "name_en": "Wuthering Heights Butler Faust",
+      "reason": "第4赛季提取"
+    }
+  ]
+}

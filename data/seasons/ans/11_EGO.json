@@ -1,0 +1,204 @@
+{
+  "entities": [
+    {
+      "id": "20604",
+      "name": "美味苏打",
+      "season": 2,
+      "acq": "event",
+      "name_en": "Soda Hong Lu",
+      "reason": "第2赛季活动提取"
+    },
+    {
+      "id": "20605",
+      "name": "沸腾腐蚀",
+      "season": 3,
+      "acq": "pass",
+      "name_en": "Effervescent Corrosion Hong Lu",
+      "reason": "第3赛季免费通行证获取"
+    },
+    {
+      "id": "20606",
+      "name": "低泣",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Cavernous Wailing Hong Lu",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20607",
+      "name": "套索",
+      "season": 5,
+      "acq": "pass",
+      "name_en": "Lasso Hong Lu",
+      "reason": "第5赛季付费通行证获取"
+    },
+    {
+      "id": "20608",
+      "name": "污血泣泪",
+      "season": 6,
+      "acq": "pass",
+      "name_en": "Tears of the Tarnished Blood 汚血泣淚 Hong Lu",
+      "reason": "第6赛季付费通行证获取"
+    },
+    {
+      "id": "20609",
+      "name": "宁作吾",
+      "season": 6,
+      "acq": "event",
+      "name_en": "To Remain Oneself 宁作吾 Hong Lu",
+      "reason": "限定E.G.O定向提取：善意的巡礼"
+    },
+    {
+      "id": "20701",
+      "name": "裹尸袋",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Bodysack Heathcliff",
+      "reason": "主线获取"
+    },
+    {
+      "id": "20702",
+      "name": "电线杆",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Telepole Heathcliff",
+      "reason": "第1赛季付费通行证获取"
+    },
+    {
+      "id": "20703",
+      "name": "AEDD",
+      "season": 2,
+      "acq": "pass",
+      "name_en": "AEDD Heathcliff",
+      "reason": "第2赛季免费通行证获取"
+    },
+    {
+      "id": "20704",
+      "name": "空即是色",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Ya Śūnyatā Tad Rūpam Heathcliff",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20705",
+      "name": "悲惨假日",
+      "season": 3,
+      "acq": "event",
+      "name_en": "Holiday Heathcliff",
+      "reason": "第3赛季活动赠送"
+    },
+    {
+      "id": "20706",
+      "name": "拘束",
+      "season": 4,
+      "acq": "pass",
+      "name_en": "Binds Heathcliff",
+      "reason": "第4赛季付费通行证获取"
+    },
+    {
+      "id": "20707",
+      "name": "凶弹",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Fell Bullet Heathcliff",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20708",
+      "name": "失衡惯性",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Asymmetrical Inertia Heathcliff",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20709",
+      "name": "迁居申请",
+      "season": 7,
+      "acq": "pass",
+      "name_en": "Move-in Reg. Heathcliff",
+      "reason": "第7赛季付费通行证获取"
+    },
+    {
+      "id": "20801",
+      "name": "捕鲸叉",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Snagharpoon Ishmael",
+      "reason": "主线获取"
+    },
+    {
+      "id": "20802",
+      "name": "粉红欲望",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Roseate Desire Ishmael",
+      "reason": "第1赛季免费通行证获取"
+    },
+    {
+      "id": "20803",
+      "name": "红艳煞",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Ardor Blossom Star Ishmael",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20804",
+      "name": "斗牛披风",
+      "season": 2,
+      "acq": "pass",
+      "name_en": "Capote Ishmael",
+      "reason": "第2赛季付费通行证获取"
+    },
+    {
+      "id": "20805",
+      "name": "盲目",
+      "season": 3,
+      "acq": "pass",
+      "name_en": "Blind Obsession Ishmael",
+      "reason": "第3赛季付费通行证获取"
+    },
+    {
+      "id": "20806",
+      "name": "翅振",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Wingbeat Ishmael",
+      "reason": "瓦尔普吉斯之夜-3提取"
+    },
+    {
+      "id": "20807",
+      "name": "往昔",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Bygone Days Ishmael",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20808",
+      "name": "圣诞梦魇",
+      "season": 5,
+      "acq": "event",
+      "name_en": "Christmas Nightmare Ishmael",
+      "reason": "第5赛季活动提取"
+    },
+    {
+      "id": "20809",
+      "name": "蝍蛆杀",
+      "season": 6,
+      "acq": "pass",
+      "name_en": "Hundred-Footed Death Maggot 蝍蛆殺 Ishmael",
+      "reason": "第6赛季付费通行证获取"
+    },
+    {
+      "id": "20810",
+      "name": "涌潮悲歌",
+      "season": 6,
+      "acq": "event",
+      "name_en": "Tidal Elegy Ishmael",
+      "reason": "善意的巡礼活动赠送"
+    }
+  ]
+}

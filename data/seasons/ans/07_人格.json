@@ -1,0 +1,204 @@
+{
+  "entities": [
+    {
+      "id": "11011",
+      "name": "Девять协会 北部3科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Devyat' Assoc. North Section 3 Sinclair",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11012",
+      "name": "中指 幼弟",
+      "season": 0,
+      "acq": "base",
+      "name_en": "The Middle Little Brother Sinclair",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11013",
+      "name": "拇指 东部 士兵II",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "The Thumb East Soldato II Sinclair",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "11014",
+      "name": "黑兽 - 酉",
+      "season": 6,
+      "acq": "event",
+      "name_en": "Heishou Pack - You Branch Sinclair",
+      "reason": "第6赛季活动赠送"
+    },
+    {
+      "id": "11015",
+      "name": "蜘蛛巢 小指 子辈",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "The House of Spiders: The Pinky Apprentice Sinclair",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "11101",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Outis",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "11102",
+      "name": "剑契组 杀手",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Blade Lineage Salsu Outis",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11103",
+      "name": "G公司 部长",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "G Corp. Head Manager Outis",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "11104",
+      "name": "Seven协会 南部6科科长",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Seven Assoc. South Section 6 Director Outis",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11105",
+      "name": "臼齿事务所 收尾人",
+      "season": 2,
+      "acq": "event",
+      "name_en": "Molar Office Fixer Outis",
+      "reason": "每日签到第二期赠送"
+    },
+    {
+      "id": "11106",
+      "name": "Cinq协会 南部4科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Cinq Assoc. South Section 4 Outis",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11107",
+      "name": "脑叶公司E.G.O:: 魔弹",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Lobotomy E.G.O::Magic Bullet Outis",
+      "reason": "瓦尔普吉斯之夜-2提取"
+    },
+    {
+      "id": "11108",
+      "name": "呼啸山庄 首席管家",
+      "season": 4,
+      "acq": "seasonal",
+      "name_en": "Wuthering Heights Chief Butler Outis",
+      "reason": "第4赛季提取"
+    },
+    {
+      "id": "11109",
+      "name": "环指 点彩派 学徒",
+      "season": 0,
+      "acq": "base",
+      "name_en": "The Ring Pointillist Student Outis",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11110",
+      "name": "W公司 3级 清扫组长",
+      "season": 0,
+      "acq": "base",
+      "name_en": "W Corp. L3 Cleanup Captain Outis",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11111",
+      "name": "拉·曼却领 理发师",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "The Barber of La Manchaland Outis",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "11112",
+      "name": "黑兽 - 卯",
+      "season": 5,
+      "acq": "event",
+      "name_en": "Heishou Pack - Mao Branch Outis",
+      "reason": "第5赛季活动赠送"
+    },
+    {
+      "id": "11113",
+      "name": "T公司 3级 强制征收人员",
+      "season": 6,
+      "acq": "event",
+      "name_en": "T Corp. Class 3 VDCU Staff Outis",
+      "reason": "第6赛季活动提取"
+    },
+    {
+      "id": "11114",
+      "name": "LCA 瓦吉特 先锋三队 队长",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "LCA Udjat Vanguard Team 3 Leader Outis",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "11115",
+      "name": "蜘蛛巢 中指 父辈",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "The House of Spiders: The Middle Nursefather Outis",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "11201",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Gregor",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "11202",
+      "name": "六协会 南部6科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Liu Assoc. South Section 6 Gregor",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11203",
+      "name": "G公司 科长代理",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "G Corp. Manager Corporal Gregor",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "11204",
+      "name": "良·派 帮厨",
+      "season": 1,
+      "acq": "event",
+      "name_en": "R.B. Sous-chef Gregor",
+      "reason": "第1赛季活动赠送"
+    },
+    {
+      "id": "11205",
+      "name": "玫瑰扳手工坊 收尾人",
+      "season": 2,
+      "acq": "seasonal",
+      "name_en": "Rosespanner Workshop Fixer Gregor",
+      "reason": "第2赛季提取"
+    }
+  ]
+}

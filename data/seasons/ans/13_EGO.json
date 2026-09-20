@@ -1,0 +1,92 @@
+{
+  "entities": [
+    {
+      "id": "21108",
+      "name": "魔弹",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Magic Bullet Outis",
+      "reason": "瓦尔普吉斯之夜-5提取"
+    },
+    {
+      "id": "21109",
+      "name": "我出剪刀，你呢？",
+      "season": 7,
+      "acq": "pass",
+      "name_en": "I'll Go fer Scissors. How 'Bout You? Outis",
+      "reason": "第7赛季免费通行证获取"
+    },
+    {
+      "id": "21201",
+      "name": "某一日，突然",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Suddenly, One Day Gregor",
+      "reason": "主线获取"
+    },
+    {
+      "id": "21202",
+      "name": "障眼把戏",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Legerdemain Gregor",
+      "reason": "第1赛季免费通行证获取"
+    },
+    {
+      "id": "21203",
+      "name": "提灯",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Lantern Gregor",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "21204",
+      "name": "AEDD",
+      "season": 2,
+      "acq": "pass",
+      "name_en": "AEDD Gregor",
+      "reason": "第2赛季免费通行证获取"
+    },
+    {
+      "id": "21205",
+      "name": "荆棘花园",
+      "season": 3,
+      "acq": "seasonal",
+      "name_en": "Garden of Thorns Gregor",
+      "reason": "第3赛季提取"
+    },
+    {
+      "id": "21206",
+      "name": "往昔",
+      "season": 4,
+      "acq": "pass",
+      "name_en": "Bygone Days Gregor",
+      "reason": "第4赛季免费通行证获取"
+    },
+    {
+      "id": "21207",
+      "name": "庄严哀悼",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Solemn Lament Gregor",
+      "reason": "瓦尔普吉斯之夜-4提取"
+    },
+    {
+      "id": "21208",
+      "name": "圣诞梦魇",
+      "season": 5,
+      "acq": "event",
+      "name_en": "Christmas Nightmare Gregor",
+      "reason": "第5赛季活动提取"
+    },
+    {
+      "id": "21209",
+      "name": "未照耀的荣光",
+      "season": 6,
+      "acq": "event",
+      "name_en": "Unbrilliant Glory Gregor",
+      "reason": "限定E.G.O定向提取：善意的巡礼"
+    }
+  ]
+}

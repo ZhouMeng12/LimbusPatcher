@@ -1,0 +1,27 @@
+{
+  "dataList": [
+    {
+      "id": 2010611,
+      "levelList": [
+        {
+          "level": 1,
+          "name": "往昔",
+          "abName": "某日的肖像",
+          "desc": "[EndSkill] 随机使目标增加共计6+(忧郁共鸣数)级[Sinking]强度",
+          "coinlist": [
+            { "coindescs": [ { "desc": "[OnSucceedAttack] 若目标的[Sinking]强度不低于6级，则下回合对其施加1层[Binding]" } ] }
+          ]
+        },
+        {
+          "level": 3,
+          "name": "往昔",
+          "abName": "某日的肖像",
+          "desc": "",
+          "coinlist": [
+            { "coindescs": [ { "desc": "[OnSucceedAttack] 若目标的[Sinking]强度不低于6级，则下回合对其施加1层[Binding]" } ] }
+          ]
+        }
+      ]
+    }
+  ]
+}

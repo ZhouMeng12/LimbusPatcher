@@ -1,0 +1,204 @@
+{
+  "entities": [
+    {
+      "id": "20901",
+      "name": "覆水难收",
+      "season": 0,
+      "acq": "base",
+      "name_en": "What is Cast Rodion",
+      "reason": "主线获取"
+    },
+    {
+      "id": "20902",
+      "name": "第四根火柴之焰",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "4th Match Flame Rodion",
+      "reason": "第1赛季付费通行证获取"
+    },
+    {
+      "id": "20903",
+      "name": "冰结之爪",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Rime Shank Rodion",
+      "reason": "第1赛季免费通行证获取"
+    },
+    {
+      "id": "20904",
+      "name": "沸腾腐蚀",
+      "season": 3,
+      "acq": "pass",
+      "name_en": "Effervescent Corrosion Rodion",
+      "reason": "第3赛季付费通行证获取"
+    },
+    {
+      "id": "20905",
+      "name": "执行",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Pursuance Rodion",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20906",
+      "name": "血欲",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Sanguine Desire Rodion",
+      "reason": "瓦尔普吉斯之夜-3提取"
+    },
+    {
+      "id": "20907",
+      "name": "诅咒之钉",
+      "season": 5,
+      "acq": "pass",
+      "name_en": "Hex Nail Rodion",
+      "reason": "第5赛季付费通行证获取"
+    },
+    {
+      "id": "20908",
+      "name": "指定审判",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "Indicant's Trial Rodion",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "20909",
+      "name": "步入晚霞",
+      "season": 7,
+      "acq": "event",
+      "name_en": "Into the Sunset Rodion",
+      "reason": "第7赛季活动提取"
+    },
+    {
+      "id": "21001",
+      "name": "知识树之枝",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Branch of Knowledge Sinclair",
+      "reason": "主线获取"
+    },
+    {
+      "id": "21002",
+      "name": "迫近之日",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Impending Day Sinclair",
+      "reason": "第1赛季免费通行证获取"
+    },
+    {
+      "id": "21003",
+      "name": "一生炖菜",
+      "season": 1,
+      "acq": "event",
+      "name_en": "Lifetime Stew Sinclair",
+      "reason": "第1赛季活动提取"
+    },
+    {
+      "id": "21004",
+      "name": "提灯",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Lantern Sinclair",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "21005",
+      "name": "9章2节",
+      "season": 3,
+      "acq": "pass",
+      "name_en": "9:2 Sinclair",
+      "reason": "第3赛季免费通行证获取"
+    },
+    {
+      "id": "21006",
+      "name": "低泣",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Cavernous Wailing Sinclair",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "21007",
+      "name": "诅咒之钉",
+      "season": 5,
+      "acq": "pass",
+      "name_en": "Hex Nail Sinclair",
+      "reason": "第5赛季免费通行证获取"
+    },
+    {
+      "id": "21008",
+      "name": "污血泣泪",
+      "season": 6,
+      "acq": "pass",
+      "name_en": "Tears of the Tarnished Blood 汚血泣淚 Sinclair",
+      "reason": "第6赛季免费通行证获取"
+    },
+    {
+      "id": "21009",
+      "name": "和声",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Harmony Sinclair",
+      "reason": "瓦尔普吉斯之夜-8提取"
+    },
+    {
+      "id": "21101",
+      "name": "致智慧与苦难",
+      "season": 0,
+      "acq": "base",
+      "name_en": "To Páthos Máthos Outis",
+      "reason": "主线获取"
+    },
+    {
+      "id": "21102",
+      "name": "黑檀枝干",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Ebony Stem Outis",
+      "reason": "第1赛季免费通行证获取"
+    },
+    {
+      "id": "21103",
+      "name": "空即是色",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Ya Śūnyatā Tad Rūpam Outis",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "21104",
+      "name": "狐雨",
+      "season": 2,
+      "acq": "pass",
+      "name_en": "Sunshower Outis",
+      "reason": "第2赛季付费通行证获取"
+    },
+    {
+      "id": "21105",
+      "name": "悲惨假日",
+      "season": 3,
+      "acq": "event",
+      "name_en": "Holiday Outis",
+      "reason": "第3赛季活动提取"
+    },
+    {
+      "id": "21106",
+      "name": "拘束",
+      "season": 4,
+      "acq": "pass",
+      "name_en": "Binds Outis",
+      "reason": "第4赛季免费通行证获取"
+    },
+    {
+      "id": "21107",
+      "name": "次元撕裂者",
+      "season": 4,
+      "acq": "event",
+      "name_en": "Dimension Shredder Outis",
+      "reason": "第4赛季活动提取"
+    }
+  ]
+}

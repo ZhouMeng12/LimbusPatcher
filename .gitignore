@@ -1,0 +1,46 @@
+# ---- 运行环境 / 构建产物 ----
+.venv/
+build/
+dist/
+dist_build/
+dist_new/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+wiki_cache.json
+
+# ---- 运行期数据（缓存 / 备份 / 历史，都可重建） ----
+data/cache/
+data/backups/
+data/history/
+data/tmp/
+crash.log
+*.log
+*.sqlite
+*.sqlite-journal
+
+# ---- 大体积中间产物（有生成脚本，别进版本库） ----
+# 灰机 wiki 原始抓取页（scripts/crawl_wiki_story.py 可重新爬）
+data/wiki_story/pages/
+# 游戏原图（scripts/extract_portraits.py 产物）
+data/portraits/full/
+# Fandom 抓图（备用素材）
+data/portraits/fandom/
+
+# 用户自己的修改（方案 / 配置）：由 scripts/git_snapshot.py 用 -f 单独提交进来
+data/profiles/*.json
+data/config.json
+
+# ---- 公开仓库不收录的第三方内容（游戏素材 / 译文 / wiki 抓取；本地保留，脚本可重建）----
+data/portraits/
+data/translate/
+data/duiying/
+data/misc_story/
+data/wiki_story/
+data/supplement/
+
+# ---- 开发杂物 ----
+temp/
+_chk.py
+*.bundle

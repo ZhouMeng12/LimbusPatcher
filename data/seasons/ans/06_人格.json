@@ -1,0 +1,204 @@
+{
+  "entities": [
+    {
+      "id": "10902",
+      "name": "黑云会 若众",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Kurokumo Clan Wakashu Rodion",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10903",
+      "name": "LCCB 系长",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "LCCB Assistant Manager Rodion",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "10904",
+      "name": "N公司 中锤",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "N Corp. Mittelhammer Rodion",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "10905",
+      "name": "玫瑰扳手工坊 代表",
+      "season": 2,
+      "acq": "seasonal",
+      "name_en": "Rosespanner Workshop Rep Rodion",
+      "reason": "第2赛季提取"
+    },
+    {
+      "id": "10906",
+      "name": "Zwei协会 南部5科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Zwei Assoc. South Section 5 Rodion",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10907",
+      "name": "Dieci协会 南部4科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Dieci Assoc. South Section 4 Rodion",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10908",
+      "name": "六协会 南部4科科长",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Liu Assoc. South Section 4 Director Rodion",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10909",
+      "name": "T公司 2级 征收人员",
+      "season": 0,
+      "acq": "base",
+      "name_en": "T Corp. Class 2 Collection Staff Rodion",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10910",
+      "name": "Девять协会 北部3科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Devyat' Assoc. North Section 3 Rodion",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10911",
+      "name": "拉·曼却领 公主",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "The Princess of La Manchaland Rodion",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "10912",
+      "name": "黑兽 - 巳",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "Heishou Pack - Si Branch Rodion",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "10913",
+      "name": "脑叶公司E.G.O:: 泪锋之剑",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Lobotomy E.G.O::The Sword Sharpened with Tears Rodion",
+      "reason": "瓦尔普吉斯之夜-6提取"
+    },
+    {
+      "id": "10914",
+      "name": "R公司 第四集团军 驯鹿队",
+      "season": 0,
+      "acq": "base",
+      "name_en": "R Corp. 4th Pack Reindeer Rodion",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10915",
+      "name": "环指 野兽派 讲解员",
+      "season": 7,
+      "acq": "event",
+      "name_en": "The Ring Fauvist Docent Rodion",
+      "reason": "第7赛季活动提取"
+    },
+    {
+      "id": "10916",
+      "name": "蜘蛛巢 拇指 父辈",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "The House of Spiders: The Thumb Nursefather Rodion",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "11001",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Sinclair",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "11002",
+      "name": "剑契组 杀手",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Blade Lineage Salsu Sinclair",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11003",
+      "name": "Zwei协会 南部6科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Zwei Assoc. South Section 6 Sinclair",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11004",
+      "name": "流浪乐队 老大",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "Los Mariachis Jefe Sinclair",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "11005",
+      "name": "准执柄者",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "The One Who Shall Grip Sinclair",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "11006",
+      "name": "脑叶公司E.G.O:: 朱符",
+      "season": 2,
+      "acq": "seasonal",
+      "name_en": "Lobotomy E.G.O::Red Sheet Sinclair",
+      "reason": "第2赛季提取"
+    },
+    {
+      "id": "11007",
+      "name": "臼齿修船厂 收尾人",
+      "season": 2,
+      "acq": "event",
+      "name_en": "Molar Boatworks Fixer Sinclair",
+      "reason": "第2赛季活动赠送"
+    },
+    {
+      "id": "11008",
+      "name": "Cinq协会 南部4科科长",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Cinq Assoc. South Section 4 Director Sinclair",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11009",
+      "name": "黎明事务所 收尾人",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Dawn Office Fixer Sinclair",
+      "reason": "瓦尔普吉斯之夜-3提取"
+    },
+    {
+      "id": "11010",
+      "name": "Zwei协会 西部3科",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "Zwei Assoc. West Section 3 Sinclair",
+      "reason": "第5赛季提取"
+    }
+  ]
+}

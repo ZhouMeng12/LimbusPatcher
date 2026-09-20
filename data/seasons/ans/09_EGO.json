@@ -1,0 +1,204 @@
+{
+  "entities": [
+    {
+      "id": "20101",
+      "name": "乌瞰刀",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Crow's Eye View Yi Sang",
+      "reason": "主线获取"
+    },
+    {
+      "id": "20102",
+      "name": "第四根火柴之焰",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "4th Match Flame Yi Sang",
+      "reason": "第1赛季付费通行证获取"
+    },
+    {
+      "id": "20103",
+      "name": "祈愿石",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Wishing Cairn Yi Sang",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20104",
+      "name": "次元撕裂者",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Dimension Shredder Yi Sang",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20105",
+      "name": "狐雨",
+      "season": 2,
+      "acq": "pass",
+      "name_en": "Sunshower Yi Sang",
+      "reason": "第2赛季付费通行证获取"
+    },
+    {
+      "id": "20106",
+      "name": "往昔",
+      "season": 4,
+      "acq": "pass",
+      "name_en": "Bygone Days Yi Sang",
+      "reason": "第4赛季付费通行证获取"
+    },
+    {
+      "id": "20107",
+      "name": "凶弹",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "Fell Bullet Yi Sang",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "20108",
+      "name": "三千大世界",
+      "season": 7,
+      "acq": "pass",
+      "name_en": "Great Trichiliocosm 三千大世界 Yi Sang",
+      "reason": "第7赛季免费通行证获取"
+    },
+    {
+      "id": "20109",
+      "name": "庄严哀悼",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Solemn Lament Yi Sang",
+      "reason": "瓦尔普吉斯之夜-9提取"
+    },
+    {
+      "id": "20201",
+      "name": "表象放射器",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Representation Emitter Faust",
+      "reason": "主线获取"
+    },
+    {
+      "id": "20202",
+      "name": "液囊",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Fluid Sac Faust",
+      "reason": "第1赛季付费通行证获取"
+    },
+    {
+      "id": "20203",
+      "name": "诅咒之钉",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Hex Nail Faust",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20204",
+      "name": "电线杆",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Telepole Faust",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20205",
+      "name": "9章2节",
+      "season": 3,
+      "acq": "pass",
+      "name_en": "9:2 Faust",
+      "reason": "第3赛季付费通行证获取"
+    },
+    {
+      "id": "20206",
+      "name": "永恒",
+      "season": 4,
+      "acq": "event",
+      "name_en": "Everlasting Faust",
+      "reason": "第4赛季活动提取"
+    },
+    {
+      "id": "20207",
+      "name": "套索",
+      "season": 5,
+      "acq": "pass",
+      "name_en": "Lasso Faust",
+      "reason": "第5赛季免费通行证获取"
+    },
+    {
+      "id": "20208",
+      "name": "胸痛",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "Thoracalgia Faust",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "20209",
+      "name": "指令：熔毁",
+      "season": 6,
+      "acq": "event",
+      "name_en": "Command : Meltdown Faust",
+      "reason": "限定E.G.O定向提取：善意的巡礼"
+    },
+    {
+      "id": "20210",
+      "name": "红艳煞",
+      "season": 7,
+      "acq": "event",
+      "name_en": "Ardor Blossom Star Faust",
+      "reason": "第7赛季活动提取"
+    },
+    {
+      "id": "20301",
+      "name": "桑丘之血",
+      "season": 0,
+      "acq": "base",
+      "name_en": "La Sangre de Sancho Don Quixote",
+      "reason": "主线获取"
+    },
+    {
+      "id": "20302",
+      "name": "液囊",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Fluid Sac Don Quixote",
+      "reason": "第1赛季付费通行证获取"
+    },
+    {
+      "id": "20303",
+      "name": "电线杆",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Telepole Don Quixote",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20304",
+      "name": "一生炖菜",
+      "season": 1,
+      "acq": "event",
+      "name_en": "Lifetime Stew Don Quixote",
+      "reason": "第1赛季活动赠送"
+    },
+    {
+      "id": "20305",
+      "name": "祈愿石",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Wishing Cairn Don Quixote",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20306",
+      "name": "电子哀鸣",
+      "season": 4,
+      "acq": "pass",
+      "name_en": "Electric Screaming Don Quixote",
+      "reason": "第4赛季免费通行证获取"
+    }
+  ]
+}

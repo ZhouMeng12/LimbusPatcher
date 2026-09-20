@@ -1,0 +1,92 @@
+{
+  "entities": [
+    {
+      "id": "11206",
+      "name": "Zwei协会 南部4科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Zwei Assoc. South Section 4 Gregor",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "11207",
+      "name": "双钩海盗团 大副",
+      "season": 3,
+      "acq": "seasonal",
+      "name_en": "Twinhook Pirates First Mate Gregor",
+      "reason": "第3赛季提取"
+    },
+    {
+      "id": "11208",
+      "name": "黑云会 副会长",
+      "season": 3,
+      "acq": "event",
+      "name_en": "Kurokumo Clan Captain Gregor",
+      "reason": "第3赛季活动提取"
+    },
+    {
+      "id": "11209",
+      "name": "埃德加家族 继承人",
+      "season": 4,
+      "acq": "seasonal",
+      "name_en": "Edgar Family Heir Gregor",
+      "reason": "第4赛季提取"
+    },
+    {
+      "id": "11210",
+      "name": "拉·曼却领 神父",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "The Priest of La Manchaland Gregor",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "11211",
+      "name": "炎拳事务所 幸存者",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "Firefist Office Survivor Gregor",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "11212",
+      "name": "黑兽 - 巳",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "Heishou Pack - Si Branch Gregor",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "11213",
+      "name": "夜锥组 队长",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Night Awls Capitano Gregor",
+      "reason": "瓦尔普吉斯之夜-7提取"
+    },
+    {
+      "id": "11214",
+      "name": "脑叶公司E.G.O:: 目灯",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "Lobotomy E.G.O::Lamp Gregor",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "11215",
+      "name": "LCE E.G.O:: AEDD",
+      "season": 7,
+      "acq": "event",
+      "name_en": "LCE E.G.O::AEDD Gregor",
+      "reason": "第7赛季活动提取"
+    },
+    {
+      "id": "11216",
+      "name": "黎明事务所 代表",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Dawn Office Rep Gregor",
+      "reason": "瓦尔普吉斯之夜-9提取"
+    }
+  ]
+}

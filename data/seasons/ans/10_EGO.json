@@ -1,0 +1,204 @@
+{
+  "entities": [
+    {
+      "id": "20307",
+      "name": "渴望-蜜卡拉",
+      "season": 5,
+      "acq": "pass",
+      "name_en": "Yearning-Mircalla Don Quixote",
+      "reason": "第5赛季付费通行证获取"
+    },
+    {
+      "id": "20308",
+      "name": "朱符",
+      "season": 6,
+      "acq": "pass",
+      "name_en": "Red Sheet Don Quixote",
+      "reason": "第6赛季免费通行证获取"
+    },
+    {
+      "id": "20309",
+      "name": "以爱与憎之名",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "In the Name of Love and Hate Don Quixote",
+      "reason": "瓦尔普吉斯之夜-6提取"
+    },
+    {
+      "id": "20310",
+      "name": "我出剪刀，你呢？",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "I'll Go fer Scissors. How 'Bout You? Don Quixote",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "20401",
+      "name": "森罗炎象",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Forest for the Flames Ryōshū",
+      "reason": "主线获取"
+    },
+    {
+      "id": "20402",
+      "name": "第四根火柴之焰",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "4th Match Flame Ryōshū",
+      "reason": "第1赛季免费通行证获取"
+    },
+    {
+      "id": "20403",
+      "name": "赤瞳",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Red Eyes Ryōshū",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20404",
+      "name": "赤瞳（开）",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Red Eyes (Open) Ryōshū",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20405",
+      "name": "美味苏打",
+      "season": 2,
+      "acq": "event",
+      "name_en": "Soda Ryōshū",
+      "reason": "第2赛季活动赠送"
+    },
+    {
+      "id": "20406",
+      "name": "盲目",
+      "season": 3,
+      "acq": "pass",
+      "name_en": "Blind Obsession Ryōshū",
+      "reason": "第3赛季免费通行证获取"
+    },
+    {
+      "id": "20407",
+      "name": "轻蔑，敬畏",
+      "season": 4,
+      "acq": "seasonal",
+      "name_en": "Contempt, Awe Ryōshū",
+      "reason": "第4赛季提取"
+    },
+    {
+      "id": "20408",
+      "name": "胸痛",
+      "season": 5,
+      "acq": "event",
+      "name_en": "Thoracalgia Ryōshū",
+      "reason": "第5赛季活动提取"
+    },
+    {
+      "id": "20409",
+      "name": "三千大世界",
+      "season": 7,
+      "acq": "pass",
+      "name_en": "Great Trichiliocosm 三千大世界 Ryōshū",
+      "reason": "第7赛季付费通行证获取"
+    },
+    {
+      "id": "20501",
+      "name": "他人之锁",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Chains of Others Meursault",
+      "reason": "主线获取"
+    },
+    {
+      "id": "20502",
+      "name": "脱线一击",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Screwloose Wallop Meursault",
+      "reason": "第1赛季免费通行证获取"
+    },
+    {
+      "id": "20503",
+      "name": "执行",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Pursuance Meursault",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "20504",
+      "name": "斗牛披风",
+      "season": 2,
+      "acq": "pass",
+      "name_en": "Capote Meursault",
+      "reason": "第2赛季免费通行证获取"
+    },
+    {
+      "id": "20505",
+      "name": "悔恨",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Regret Meursault",
+      "reason": "瓦尔普吉斯之夜-1提取"
+    },
+    {
+      "id": "20506",
+      "name": "电子哀鸣",
+      "season": 4,
+      "acq": "pass",
+      "name_en": "Electric Screaming Meursault",
+      "reason": "第4赛季付费通行证获取"
+    },
+    {
+      "id": "20507",
+      "name": "渴望-蜜卡拉",
+      "season": 5,
+      "acq": "pass",
+      "name_en": "Yearning-Mircalla Meursault",
+      "reason": "第5赛季免费通行证获取"
+    },
+    {
+      "id": "20508",
+      "name": "将被粉碎的过去",
+      "season": 6,
+      "acq": "event",
+      "name_en": "Crushbound Past Meursault",
+      "reason": "第6赛季活动提取"
+    },
+    {
+      "id": "20509",
+      "name": "着影挥刀",
+      "season": 7,
+      "acq": "event",
+      "name_en": "Shadow-vested Bladesinger 着影揮刀 Meursault",
+      "reason": "第7赛季活动提取"
+    },
+    {
+      "id": "20601",
+      "name": "太虚幻境",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Land of Illusion Hong Lu",
+      "reason": "主线获取"
+    },
+    {
+      "id": "20602",
+      "name": "粉红欲望",
+      "season": 1,
+      "acq": "pass",
+      "name_en": "Roseate Desire Hong Lu",
+      "reason": "第1赛季免费通行证获取"
+    },
+    {
+      "id": "20603",
+      "name": "次元撕裂者",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Dimension Shredder Hong Lu",
+      "reason": "常驻提取"
+    }
+  ]
+}

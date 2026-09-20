@@ -1,0 +1,7 @@
+{
+  "dataList": [
+    { "id": "AreaAtk", "name": "Mass Attack", "desc": "Attacks 2 or more enemies at once." },
+    { "id": "Enhancement", "desc": "Final power of attack skills +1 per stack for one turn." },
+    { "id": "Agility", "name": "Haste", "desc": "Speed +1 per stack for one turn." }
+  ]
+}

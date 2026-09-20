@@ -1,0 +1,25 @@
+{
+  "entities": [
+    {
+      "id": "40501",
+      "season": 0,
+      "acq": "event",
+      "name_en": "",
+      "reason": "映射战斗经验记忆限定奖励"
+    },
+    {
+      "id": "10616",
+      "season": 0,
+      "acq": "base",
+      "name_en": "",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "21210",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "",
+      "reason": "第7赛季提取"
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "entities": [
+    {
+      "id": "10405",
+      "name": "W公司 3级 清扫人员",
+      "season": 0,
+      "acq": "base",
+      "name_en": "W Corp. L3 Cleanup Agent Ryōshū",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10406",
+      "name": "LCCB 系长",
+      "season": 3,
+      "acq": "seasonal",
+      "name_en": "LCCB Assistant Manager Ryōshū",
+      "reason": "第3赛季提取"
+    },
+    {
+      "id": "10407",
+      "name": "六协会 南部4科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Liu Assoc. South Section 4 Ryōshū",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10408",
+      "name": "埃德加家族 首席管家",
+      "season": 4,
+      "acq": "seasonal",
+      "name_en": "Edgar Family Chief Butler Ryōshū",
+      "reason": "第4赛季提取"
+    },
+    {
+      "id": "10409",
+      "name": "20区 圣愚",
+      "season": 4,
+      "acq": "event",
+      "name_en": "District 20 Yurodivy Ryōshū",
+      "reason": "第4赛季活动赠送"
+    },
+    {
+      "id": "10410",
+      "name": "脑叶公司E.G.O:: 赤瞳·忏悔",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Lobotomy E.G.O::Red Eyes & Penitence Ryōshū",
+      "reason": "瓦尔普吉斯之夜-4提取"
+    },
+    {
+      "id": "10411",
+      "name": "黑兽 - 卯",
+      "season": 5,
+      "acq": "event",
+      "name_en": "Heishou Pack - Mao Branch Ryōshū",
+      "reason": "第5赛季活动提取"
+    },
+    {
+      "id": "10412",
+      "name": "N公司E.G.O:: 轻蔑，敬畏",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "N Corp. E.G.O::Contempt, Awe Ryōshū",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "10413",
+      "name": "鸿园的 流浪武者",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "Drifting Blade of Hongyuan Ryōshū",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "10414",
+      "name": "脑叶公司E.G.O:: 余香·孤独",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Lobotomy E.G.O::Faint Aroma & Solitude Ryōshū",
+      "reason": "瓦尔普吉斯之夜-8提取"
+    },
+    {
+      "id": "10415",
+      "name": "蜘蛛巢之刃",
+      "season": 7,
+      "acq": "seasonal",
+      "name_en": "Blade of the House of Spiders Ryōshū",
+      "reason": "第7赛季提取"
+    },
+    {
+      "id": "10501",
+      "name": "LCB 罪人",
+      "season": 0,
+      "acq": "base",
+      "name_en": "LCB Sinner Meursault",
+      "reason": "主线及常驻提取"
+    },
+    {
+      "id": "10502",
+      "name": "六协会 南部6科",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Liu Assoc. South Section 6 Meursault",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10503",
+      "name": "W公司 2级 清扫人员",
+      "season": 0,
+      "acq": "base",
+      "name_en": "W Corp. L2 Cleanup Agent Meursault",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10504",
+      "name": "N公司 大锤",
+      "season": 1,
+      "acq": "seasonal",
+      "name_en": "N Corp. Großhammer Meursault",
+      "reason": "第1赛季提取"
+    },
+    {
+      "id": "10505",
+      "name": "玫瑰扳手工坊 收尾人",
+      "season": 2,
+      "acq": "seasonal",
+      "name_en": "Rosespanner Workshop Fixer Meursault",
+      "reason": "第2赛季提取"
+    },
+    {
+      "id": "10506",
+      "name": "R公司 第四集团军 犀牛队",
+      "season": 0,
+      "acq": "base",
+      "name_en": "R Corp. 4th Pack Rhino Meursault",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10507",
+      "name": "中指 幼弟",
+      "season": 3,
+      "acq": "seasonal",
+      "name_en": "The Middle Little Brother Meursault",
+      "reason": "第3赛季提取"
+    },
+    {
+      "id": "10508",
+      "name": "剑契组 头领",
+      "season": 3,
+      "acq": "event",
+      "name_en": "Blade Lineage Mentor Meursault",
+      "reason": "第3赛季活动提取"
+    },
+    {
+      "id": "10509",
+      "name": "死兔帮 老大",
+      "season": 4,
+      "acq": "seasonal",
+      "name_en": "Dead Rabbits Boss Meursault",
+      "reason": "第4赛季提取"
+    },
+    {
+      "id": "10510",
+      "name": "Dieci协会 南部4科科长",
+      "season": 0,
+      "acq": "base",
+      "name_en": "Dieci Assoc. South Section 4 Director Meursault",
+      "reason": "常驻提取"
+    },
+    {
+      "id": "10511",
+      "name": "Cinq协会 西部3科",
+      "season": 5,
+      "acq": "seasonal",
+      "name_en": "Cinq Assoc. West Section 3 Meursault",
+      "reason": "第5赛季提取"
+    },
+    {
+      "id": "10512",
+      "name": "拇指 东部 指挥官IIII",
+      "season": 6,
+      "acq": "seasonal",
+      "name_en": "The Thumb East Capo IIII Meursault",
+      "reason": "第6赛季提取"
+    },
+    {
+      "id": "10513",
+      "name": "拉·曼却领 王子",
+      "season": 6,
+      "acq": "event",
+      "name_en": "The Prince of La Manchaland Meursault",
+      "reason": "第6赛季活动提取"
+    },
+    {
+      "id": "10514",
+      "name": "脑叶公司E.G.O:: 黄蜂【变调】",
+      "season": null,
+      "acq": "walpurgis",
+      "name_en": "Lobotomy E.G.O::Hornet【Alteration】Meursault",
+      "reason": "瓦尔普吉斯之夜-8提取"
+    }
+  ]
+}

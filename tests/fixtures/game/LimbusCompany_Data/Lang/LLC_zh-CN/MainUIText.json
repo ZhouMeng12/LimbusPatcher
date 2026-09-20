@@ -1,0 +1,6 @@
+{
+  "dataList": [
+    { "id": "clear_cache", "content": "清除缓存" },
+    { "id": "custom_translation_note", "content": "自定义翻译测试按钮" }
+  ]
+}

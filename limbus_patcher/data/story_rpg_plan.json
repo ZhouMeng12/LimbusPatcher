@@ -1,0 +1,464 @@
+{
+  "format_version": 1,
+  "说明": "章节剧情编排表（RPG 关卡按玩家游玩顺序分段；普通过场关也走同一套，保证文本来自零协）：分支按「玩家游玩顺序」排列，本表是唯一事实源，改这里重跑 scripts/build_story_rpg.py 即可幂等重建剧本数据。records 为 [起, 止] 闭区间的 dataList 下标（null = 到文件末尾）。confidence/evidence 记录这一段顺序的依据，供进游戏核对后修正。",
+  "stages": {
+    "10-01": {
+      "mode": "story",
+      "label": "10-01 审判",
+      "source": "Lang/LLC_zh-CN（零协原文重建）",
+      "story_dir": "StoryData",
+      "branches": [
+        {
+          "id": "b01",
+          "label": "10-01 审判",
+          "kind": "story",
+          "kind_label": "过场",
+          "confidence": "high",
+          "evidence": "该关只有一段过场（StoryData/S1003B.json）；此前 pages 里的文件声明有误（指向了别的关），本条一并修正",
+          "parts": [
+            {
+              "file": "StoryData/S1003B.json"
+            }
+          ]
+        }
+      ]
+    },
+    "10-02": {
+      "mode": "story",
+      "label": "10-02 法院",
+      "source": "Lang/LLC_zh-CN（零协原文重建）",
+      "story_dir": "StoryData",
+      "branches": [
+        {
+          "id": "b01",
+          "label": "10-02 法院",
+          "kind": "story",
+          "kind_label": "过场",
+          "confidence": "high",
+          "evidence": "该关只有一段过场（StoryData/S1004B.json）；此前 pages 里的文件声明有误（指向了别的关），本条一并修正",
+          "parts": [
+            {
+              "file": "StoryData/S1004B.json"
+            }
+          ]
+        }
+      ]
+    },
+    "10-03": {
+      "mode": "story",
+      "label": "10-03 计划",
+      "source": "Lang/LLC_zh-CN（零协原文重建）",
+      "story_dir": "StoryData",
+      "branches": [
+        {
+          "id": "b01",
+          "label": "10-03 计划",
+          "kind": "story",
+          "kind_label": "过场",
+          "confidence": "high",
+          "evidence": "该关只有一段过场（StoryData/S1005B.json）；此前 pages 里的文件声明有误（指向了别的关），本条一并修正",
+          "parts": [
+            {
+              "file": "StoryData/S1005B.json"
+            }
+          ]
+        }
+      ]
+    },
+    "10-04": {
+      "mode": "rpg",
+      "label": "西西弗百货（RPG 关卡）",
+      "source": "Lang/LLC_zh-CN（RPG 分支按玩家游玩顺序）",
+      "story_dir": "StoryData",
+      "rpg_dir": "RPGSystem",
+      "quest_files": [
+        "RPGSystem/rpg-loc-quest-floor-1.json",
+        "RPGSystem/rpg-loc-quest-floor-2.json",
+        "RPGSystem/rpg-loc-quest-floor-3.json",
+        "RPGSystem/rpg-loc-quest-floor-4.json",
+        "RPGSystem/rpg-loc-quest-floor-b1.json",
+        "RPGSystem/rpg-loc-quest-floor-b2.json"
+      ],
+      "branches": [
+        {
+          "id": "b01",
+          "label": "01 序章·进店与坠落",
+          "kind": "story",
+          "kind_label": "过场",
+          "confidence": "high",
+          "evidence": "S1000B 入店广播 → S1001B 坠落（Q1000「载入后立即播放开场演出（S1001B）」）",
+          "quests": [
+            "Q1000"
+          ],
+          "parts": [
+            {
+              "file": "StoryData/S1000B.json",
+              "label": "过场·进店广播"
+            },
+            {
+              "file": "StoryData/S1001B.json",
+              "label": "过场·坠落与苏醒"
+            }
+          ]
+        },
+        {
+          "id": "b02",
+          "label": "02 1F·西西弗百货",
+          "kind": "rpg",
+          "kind_label": "RPG 楼层",
+          "confidence": "medium",
+          "evidence": "Q1011 探索周围 → Q1012 返回卫生间（克罗默之姐）→ Q1013…Q1064 乘扶梯；S1002B 首句直接承接坠落的尸体",
+          "quests": [
+            "Q1011",
+            "Q1012",
+            "Q1013",
+            "Q1014",
+            "Q1021",
+            "Q1022",
+            "Q1023",
+            "Q1031",
+            "Q1032",
+            "Q1041",
+            "Q1042",
+            "Q1051",
+            "Q1052",
+            "Q1061",
+            "Q1062",
+            "Q1064"
+          ],
+          "parts": [
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-1.json",
+              "records": [
+                0,
+                5
+              ],
+              "label": "探索·尸雨"
+            },
+            {
+              "file": "StoryData/S1002B.json",
+              "label": "过场·克罗默之姐·美容厅"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-1.json",
+              "records": [
+                6,
+                null
+              ],
+              "label": "探索·百货店（人台→服饰馆→红派→扶梯）"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-choice-floor-1.json"
+            }
+          ]
+        },
+        {
+          "id": "b03",
+          "label": "03 2F·奢侈品馆",
+          "kind": "rpg",
+          "kind_label": "RPG 楼层",
+          "confidence": "medium",
+          "evidence": "Q2001 探索2F → Q2004 进入帐幕（floor-2 全篇）",
+          "quests": [
+            "Q2001",
+            "Q2002",
+            "Q2003",
+            "Q2011",
+            "Q2004"
+          ],
+          "parts": [
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-2.json",
+              "label": "探索·2F（施工→奢侈品馆→帐幕）"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-choice-floor-2.json"
+            }
+          ]
+        },
+        {
+          "id": "b04",
+          "label": "04 3F·品牌世家",
+          "kind": "rpg",
+          "kind_label": "RPG 楼层",
+          "confidence": "medium",
+          "evidence": "Q3001 登上3F → Q3002 跟着裁衣声（floor-3[9]）→ Q3003 改衣室安妮特 → Q3004…Q3013；让娜在 floor-3[7] 自我介绍；S1010B 位置待确认",
+          "quests": [
+            "Q3001",
+            "Q3002",
+            "Q3003",
+            "Q3004",
+            "Q3005",
+            "Q3006",
+            "Q3007",
+            "Q3008",
+            "Q3009",
+            "Q3010",
+            "Q3011",
+            "Q3012",
+            "Q3013"
+          ],
+          "parts": [
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-3.json",
+              "records": [
+                0,
+                6
+              ],
+              "label": "探索·上楼（辛克莱与奥提斯）"
+            },
+            {
+              "file": "StoryData/S1008B.json",
+              "label": "过场·让娜之声"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-3.json",
+              "records": [
+                7,
+                11
+              ],
+              "label": "探索·循声而行"
+            },
+            {
+              "file": "StoryData/S1009B.json",
+              "label": "过场·改衣室·安妮特"
+            },
+            {
+              "file": "StoryData/S1010B.json",
+              "label": "过场·默尔索妈妈（位置待确认）"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-3.json",
+              "records": [
+                12,
+                null
+              ],
+              "label": "探索·品牌世家（两件套→精品店→广播室）"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-choice-floor-3.json"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-narration-floor-3.json"
+            }
+          ]
+        },
+        {
+          "id": "b05",
+          "label": "05 4F·家具馆",
+          "kind": "rpg",
+          "kind_label": "RPG 楼层",
+          "confidence": "medium",
+          "evidence": "Q4001 前往4F → Q4013 与驼背落地灯交谈（floor-4 全篇）",
+          "quests": [
+            "Q4001",
+            "Q4002",
+            "Q4003",
+            "Q4004",
+            "Q4005",
+            "Q4006",
+            "Q4007",
+            "Q4008",
+            "Q4013"
+          ],
+          "parts": [
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-4.json",
+              "label": "探索·4F（制鞋馆→家具馆）"
+            }
+          ]
+        },
+        {
+          "id": "b06",
+          "label": "06 B1F·美食广场",
+          "kind": "rpg",
+          "kind_label": "RPG 楼层",
+          "confidence": "medium",
+          "evidence": "S1011B 扶梯循环 → Q-1002 寻找下行扶梯（floor-b1[0..7]）→ S1012B 初识精肉苏打 → Q-1003…Q-1011",
+          "quests": [
+            "Q-1002",
+            "Q-1001",
+            "Q-1003",
+            "Q-1004",
+            "Q-1005",
+            "Q-1006",
+            "Q-1008",
+            "Q-1009",
+            "Q-1010",
+            "Q-1011"
+          ],
+          "parts": [
+            {
+              "file": "StoryData/S1011B.json",
+              "label": "过场·自动扶梯·原地打转"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-b1.json",
+              "records": [
+                0,
+                7
+              ],
+              "label": "探索·扶梯厅"
+            },
+            {
+              "file": "StoryData/S1012B.json",
+              "label": "过场·肉味苏打"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-b1.json",
+              "records": [
+                8,
+                null
+              ],
+              "label": "探索·美食广场（副主厨→屠夫→黄金之茧）"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-choice-floor-b1.json"
+            }
+          ]
+        },
+        {
+          "id": "b07",
+          "label": "07 B2F·纺丝场",
+          "kind": "rpg",
+          "kind_label": "RPG 楼层",
+          "confidence": "medium",
+          "evidence": "Q-2000…Q-2004 抵达与线团之巢（floor-b2[0..37]）→ S1013B 楼层管理员 → Q-2005…Q-2008 染色室 → S1014B 帕莱特 → Q-2009…Q-2017 取线",
+          "quests": [
+            "Q-2000",
+            "Q-2001",
+            "Q-2002",
+            "Q-2003",
+            "Q-2004",
+            "Q-2005",
+            "Q-2006",
+            "Q-2007",
+            "Q-2008",
+            "Q-2009",
+            "Q-2010",
+            "Q-2011",
+            "Q-2012",
+            "Q-2013",
+            "Q-2014",
+            "Q-2015",
+            "Q-2016A",
+            "Q-2017"
+          ],
+          "parts": [
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-b2.json",
+              "records": [
+                0,
+                37
+              ],
+              "label": "探索·抵达与线团之巢"
+            },
+            {
+              "file": "StoryData/S1013B.json",
+              "label": "过场·楼层管理员"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-b2.json",
+              "records": [
+                38,
+                48
+              ],
+              "label": "探索·染色室"
+            },
+            {
+              "file": "StoryData/S1014B.json",
+              "label": "过场·染坊·帕莱特"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-floor-b2.json",
+              "records": [
+                49,
+                null
+              ],
+              "label": "探索·取线（无色染料→抽丝→黄金线团）"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-choice-floor-b2.json"
+            }
+          ]
+        },
+        {
+          "id": "b08",
+          "label": "08 3F·织布与收尾",
+          "kind": "rpg",
+          "kind_label": "RPG 楼层",
+          "confidence": "high",
+          "evidence": "Q4015 把黄金线团带给改衣室安妮特（S1015B）→ Q4016/Q4017 取尖钉 → route-a 返回 3F 收尾",
+          "quests": [
+            "Q4014",
+            "Q4015",
+            "Q4016",
+            "Q4017",
+            "Q1018"
+          ],
+          "parts": [
+            {
+              "file": "StoryData/S1015B.json",
+              "label": "过场·金线织布"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-route-a.json",
+              "label": "探索·返回3F 收尾"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-theater.json",
+              "label": "未解锁·放映厅"
+            }
+          ]
+        },
+        {
+          "id": "b09",
+          "label": "09 终盘·不可移动者与尾声",
+          "kind": "story",
+          "kind_label": "过场",
+          "confidence": "high",
+          "evidence": "S1016B 不可动摇者 → S1060B 被告 → S1061B 摇篮曲 → S1062B 让娜被钉死 → S9991B 尾声",
+          "parts": [
+            {
+              "file": "StoryData/S1016B.json",
+              "label": "过场·不可移动者"
+            },
+            {
+              "file": "StoryData/S1060B.json",
+              "label": "过场·被告·杀害妈妈"
+            },
+            {
+              "file": "StoryData/S1061B.json",
+              "label": "过场·摇篮曲"
+            },
+            {
+              "file": "StoryData/S1062B.json",
+              "label": "过场·让娜·被钉死"
+            },
+            {
+              "file": "StoryData/S9991B.json",
+              "label": "过场·尾声·永存的西西弗"
+            }
+          ]
+        },
+        {
+          "id": "b10",
+          "label": "10 通用互动台词（跨楼层复用）",
+          "kind": "rpg",
+          "kind_label": "通用互动",
+          "confidence": "high",
+          "evidence": "D900xx 为各楼层复用的互动台词（尸体/任务提示/通用应答），不属特定楼层，单列一段",
+          "parts": [
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-common-a1c10p1.json",
+              "label": "通用互动台词"
+            },
+            {
+              "file": "RPGSystem/rpg-loc-dialogue-choice-common-a1c10p1.json"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

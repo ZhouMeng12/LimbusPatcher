@@ -1,0 +1,1863 @@
+{
+  "format_version": 1,
+  "generated_at": "2026-09-12T09:29:39",
+  "source": "https://limbuscompany.wiki.gg/api.php + 豆包/灰机核对补全 + 豆包/灰机核对补全 + 豆包/灰机核对补全 + 豆包/灰机核对补全 + 豆包/灰机核对补全 + 豆包/灰机核对补全",
+  "identities": {
+    "10101": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01101",
+      "name_en": "LCB Sinner Yi Sang"
+    },
+    "10102": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01202",
+      "name_en": "Seven Assoc. South Section 6 Yi Sang"
+    },
+    "10105": {
+      "season": 2,
+      "acq": "event",
+      "wiki_id": "01205",
+      "name_en": "Molar Office Fixer Yi Sang"
+    },
+    "10107": {
+      "season": 3,
+      "acq": "seasonal",
+      "wiki_id": "01207",
+      "name_en": "The Pequod First Mate Yi Sang"
+    },
+    "10108": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01208",
+      "name_en": "Dieci Assoc. South Section 4 Yi Sang"
+    },
+    "10111": {
+      "season": 5,
+      "acq": "event",
+      "wiki_id": "01211",
+      "name_en": "LCE E.G.O::Lantern Yi Sang"
+    },
+    "10103": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01303",
+      "name_en": "Blade Lineage Salsu Yi Sang"
+    },
+    "10104": {
+      "season": 2,
+      "acq": "seasonal",
+      "wiki_id": "01304",
+      "name_en": "Effloresced E.G.O::Spicebush Yi Sang"
+    },
+    "10106": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01306",
+      "name_en": "W Corp. L3 Cleanup Agent Yi Sang"
+    },
+    "10109": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01309",
+      "name_en": "The Ring Pointillist Student Yi Sang"
+    },
+    "10110": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "01310",
+      "name_en": "Lobotomy E.G.O::Solemn Lament Yi Sang"
+    },
+    "10112": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01312",
+      "name_en": "Liu Assoc. South Section 3 Yi Sang"
+    },
+    "10113": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "01313",
+      "name_en": "N Corp. E.G.O::Fell Bullet Yi Sang"
+    },
+    "10114": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "01314",
+      "name_en": "Heishou Pack - Wu Branch Adept Yi Sang"
+    },
+    "10115": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "01315",
+      "name_en": "The House of Spiders: The Index Nursefather Yi Sang"
+    },
+    "10116": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "01316",
+      "name_en": "LCE E.G.O::Dimension Shredder Yi Sang"
+    },
+    "10201": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "02101",
+      "name_en": "LCB Sinner Faust"
+    },
+    "10202": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "02202",
+      "name_en": "W Corp. L2 Cleanup Agent Faust"
+    },
+    "10203": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "02203",
+      "name_en": "Lobotomy Corp. Remnant Faust"
+    },
+    "10205": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "02205",
+      "name_en": "Zwei Assoc. South Section 4 Faust"
+    },
+    "10209": {
+      "season": 4,
+      "acq": "seasonal",
+      "wiki_id": "02209",
+      "name_en": "Wuthering Heights Butler Faust"
+    },
+    "10204": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "02304",
+      "name_en": "The One Who Grips Faust"
+    },
+    "10206": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "02306",
+      "name_en": "Seven Assoc. South Section 4 Faust"
+    },
+    "10207": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "02307",
+      "name_en": "Lobotomy E.G.O::Regret Faust"
+    },
+    "10208": {
+      "season": 3,
+      "acq": "event",
+      "wiki_id": "02308",
+      "name_en": "Blade Lineage Salsu Faust"
+    },
+    "10210": {
+      "season": 4,
+      "acq": "event",
+      "wiki_id": "02310",
+      "name_en": "MultiCrack Office Rep Faust"
+    },
+    "10211": {
+      "season": 5,
+      "acq": "event",
+      "wiki_id": "02311",
+      "name_en": "LCE E.G.O::Ardor Blossom Star Faust"
+    },
+    "10212": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "02312",
+      "name_en": "Heishou Pack - Mao Branch Adept Faust"
+    },
+    "10213": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "02313",
+      "name_en": "Shi Assoc. East Section 3 Faust"
+    },
+    "10214": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "02314",
+      "name_en": "The Index Proselyte:【Paper Slip】Faust"
+    },
+    "10215": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "02315",
+      "name_en": "The House of Spiders: The Ring Apprentice Faust"
+    },
+    "10216": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "02316",
+      "name_en": "Dawn Office Fixer Faust"
+    },
+    "10301": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "03101",
+      "name_en": "LCB Sinner Don Quixote"
+    },
+    "10303": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "03202",
+      "name_en": "Shi Assoc. South Section 5 Director Don Quixote"
+    },
+    "10304": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "03204",
+      "name_en": "N Corp. Mittelhammer Don Quixote"
+    },
+    "10307": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "03207",
+      "name_en": "Lobotomy E.G.O::Lantern Don Quixote"
+    },
+    "10308": {
+      "season": 3,
+      "acq": "event",
+      "wiki_id": "03208",
+      "name_en": "Blade Lineage Salsu Don Quixote"
+    },
+    "10302": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "03303",
+      "name_en": "W Corp. L3 Cleanup Agent Don Quixote"
+    },
+    "10305": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "03305",
+      "name_en": "Cinq Assoc. South Section 5 Director Don Quixote"
+    },
+    "10306": {
+      "season": 3,
+      "acq": "seasonal",
+      "wiki_id": "03306",
+      "name_en": "The Middle Little Sister Don Quixote"
+    },
+    "10309": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "03309",
+      "name_en": "T Corp. Class 3 Collection Staff Don Quixote"
+    },
+    "10310": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "03310",
+      "name_en": "The Manager of La Manchaland Don Quixote"
+    },
+    "10311": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "03311",
+      "name_en": "Cinq Assoc. East Section 3 Don Quixote"
+    },
+    "10312": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "03312",
+      "name_en": "Lobotomy E.G.O::In the Name of Love and Hate Don Quixote"
+    },
+    "10313": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "03313",
+      "name_en": "Heishou Pack - Wei Branch Don Quixote"
+    },
+    "10314": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "03314",
+      "name_en": "The Index Proxy - Effloresced E.G.O::Procuration Don Quixote"
+    },
+    "10401": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "04101",
+      "name_en": "LCB Sinner Ryōshū"
+    },
+    "10402": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "04202",
+      "name_en": "Seven Assoc. South Section 6 Ryōshū"
+    },
+    "10406": {
+      "season": 3,
+      "acq": "seasonal",
+      "wiki_id": "04206",
+      "name_en": "LCCB Assistant Manager Ryōshū"
+    },
+    "10407": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "04207",
+      "name_en": "Liu Assoc. South Section 4 Ryōshū"
+    },
+    "10409": {
+      "season": 4,
+      "acq": "event",
+      "wiki_id": "04209",
+      "name_en": "District 20 Yurodivy Ryōshū"
+    },
+    "10403": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "04303",
+      "name_en": "Kurokumo Clan Wakashu Ryōshū"
+    },
+    "10404": {
+      "season": 1,
+      "acq": "event",
+      "wiki_id": "04304",
+      "name_en": "R.B. Chef de Cuisine Ryōshū"
+    },
+    "10405": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "04305",
+      "name_en": "W Corp. L3 Cleanup Agent Ryōshū"
+    },
+    "10408": {
+      "season": 4,
+      "acq": "seasonal",
+      "wiki_id": "04308",
+      "name_en": "Edgar Family Chief Butler Ryōshū"
+    },
+    "10410": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "04310",
+      "name_en": "Lobotomy E.G.O::Red Eyes & Penitence Ryōshū"
+    },
+    "10411": {
+      "season": 5,
+      "acq": "event",
+      "wiki_id": "04311",
+      "name_en": "Heishou Pack - Mao Branch Ryōshū"
+    },
+    "10412": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "04312",
+      "name_en": "N Corp. E.G.O::Contempt, Awe Ryōshū"
+    },
+    "10413": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "04313",
+      "name_en": "Drifting Blade of Hongyuan Ryōshū"
+    },
+    "10414": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "04314",
+      "name_en": "Lobotomy E.G.O::Faint Aroma & Solitude Ryōshū"
+    },
+    "10415": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "04315",
+      "name_en": "Blade of the House of Spiders Ryōshū"
+    },
+    "10501": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "05101",
+      "name_en": "LCB Sinner Meursault"
+    },
+    "10502": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "05202",
+      "name_en": "Liu Assoc. South Section 6 Meursault"
+    },
+    "10505": {
+      "season": 2,
+      "acq": "seasonal",
+      "wiki_id": "05205",
+      "name_en": "Rosespanner Workshop Fixer Meursault"
+    },
+    "10507": {
+      "season": 3,
+      "acq": "seasonal",
+      "wiki_id": "05207",
+      "name_en": "The Middle Little Brother Meursault"
+    },
+    "10509": {
+      "season": 4,
+      "acq": "seasonal",
+      "wiki_id": "05209",
+      "name_en": "Dead Rabbits Boss Meursault"
+    },
+    "10503": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "05303",
+      "name_en": "W Corp. L2 Cleanup Agent Meursault"
+    },
+    "10504": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "05304",
+      "name_en": "N Corp. Großhammer Meursault"
+    },
+    "10506": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "05306",
+      "name_en": "R Corp. 4th Pack Rhino Meursault"
+    },
+    "10508": {
+      "season": 3,
+      "acq": "event",
+      "wiki_id": "05308",
+      "name_en": "Blade Lineage Mentor Meursault"
+    },
+    "10510": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "05310",
+      "name_en": "Dieci Assoc. South Section 4 Director Meursault"
+    },
+    "10511": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "05311",
+      "name_en": "Cinq Assoc. West Section 3 Meursault"
+    },
+    "10512": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "05312",
+      "name_en": "The Thumb East Capo IIII Meursault"
+    },
+    "10513": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "05313",
+      "name_en": "The Prince of La Manchaland Meursault"
+    },
+    "10514": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "05314",
+      "name_en": "Lobotomy E.G.O::Hornet【Alteration】Meursault"
+    },
+    "10515": {
+      "season": 7,
+      "acq": "event",
+      "wiki_id": "05315",
+      "name_en": "The Ring Fauvist Student Meursault"
+    },
+    "10601": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "06101",
+      "name_en": "LCB Sinner Hong Lu"
+    },
+    "10602": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "06202",
+      "name_en": "Kurokumo Clan Wakashu Hong Lu"
+    },
+    "10604": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "06204",
+      "name_en": "Liu Assoc. South Section 5 Hong Lu"
+    },
+    "10606": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "06206",
+      "name_en": "W Corp. L2 Cleanup Agent Hong Lu"
+    },
+    "10607": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "06207",
+      "name_en": "Hook Office Fixer Hong Lu"
+    },
+    "10610": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "06210",
+      "name_en": "Fanghunt Office Fixer Hong Lu"
+    },
+    "10603": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "06303",
+      "name_en": "Tingtang Gang Gangleader Hong Lu"
+    },
+    "10605": {
+      "season": 2,
+      "acq": "seasonal",
+      "wiki_id": "06305",
+      "name_en": "K Corp. Class 3 Excision Staff Hong Lu"
+    },
+    "10608": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "06308",
+      "name_en": "Dieci Assoc. South Section 4 Hong Lu"
+    },
+    "10609": {
+      "season": 4,
+      "acq": "event",
+      "wiki_id": "06309",
+      "name_en": "District 20 Yurodivy Hong Lu"
+    },
+    "10611": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "06311",
+      "name_en": "Full-Stop Office Rep Hong Lu"
+    },
+    "10612": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "06312",
+      "name_en": "R Corp. 4th Pack Reindeer Hong Lu"
+    },
+    "10613": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "06313",
+      "name_en": "The Lord of Hongyuan Hong Lu"
+    },
+    "10614": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "06314",
+      "name_en": "The House of Spiders: The Ring Nursefather Hong Lu"
+    },
+    "10615": {
+      "season": 7,
+      "acq": "event",
+      "wiki_id": "06315",
+      "name_en": "S Corp. Ch'unokkun Hong Lu"
+    },
+    "10701": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "07101",
+      "name_en": "LCB Sinner Heathcliff"
+    },
+    "10702": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "07202",
+      "name_en": "Shi Assoc. South Section 5 Heathcliff"
+    },
+    "10704": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "07204",
+      "name_en": "N Corp. Kleinhammer Heathcliff"
+    },
+    "10706": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "07206",
+      "name_en": "Seven Assoc. South Section 4 Heathcliff"
+    },
+    "10709": {
+      "season": 4,
+      "acq": "event",
+      "wiki_id": "07209",
+      "name_en": "MultiCrack Office Fixer Heathcliff"
+    },
+    "10703": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "07303",
+      "name_en": "R Corp. 4th Pack Rabbit Heathcliff"
+    },
+    "10705": {
+      "season": 2,
+      "acq": "seasonal",
+      "wiki_id": "07305",
+      "name_en": "Lobotomy E.G.O::Sunshower Heathcliff"
+    },
+    "10707": {
+      "season": 3,
+      "acq": "seasonal",
+      "wiki_id": "07307",
+      "name_en": "The Pequod Harpooneer Heathcliff"
+    },
+    "10708": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "07308",
+      "name_en": "Öufi Assoc. South Section 3 Heathcliff"
+    },
+    "10710": {
+      "season": 4,
+      "acq": "seasonal",
+      "wiki_id": "07310",
+      "name_en": "Wild Hunt Heathcliff"
+    },
+    "10711": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "07311",
+      "name_en": "Full-Stop Office Fixer Heathcliff"
+    },
+    "10712": {
+      "season": 5,
+      "acq": "event",
+      "wiki_id": "07312",
+      "name_en": "Kurokumo Clan Wakashu Heathcliff"
+    },
+    "10713": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "07313",
+      "name_en": "W Corp. L4 Cleanup Agent - CCA Heathcliff"
+    },
+    "10714": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "07314",
+      "name_en": "Heishou Pack - You Branch Adept Heathcliff"
+    },
+    "10715": {
+      "season": 7,
+      "acq": "event",
+      "wiki_id": "07315",
+      "name_en": "The Middle Big Brother Heathcliff"
+    },
+    "10716": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "07316",
+      "name_en": "The House of Spiders: The Thumb Apprentice Heathcliff"
+    },
+    "10801": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "08101",
+      "name_en": "LCB Sinner Ishmael"
+    },
+    "10803": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "08202",
+      "name_en": "Shi Assoc. South Section 5 Ishmael"
+    },
+    "10804": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "08203",
+      "name_en": "LCCB Assistant Manager Ishmael"
+    },
+    "10805": {
+      "season": 2,
+      "acq": "seasonal",
+      "wiki_id": "08205",
+      "name_en": "Lobotomy E.G.O::Sloshing Ishmael"
+    },
+    "10809": {
+      "season": 4,
+      "acq": "seasonal",
+      "wiki_id": "08209",
+      "name_en": "Edgar Family Butler Ishmael"
+    },
+    "10802": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "08304",
+      "name_en": "R Corp. 4th Pack Reindeer Ishmael"
+    },
+    "10806": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "08306",
+      "name_en": "Liu Assoc. South Section 4 Ishmael"
+    },
+    "10807": {
+      "season": 2,
+      "acq": "event",
+      "wiki_id": "08307",
+      "name_en": "Molar Boatworks Fixer Ishmael"
+    },
+    "10808": {
+      "season": 3,
+      "acq": "seasonal",
+      "wiki_id": "08308",
+      "name_en": "The Pequod Captain Ishmael"
+    },
+    "10810": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "08310",
+      "name_en": "Zwei Assoc. West Section 3 Ishmael"
+    },
+    "10811": {
+      "season": 5,
+      "acq": "event",
+      "wiki_id": "08311",
+      "name_en": "Kurokumo Clan Captain Ishmael"
+    },
+    "10812": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "08312",
+      "name_en": "Family Hierarch Candidate Ishmael"
+    },
+    "10813": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "08313",
+      "name_en": "Jeong's Office Rep Ishmael"
+    },
+    "10814": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "08314",
+      "name_en": "The House of Spiders: The Middle Apprentice Ishmael"
+    },
+    "10815": {
+      "season": 7,
+      "acq": "event",
+      "wiki_id": "08315",
+      "name_en": "LCD OSIR Team Ishmael"
+    },
+    "10901": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09101",
+      "name_en": "LCB Sinner Rodion"
+    },
+    "10903": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "09202",
+      "name_en": "LCCB Assistant Manager Rodion"
+    },
+    "10904": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "09204",
+      "name_en": "N Corp. Mittelhammer Rodion"
+    },
+    "10906": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09206",
+      "name_en": "Zwei Assoc. South Section 5 Rodion"
+    },
+    "10909": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09209",
+      "name_en": "T Corp. Class 2 Collection Staff Rodion"
+    },
+    "10902": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09303",
+      "name_en": "Kurokumo Clan Wakashu Rodion"
+    },
+    "10905": {
+      "season": 2,
+      "acq": "seasonal",
+      "wiki_id": "09305",
+      "name_en": "Rosespanner Workshop Rep Rodion"
+    },
+    "10907": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09307",
+      "name_en": "Dieci Assoc. South Section 4 Rodion"
+    },
+    "10908": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09308",
+      "name_en": "Liu Assoc. South Section 4 Director Rodion"
+    },
+    "10910": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09310",
+      "name_en": "Devyat' Assoc. North Section 3 Rodion"
+    },
+    "10911": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "09311",
+      "name_en": "The Princess of La Manchaland Rodion"
+    },
+    "10912": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "09312",
+      "name_en": "Heishou Pack - Si Branch Rodion"
+    },
+    "10913": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "09313",
+      "name_en": "Lobotomy E.G.O::The Sword Sharpened with Tears Rodion"
+    },
+    "10914": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09314",
+      "name_en": "R Corp. 4th Pack Reindeer Rodion"
+    },
+    "10915": {
+      "season": 7,
+      "acq": "event",
+      "wiki_id": "09315",
+      "name_en": "The Ring Fauvist Docent Rodion"
+    },
+    "10916": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "09316",
+      "name_en": "The House of Spiders: The Thumb Nursefather Rodion"
+    },
+    "11001": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "11101",
+      "name_en": "LCB Sinner Sinclair"
+    },
+    "11003": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "11202",
+      "name_en": "Zwei Assoc. South Section 6 Sinclair"
+    },
+    "11004": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "11203",
+      "name_en": "Los Mariachis Jefe Sinclair"
+    },
+    "11006": {
+      "season": 2,
+      "acq": "seasonal",
+      "wiki_id": "11206",
+      "name_en": "Lobotomy E.G.O::Red Sheet Sinclair"
+    },
+    "11007": {
+      "season": 2,
+      "acq": "event",
+      "wiki_id": "11207",
+      "name_en": "Molar Boatworks Fixer Sinclair"
+    },
+    "11010": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "11210",
+      "name_en": "Zwei Assoc. West Section 3 Sinclair"
+    },
+    "11002": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "11304",
+      "name_en": "Blade Lineage Salsu Sinclair"
+    },
+    "11005": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "11305",
+      "name_en": "The One Who Shall Grip Sinclair"
+    },
+    "11008": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "11308",
+      "name_en": "Cinq Assoc. South Section 4 Director Sinclair"
+    },
+    "11009": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "11309",
+      "name_en": "Dawn Office Fixer Sinclair"
+    },
+    "11011": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "11311",
+      "name_en": "Devyat' Assoc. North Section 3 Sinclair"
+    },
+    "11012": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "11312",
+      "name_en": "The Middle Little Brother Sinclair"
+    },
+    "11013": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "11313",
+      "name_en": "The Thumb East Soldato II Sinclair"
+    },
+    "11014": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "11314",
+      "name_en": "Heishou Pack - You Branch Sinclair"
+    },
+    "11015": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "11315",
+      "name_en": "The House of Spiders: The Pinky Apprentice Sinclair"
+    },
+    "11101": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "12101",
+      "name_en": "LCB Sinner Outis"
+    },
+    "11102": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "12202",
+      "name_en": "Blade Lineage Salsu Outis"
+    },
+    "11103": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "12203",
+      "name_en": "G Corp. Head Manager Outis"
+    },
+    "11106": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "12206",
+      "name_en": "Cinq Assoc. South Section 4 Outis"
+    },
+    "11109": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "12209",
+      "name_en": "The Ring Pointillist Student Outis"
+    },
+    "11104": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "12304",
+      "name_en": "Seven Assoc. South Section 6 Director Outis"
+    },
+    "11105": {
+      "season": 2,
+      "acq": "event",
+      "wiki_id": "12305",
+      "name_en": "Molar Office Fixer Outis"
+    },
+    "11107": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "12307",
+      "name_en": "Lobotomy E.G.O::Magic Bullet Outis"
+    },
+    "11108": {
+      "season": 4,
+      "acq": "seasonal",
+      "wiki_id": "12308",
+      "name_en": "Wuthering Heights Chief Butler Outis"
+    },
+    "11110": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "12310",
+      "name_en": "W Corp. L3 Cleanup Captain Outis"
+    },
+    "11111": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "12311",
+      "name_en": "The Barber of La Manchaland Outis"
+    },
+    "11112": {
+      "season": 5,
+      "acq": "event",
+      "wiki_id": "12312",
+      "name_en": "Heishou Pack - Mao Branch Outis"
+    },
+    "11113": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "12313",
+      "name_en": "T Corp. Class 3 VDCU Staff Outis"
+    },
+    "11114": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "12314",
+      "name_en": "LCA Udjat Vanguard Team 3 Leader Outis"
+    },
+    "11115": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "12315",
+      "name_en": "The House of Spiders: The Middle Nursefather Outis"
+    },
+    "11201": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "13101",
+      "name_en": "LCB Sinner Gregor"
+    },
+    "11202": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "13202",
+      "name_en": "Liu Assoc. South Section 6 Gregor"
+    },
+    "11204": {
+      "season": 1,
+      "acq": "event",
+      "wiki_id": "13204",
+      "name_en": "R.B. Sous-chef Gregor"
+    },
+    "11205": {
+      "season": 2,
+      "acq": "seasonal",
+      "wiki_id": "13205",
+      "name_en": "Rosespanner Workshop Fixer Gregor"
+    },
+    "11208": {
+      "season": 3,
+      "acq": "event",
+      "wiki_id": "13208",
+      "name_en": "Kurokumo Clan Captain Gregor"
+    },
+    "11203": {
+      "season": 1,
+      "acq": "seasonal",
+      "wiki_id": "13303",
+      "name_en": "G Corp. Manager Corporal Gregor"
+    },
+    "11206": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "13306",
+      "name_en": "Zwei Assoc. South Section 4 Gregor"
+    },
+    "11207": {
+      "season": 3,
+      "acq": "seasonal",
+      "wiki_id": "13307",
+      "name_en": "Twinhook Pirates First Mate Gregor"
+    },
+    "11209": {
+      "season": 4,
+      "acq": "seasonal",
+      "wiki_id": "13309",
+      "name_en": "Edgar Family Heir Gregor"
+    },
+    "11210": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "13310",
+      "name_en": "The Priest of La Manchaland Gregor"
+    },
+    "11211": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "13311",
+      "name_en": "Firefist Office Survivor Gregor"
+    },
+    "11212": {
+      "season": 6,
+      "acq": "seasonal",
+      "wiki_id": "13312",
+      "name_en": "Heishou Pack - Si Branch Gregor"
+    },
+    "11213": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "13313",
+      "name_en": "Night Awls Capitano Gregor"
+    },
+    "11214": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "13314",
+      "name_en": "Lobotomy E.G.O::Lamp Gregor"
+    },
+    "11215": {
+      "season": 7,
+      "acq": "event",
+      "wiki_id": "13315",
+      "name_en": "LCE E.G.O::AEDD Gregor"
+    },
+    "11216": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "13316",
+      "name_en": "Dawn Office Rep Gregor"
+    },
+    "10616": {
+      "season": 0,
+      "acq": "base",
+      "source": "doubao/huiji",
+      "note": "常驻提取"
+    },
+    "40501": {
+      "season": 0,
+      "acq": "event",
+      "source": "doubao/huiji",
+      "note": "映射战斗经验记忆限定奖励"
+    }
+  },
+  "egos": {
+    "20101": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01101",
+      "name_en": "Crow's Eye View Yi Sang",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "20106": {
+      "season": 4,
+      "acq": "pass",
+      "wiki_id": "01106",
+      "name_en": "Bygone Days Yi Sang"
+    },
+    "20102": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "01202",
+      "name_en": "4th Match Flame Yi Sang"
+    },
+    "20103": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01203",
+      "name_en": "Wishing Cairn Yi Sang"
+    },
+    "20104": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "01304",
+      "name_en": "Dimension Shredder Yi Sang"
+    },
+    "20107": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "01307",
+      "name_en": "Fell Bullet Yi Sang"
+    },
+    "20109": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "01309",
+      "name_en": "Solemn Lament Yi Sang",
+      "source": "doubao/huiji",
+      "note": "瓦尔普吉斯之夜-9提取"
+    },
+    "20105": {
+      "season": 2,
+      "acq": "pass",
+      "wiki_id": "01405",
+      "name_en": "Sunshower Yi Sang"
+    },
+    "20108": {
+      "season": 7,
+      "acq": "pass",
+      "wiki_id": "01408",
+      "name_en": "Great Trichiliocosm 三千大世界 Yi Sang",
+      "source": "doubao/huiji",
+      "note": "第7赛季免费通行证获取"
+    },
+    "20201": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "02101",
+      "name_en": "Representation Emitter Faust",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "20203": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "02203",
+      "name_en": "Hex Nail Faust"
+    },
+    "20205": {
+      "season": 3,
+      "acq": "pass",
+      "wiki_id": "02205",
+      "name_en": "9:2 Faust"
+    },
+    "20207": {
+      "season": 5,
+      "acq": "pass",
+      "wiki_id": "02207",
+      "name_en": "Lasso Faust"
+    },
+    "20202": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "02302",
+      "name_en": "Fluid Sac Faust"
+    },
+    "20204": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "02304",
+      "name_en": "Telepole Faust"
+    },
+    "20208": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "02308",
+      "name_en": "Thoracalgia Faust"
+    },
+    "20209": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "02309",
+      "name_en": "Command : Meltdown Faust",
+      "source": "doubao/huiji",
+      "note": "限定E.G.O定向提取：善意的巡礼"
+    },
+    "20210": {
+      "season": 7,
+      "acq": "event",
+      "wiki_id": "02310",
+      "name_en": "Ardor Blossom Star Faust",
+      "source": "doubao/huiji",
+      "note": "第7赛季活动提取"
+    },
+    "20206": {
+      "season": 4,
+      "acq": "event",
+      "wiki_id": "02406",
+      "name_en": "Everlasting Faust"
+    },
+    "20301": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "03101",
+      "name_en": "La Sangre de Sancho Don Quixote",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "20310": {
+      "season": 7,
+      "acq": "seasonal",
+      "wiki_id": "03110",
+      "name_en": "I'll Go fer Scissors. How 'Bout You? Don Quixote"
+    },
+    "20304": {
+      "season": 1,
+      "acq": "event",
+      "wiki_id": "03204",
+      "name_en": "Lifetime Stew Don Quixote"
+    },
+    "20305": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "03205",
+      "name_en": "Wishing Cairn Don Quixote"
+    },
+    "20306": {
+      "season": 4,
+      "acq": "pass",
+      "wiki_id": "03206",
+      "name_en": "Electric Screaming Don Quixote"
+    },
+    "20302": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "03302",
+      "name_en": "Fluid Sac Don Quixote"
+    },
+    "20303": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "03303",
+      "name_en": "Telepole Don Quixote"
+    },
+    "20308": {
+      "season": 6,
+      "acq": "pass",
+      "wiki_id": "03308",
+      "name_en": "Red Sheet Don Quixote"
+    },
+    "20307": {
+      "season": 5,
+      "acq": "pass",
+      "wiki_id": "03407",
+      "name_en": "Yearning-Mircalla Don Quixote"
+    },
+    "20309": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "03409",
+      "name_en": "In the Name of Love and Hate Don Quixote",
+      "source": "doubao/huiji",
+      "note": "瓦尔普吉斯之夜-6提取"
+    },
+    "20401": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "04101",
+      "name_en": "Forest for the Flames Ryōshū",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "20405": {
+      "season": 2,
+      "acq": "event",
+      "wiki_id": "04105",
+      "name_en": "Soda Ryōshū"
+    },
+    "20403": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "04203",
+      "name_en": "Red Eyes Ryōshū"
+    },
+    "20406": {
+      "season": 3,
+      "acq": "pass",
+      "wiki_id": "04206",
+      "name_en": "Blind Obsession Ryōshū"
+    },
+    "20402": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "04302",
+      "name_en": "4th Match Flame Ryōshū"
+    },
+    "20404": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "04304",
+      "name_en": "Red Eyes (Open) Ryōshū"
+    },
+    "20408": {
+      "season": 5,
+      "acq": "event",
+      "wiki_id": "04308",
+      "name_en": "Thoracalgia Ryōshū"
+    },
+    "20407": {
+      "season": 4,
+      "acq": "seasonal",
+      "wiki_id": "04407",
+      "name_en": "Contempt, Awe Ryōshū"
+    },
+    "20409": {
+      "season": 7,
+      "acq": "pass",
+      "wiki_id": "04409",
+      "name_en": "Great Trichiliocosm 三千大世界 Ryōshū",
+      "source": "doubao/huiji",
+      "note": "第7赛季付费通行证获取"
+    },
+    "20501": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "05101",
+      "name_en": "Chains of Others Meursault",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "20502": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "05202",
+      "name_en": "Screwloose Wallop Meursault"
+    },
+    "20505": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "05205",
+      "name_en": "Regret Meursault"
+    },
+    "20506": {
+      "season": 4,
+      "acq": "pass",
+      "wiki_id": "05206",
+      "name_en": "Electric Screaming Meursault"
+    },
+    "20503": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "05303",
+      "name_en": "Pursuance Meursault"
+    },
+    "20504": {
+      "season": 2,
+      "acq": "pass",
+      "wiki_id": "05304",
+      "name_en": "Capote Meursault"
+    },
+    "20509": {
+      "season": 7,
+      "acq": "event",
+      "wiki_id": "05309",
+      "name_en": "Shadow-vested Bladesinger 着影揮刀 Meursault",
+      "source": "doubao/huiji",
+      "note": "第7赛季活动提取"
+    },
+    "20507": {
+      "season": 5,
+      "acq": "pass",
+      "wiki_id": "05407",
+      "name_en": "Yearning-Mircalla Meursault"
+    },
+    "20508": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "05408",
+      "name_en": "Crushbound Past Meursault",
+      "source": "doubao/huiji",
+      "note": "第6赛季活动提取"
+    },
+    "20601": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "06101",
+      "name_en": "Land of Illusion Hong Lu",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "20602": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "06202",
+      "name_en": "Roseate Desire Hong Lu"
+    },
+    "20604": {
+      "season": 2,
+      "acq": "event",
+      "wiki_id": "06204",
+      "name_en": "Soda Hong Lu"
+    },
+    "20606": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "06206",
+      "name_en": "Cavernous Wailing Hong Lu"
+    },
+    "20607": {
+      "season": 5,
+      "acq": "pass",
+      "wiki_id": "06207",
+      "name_en": "Lasso Hong Lu"
+    },
+    "20603": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "06303",
+      "name_en": "Dimension Shredder Hong Lu"
+    },
+    "20605": {
+      "season": 3,
+      "acq": "pass",
+      "wiki_id": "06305",
+      "name_en": "Effervescent Corrosion Hong Lu"
+    },
+    "20609": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "06309",
+      "name_en": "To Remain Oneself 宁作吾 Hong Lu",
+      "source": "doubao/huiji",
+      "note": "限定E.G.O定向提取：善意的巡礼"
+    },
+    "20608": {
+      "season": 6,
+      "acq": "pass",
+      "wiki_id": "06408",
+      "name_en": "Tears of the Tarnished Blood 汚血泣淚 Hong Lu",
+      "source": "doubao/huiji",
+      "note": "第6赛季付费通行证获取"
+    },
+    "20701": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "07101",
+      "name_en": "Bodysack Heathcliff",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "20705": {
+      "season": 3,
+      "acq": "event",
+      "wiki_id": "07105",
+      "name_en": "Holiday Heathcliff"
+    },
+    "20703": {
+      "season": 2,
+      "acq": "pass",
+      "wiki_id": "07203",
+      "name_en": "AEDD Heathcliff"
+    },
+    "20707": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "07207",
+      "name_en": "Fell Bullet Heathcliff"
+    },
+    "20709": {
+      "season": 7,
+      "acq": "pass",
+      "wiki_id": "07209",
+      "name_en": "Move-in Reg. Heathcliff",
+      "source": "doubao/huiji",
+      "note": "第7赛季付费通行证获取"
+    },
+    "20702": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "07302",
+      "name_en": "Telepole Heathcliff"
+    },
+    "20704": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "07304",
+      "name_en": "Ya Śūnyatā Tad Rūpam Heathcliff"
+    },
+    "20708": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "07308",
+      "name_en": "Asymmetrical Inertia Heathcliff"
+    },
+    "20706": {
+      "season": 4,
+      "acq": "pass",
+      "wiki_id": "07406",
+      "name_en": "Binds Heathcliff"
+    },
+    "20801": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "08101",
+      "name_en": "Snagharpoon Ishmael",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "20809": {
+      "season": 6,
+      "acq": "pass",
+      "wiki_id": "08109",
+      "name_en": "Hundred-Footed Death Maggot 蝍蛆殺 Ishmael",
+      "source": "doubao/huiji",
+      "note": "第6赛季付费通行证获取"
+    },
+    "20802": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "08202",
+      "name_en": "Roseate Desire Ishmael"
+    },
+    "20804": {
+      "season": 2,
+      "acq": "pass",
+      "wiki_id": "08204",
+      "name_en": "Capote Ishmael"
+    },
+    "20807": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "08207",
+      "name_en": "Bygone Days Ishmael"
+    },
+    "20803": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "08303",
+      "name_en": "Ardor Blossom Star Ishmael"
+    },
+    "20806": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "08306",
+      "name_en": "Wingbeat Ishmael"
+    },
+    "20808": {
+      "season": 5,
+      "acq": "event",
+      "wiki_id": "08308",
+      "name_en": "Christmas Nightmare Ishmael",
+      "source": "doubao/huiji",
+      "note": "第5赛季活动提取"
+    },
+    "20810": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "08310",
+      "name_en": "Tidal Elegy Ishmael",
+      "source": "doubao/huiji",
+      "note": "善意的巡礼活动赠送"
+    },
+    "20805": {
+      "season": 3,
+      "acq": "pass",
+      "wiki_id": "08405",
+      "name_en": "Blind Obsession Ishmael"
+    },
+    "20901": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09101",
+      "name_en": "What is Cast Rodion",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "20909": {
+      "season": 7,
+      "acq": "event",
+      "wiki_id": "09109",
+      "name_en": "Into the Sunset Rodion",
+      "source": "doubao/huiji",
+      "note": "第7赛季活动提取"
+    },
+    "20903": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "09202",
+      "name_en": "Rime Shank Rodion"
+    },
+    "20904": {
+      "season": 3,
+      "acq": "pass",
+      "wiki_id": "09204",
+      "name_en": "Effervescent Corrosion Rodion"
+    },
+    "20902": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "09303",
+      "name_en": "4th Match Flame Rodion"
+    },
+    "20905": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "09305",
+      "name_en": "Pursuance Rodion"
+    },
+    "20907": {
+      "season": 5,
+      "acq": "pass",
+      "wiki_id": "09307",
+      "name_en": "Hex Nail Rodion",
+      "source": "doubao/huiji",
+      "note": "第5赛季付费通行证获取"
+    },
+    "20906": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "09406",
+      "name_en": "Sanguine Desire Rodion"
+    },
+    "20908": {
+      "season": 5,
+      "acq": "seasonal",
+      "wiki_id": "09408",
+      "name_en": "Indicant's Trial Rodion"
+    },
+    "21001": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "11101",
+      "name_en": "Branch of Knowledge Sinclair",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "21006": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "11106",
+      "name_en": "Cavernous Wailing Sinclair"
+    },
+    "21002": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "11202",
+      "name_en": "Impending Day Sinclair"
+    },
+    "21003": {
+      "season": 1,
+      "acq": "event",
+      "wiki_id": "11203",
+      "name_en": "Lifetime Stew Sinclair"
+    },
+    "21007": {
+      "season": 5,
+      "acq": "pass",
+      "wiki_id": "11207",
+      "name_en": "Hex Nail Sinclair",
+      "source": "doubao/huiji",
+      "note": "第5赛季免费通行证获取"
+    },
+    "21004": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "11304",
+      "name_en": "Lantern Sinclair"
+    },
+    "21005": {
+      "season": 3,
+      "acq": "pass",
+      "wiki_id": "11305",
+      "name_en": "9:2 Sinclair"
+    },
+    "21009": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "11309",
+      "name_en": "Harmony Sinclair",
+      "source": "doubao/huiji",
+      "note": "瓦尔普吉斯之夜-8提取"
+    },
+    "21008": {
+      "season": 6,
+      "acq": "pass",
+      "wiki_id": "11408",
+      "name_en": "Tears of the Tarnished Blood 汚血泣淚 Sinclair",
+      "source": "doubao/huiji",
+      "note": "第6赛季免费通行证获取"
+    },
+    "21101": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "12101",
+      "name_en": "To Páthos Máthos Outis",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "21109": {
+      "season": 7,
+      "acq": "pass",
+      "wiki_id": "12109",
+      "name_en": "I'll Go fer Scissors. How 'Bout You? Outis",
+      "source": "doubao/huiji",
+      "note": "第7赛季免费通行证获取"
+    },
+    "21103": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "12202",
+      "name_en": "Ya Śūnyatā Tad Rūpam Outis"
+    },
+    "21104": {
+      "season": 2,
+      "acq": "pass",
+      "wiki_id": "12204",
+      "name_en": "Sunshower Outis"
+    },
+    "21102": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "12303",
+      "name_en": "Ebony Stem Outis"
+    },
+    "21105": {
+      "season": 3,
+      "acq": "event",
+      "wiki_id": "12305",
+      "name_en": "Holiday Outis"
+    },
+    "21107": {
+      "season": 4,
+      "acq": "event",
+      "wiki_id": "12307",
+      "name_en": "Dimension Shredder Outis"
+    },
+    "21108": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "12308",
+      "name_en": "Magic Bullet Outis"
+    },
+    "21106": {
+      "season": 4,
+      "acq": "pass",
+      "wiki_id": "12406",
+      "name_en": "Binds Outis"
+    },
+    "21201": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "13101",
+      "name_en": "Suddenly, One Day Gregor",
+      "source": "doubao/huiji",
+      "note": "主线获取"
+    },
+    "21202": {
+      "season": 1,
+      "acq": "pass",
+      "wiki_id": "13102",
+      "name_en": "Legerdemain Gregor"
+    },
+    "21203": {
+      "season": 0,
+      "acq": "base",
+      "wiki_id": "13203",
+      "name_en": "Lantern Gregor"
+    },
+    "21206": {
+      "season": 4,
+      "acq": "pass",
+      "wiki_id": "13206",
+      "name_en": "Bygone Days Gregor"
+    },
+    "21204": {
+      "season": 2,
+      "acq": "pass",
+      "wiki_id": "13304",
+      "name_en": "AEDD Gregor"
+    },
+    "21207": {
+      "season": null,
+      "acq": "walpurgis",
+      "wiki_id": "13307",
+      "name_en": "Solemn Lament Gregor"
+    },
+    "21208": {
+      "season": 5,
+      "acq": "event",
+      "wiki_id": "13308",
+      "name_en": "Christmas Nightmare Gregor"
+    },
+    "21205": {
+      "season": 3,
+      "acq": "seasonal",
+      "wiki_id": "13405",
+      "name_en": "Garden of Thorns Gregor"
+    },
+    "21209": {
+      "season": 6,
+      "acq": "event",
+      "wiki_id": "13409",
+      "name_en": "Unbrilliant Glory Gregor",
+      "source": "doubao/huiji",
+      "note": "限定E.G.O定向提取：善意的巡礼"
+    },
+    "21210": {
+      "season": 7,
+      "acq": "seasonal",
+      "source": "doubao/huiji",
+      "note": "第7赛季提取"
+    }
+  }
+}

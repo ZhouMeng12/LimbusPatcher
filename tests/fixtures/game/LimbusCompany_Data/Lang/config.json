@@ -1,0 +1,8 @@
+{
+  "lang": "LLC_zh-CN",
+  "titleFont": "Context/ChineseFont.ttf",
+  "contextFont": "Context/ChineseFont.ttf",
+  "samplingPointSize": 78,
+  "padding": 5,
+  "futureKey": "keep-me"
+}
