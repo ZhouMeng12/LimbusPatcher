@@ -1,6 +1,10 @@
 # 更新日志
 
-## 未发布 · 零协第十章（c10p2）更新适配
+> **v0.9.1 公测已发布**（GitHub Releases，2026-09-28）：下面标「未发布」的各小节
+> （界面改版一～四、打包加固、零协第十章 c10p2 适配）都包含在这一版里，
+> 产物与哈希见 `### 产物（v0.9.1）`。
+
+## 零协第十章（c10p2）更新适配
 
 零协汉化补全了第十章后半（新增 96 个文件，其中 93 个第十章相关；另有 101 个文件有改动）。
 
@@ -171,9 +175,13 @@
 ### 产物（v0.9.1）
 | 产物 | 大小 | SHA256 前 16 位 |
 |---|---|---|
-| `dist/边狱巴士汉化文本修改器.exe`（已部署，用户双击那份） | 62.8 MB | `1e7aa6ce9a97af0a` |
-| `dist/release/LimbusPatcher-v0.9.1-portable.zip` | 62.7 MB | `ce88714592e1056d` |
-| `dist/release/LimbusPatcher-v0.9.1-onedir.zip` | 124.7 MB | `3d9d0dd0283cd175` |
+| `dist/边狱巴士汉化文本修改器.exe`（已部署，用户双击那份） | 65.4 MB | `de5c1eeeda09a743` |
+| `dist/release/LimbusPatcher-v0.9.1-portable.zip` | 65.2 MB | `fb247c46dbdf46dc` |
+| `dist/release/LimbusPatcher-v0.9.1-onedir.zip` | 129.9 MB | `1f992f49a6cdd10a` |
+
+> 上面是**已发布**（GitHub Releases `v0.9.1 公测`）的那一版：含零协 c10p2 适配与
+> 剧本错位修复，卡面随包（授权见 `THIRD_PARTY_LICENSES.md` §3）；完整哈希见随包的
+> `SHA256SUMS.txt`。
 
 exe 属性：`ProductName/FileDescription = 边狱巴士汉化文本修改器`、`FileVersion/ProductVersion = 0.9.1`、
 `CompanyName = LimbusPatcher contributors`、`LegalCopyright = MIT License (c) 2025 …`。
