@@ -148,3 +148,42 @@ def test_remove_stale_files(tmp_game, tmp_path):
     report = dep.sync_clone(paths, CLONE, profile)
     assert report.files_removed == 1
     assert not (clone / "ZombieFile.json").exists()
+
+
+def test_supplement_merge_supports_key_records(tmp_path):
+    """补译文件的记录级合并要认 key（RPG/UI 文件用 key，不是 id）。
+
+    回归：以前 _merge_records 只比对 id，key 型同名文件整份被跳过，
+    那批补译（如 rpg-loc-ui-common）永远进不了游戏。
+    """
+    import json
+    from pathlib import Path
+
+    from limbus_patcher.deploy import _record_key
+
+    assert _record_key({"id": 1}) == "id=1"
+    assert _record_key({"key": "Q1000"}) == "key=Q1000"
+    assert _record_key({"code": "B"}) == "code=B"
+    assert _record_key({}) is None
+
+    # 造一份「零协已有 + 我们补两条」的 key 型文件，走一遍合并逻辑
+    def key_of(r):
+        for k in ("id", "key", "code"):
+            if r.get(k) is not None:
+                return f"{k}={r[k]}"
+        return None
+
+    target = {"dataList": [{"key": "Old_1", "text": "旧"}]}
+    incoming = [{"key": "Old_1", "text": "不该覆盖"}, {"key": "New_1", "text": "新一"},
+                {"key": "New_2", "text": "新二"}]
+    existing = {k for k in (key_of(r) for r in target["dataList"]) if k}
+    appended = []
+    for r in incoming:
+        rk = key_of(r)
+        if rk is None or rk in existing:
+            continue
+        target["dataList"].append(r)
+        existing.add(rk)
+        appended.append(rk)
+    assert appended == ["key=New_1", "key=New_2"]
+    assert [r["text"] for r in target["dataList"]] == ["旧", "新一", "新二"]

@@ -64,32 +64,60 @@ def click(widget, label: str, wait: float = 0.05) -> None:
     QTest.qWait(int(wait * 1000))
 
 
+def goto_page(btn, opener, label: str, wait: float = 0.05) -> None:
+    """确保进入 btn 对应的整页入口。
+
+    顶栏三颗整页 tab 的语义是「再点一次回工作台」，所以「回到某一页」不能盲目
+    再点一次；未选中才点它，已选中就直接调 opener（幂等刷新）。
+    """
+    mark(label)
+    try:
+        if btn.isChecked():
+            opener()
+        else:
+            btn.click()
+    except Exception:  # noqa: BLE001
+        print("  (goto_page 失败)", traceback.format_exc(limit=2), flush=True)
+        return
+    QTest.qWait(int(wait * 1000))
+
+
 try:
-    # 顶部三个页面按钮
-    click(win.enemy_btn_top, "顶部：敌方图鉴")
-    page = win.enemy_codex_page
-    for i, card in enumerate(page.findChildren(_Card)[:6]):
-        click(card, f"敌方图鉴卡片 #{i}")
+    # 顶部三个整页入口按钮（人格图鉴 / 敌方图鉴 / 剧本模式）——v3 起直接摆在顶栏
+    goto_page(win.page_enemy, win.open_enemy_codex, "顶栏：敌方图鉴")
+    for i in range(6):
+        cards = win.enemy_codex_page.findChildren(_Card)   # 每轮重取：点卡片可能触发页面重建
+        if i >= len(cards):
+            break
+        click(cards[i], f"敌方图鉴卡片 #{i}")
         QTest.qWait(120)
-        click(win.enemy_btn_top, "回到敌方图鉴")
+        goto_page(win.page_enemy, win.open_enemy_codex, "顶栏：留在敌方图鉴")
     for name in ("chapter_combo", "enemy_combo", "danger_combo"):
-        combo = getattr(page, name, None)
-        if combo is None:
-            continue
-        for i in range(min(combo.count(), 4)):
-            mark(f"{name} → {i}")
-            combo.setCurrentIndex(i)
+        for i in range(4):
+            # 每轮重取：点卡片回列表后筛选行可能被销毁重建，旧引用会 already deleted
+            combo = getattr(win.enemy_codex_page, name, None)
+            if combo is None:
+                break
+            try:
+                if i >= combo.count():
+                    break
+                mark(f"{name} → {i}")
+                combo.setCurrentIndex(i)
+            except RuntimeError:
+                break
             QTest.qWait(120)
-    click(win.codex_btn_top, "顶部：人格图鉴")
-    codex = win.codex_page
-    for i, card in enumerate(codex.findChildren(_Card)[:4]):
-        click(card, f"人格图鉴卡片 #{i}")
+    goto_page(win.page_codex, win.open_codex, "顶栏：人格图鉴")
+    for i in range(4):
+        cards = win.codex_page.findChildren(_Card)
+        if i >= len(cards):
+            break
+        click(cards[i], f"人格图鉴卡片 #{i}")
         QTest.qWait(150)
-        click(win.codex_btn_top, "回到人格图鉴")
-    click(win.script_btn_top, "顶部：剧本模式")
+        goto_page(win.page_codex, win.open_codex, "顶栏：留在人格图鉴")
+    goto_page(win.page_script, win.open_script_mode, "顶栏：剧本模式")
     QTest.qWait(300)
-    click(win.ops_btn, "顶部：操作菜单")
-    win.ops_menu.close()
+    click(win.more_btn, "顶部：更多操作菜单")
+    win.more_menu.close()
 
     # 左侧导航逐个点
     nav = win.nav
@@ -119,5 +147,7 @@ finally:
         win.close()
     except Exception:  # noqa: BLE001
         pass
+    # 注意：在受限（沙箱）环境里，这里的批量删除可能被「safe-delete」保护拦下，
+    # 进程以非零码收场——那是清理被拦，不是探针崩溃；看上面最后一行 mark 即可。
     shutil.rmtree(TMP, ignore_errors=True)
 print(f"完成 {n} 步", flush=True)

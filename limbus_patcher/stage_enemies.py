@@ -42,6 +42,11 @@ def extra_items() -> list:
     return load_stage_enemies().get("extra", [])
 
 
+def dungeon_items() -> list:
+    """主线迷宫条目：[{tag, label, enemies, source, note}]（DungeonNode 关卡，按迷宫分组）"""
+    return load_stage_enemies().get("dungeons", [])
+
+
 def find_stage(stage_code: str) -> dict | None:
     """按 stage_code（如 '9-50'）找关卡，附加所属章节信息后返回。"""
     for ch in chapters():

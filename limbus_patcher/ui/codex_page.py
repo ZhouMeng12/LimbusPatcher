@@ -73,12 +73,19 @@ SINNER_CROP_ANCHOR_X = 0.5
 
 
 def portrait_path(app_data_dir: Path, kind: str, entity_id: int) -> Path | None:
-    """头像文件（由 scripts/extract_portraits.py 抽取，缺失则返回 None）。"""
+    """头像文件（由 scripts/extract_portraits.py 抽取，缺失则返回 None）。
+
+    查找顺序：外部 data/portraits（覆盖优先）→ 内置包数据（frozen 时为
+    sys._MEIPASS/limbus_patcher/data/portraits，开发态为项目根 data/portraits）。
+    """
+    from ..season import package_data_dir
+
     sub = "identity" if kind == KIND_PERSONALITY else "ego"
-    for ext in (".png", ".webp", ".jpg"):
-        p = Path(app_data_dir) / PORTRAIT_DIR_NAME / sub / f"{entity_id}{ext}"
-        if p.is_file():
-            return p
+    for base in (Path(app_data_dir), package_data_dir()):
+        for ext in (".png", ".webp", ".jpg"):
+            p = base / PORTRAIT_DIR_NAME / sub / f"{entity_id}{ext}"
+            if p.is_file():
+                return p
     return None
 
 
@@ -430,7 +437,7 @@ class KeywordEditDialog(QDialog):
         self.accept()
 
 
-class CodexPage(QWidget):
+class CodexPage(QFrame):
     """图鉴主页面。"""
 
     close_requested = Signal()
@@ -840,7 +847,7 @@ class CodexPage(QWidget):
         lay.setSpacing(8)
 
         tools = QHBoxLayout()
-        self.name_btn = QPushButton("改名称 ▾")
+        self.name_btn = QPushButton("改名称 ▼")
         self.name_btn.setToolTip("修改这个人格／E.G.O 的名称、罪人名、简介（写进方案，零协原文不动）")
         menu = QMenu(self.name_btn)
         for item in ent.self_texts:

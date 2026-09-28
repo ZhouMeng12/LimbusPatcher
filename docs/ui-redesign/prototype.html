@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="bus">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>边狱巴士汉化文本修改器 · 界面原型 v2（巴士 / 简约）</title>
+<style>
+/* ================= 主题 1：巴士（原版 · 黑金直角） ================= */
+:root, html[data-theme="bus"]{
+  --bg:#000000; --s1:#0b0b0b; --s2:#141414; --s3:#1c1c1c;
+  --border:#302b1d; --border-strong:#4d4530;
+  --text:#f4efe2; --text-dim:#a79f8b; --text-faint:#726c5c;
+  --accent:#F1BF02; --accent-2:#B48600; --accent-hover:#ffd12e;
+  --accent-subtle:rgba(241,191,2,.12); --on-accent:#0a0800;
+  --ok:#86b98f; --warn:#E0AD4D; --err:#D9614F; --info:#7fa8d8;
+  --st-none:#3a3529;
+  --radius:0px; --radius-pill:999px;
+  --cut:10px;
+}
+/* ================= 主题 2：简约 · 暗（原 AURUM） ================= */
+html[data-theme="mini"]{
+  --bg:#101215; --s1:#171a1f; --s2:#1e232a; --s3:#252b33;
+  --border:#2a313a; --border-strong:#3a434e;
+  --text:#e4e0d6; --text-dim:#9a958a; --text-faint:#6e6a61;
+  --accent:#c8a24a; --accent-2:#a8862f; --accent-hover:#d9b463;
+  --accent-subtle:rgba(200,162,74,.14); --on-accent:#14120e;
+  --ok:#63ae94; --warn:#e0ad4d; --err:#c4685a; --info:#7fa8d8;
+  --st-none:#4a4f56;
+  --radius:6px; --radius-pill:999px;
+  --cut:0px;
+}
+/* ================= 主题 3：简约 · 亮 ================= */
+html[data-theme="mini-light"]{
+  --bg:#f7f6f3; --s1:#ffffff; --s2:#f1efea; --s3:#ffffff;
+  --border:#dcd8d0; --border-strong:#c3bdb2;
+  --text:#1c1e22; --text-dim:#5c5f66; --text-faint:#8a8681;
+  --accent:#8a6d1f; --accent-2:#6f5716; --accent-hover:#a2801f;
+  --accent-subtle:rgba(138,109,31,.12); --on-accent:#ffffff;
+  --ok:#2f7d63; --warn:#8a6100; --err:#b23a2e; --info:#2f6299;
+  --st-none:#b8b3aa;
+  --radius:6px; --radius-pill:999px;
+  --cut:0px;
+}
+/* ================= 由切换器直接驱动主题（纯 CSS，无 JS） ================= */
+:root:has(#st-mini:checked){ --bg:#101215; --s1:#171a1f; --s2:#1e232a; --s3:#252b33;
+  --border:#2a313a; --border-strong:#3a434e; --text:#e4e0d6; --text-dim:#9a958a; --text-faint:#6e6a61;
+  --accent:#c8a24a; --accent-2:#a8862f; --accent-hover:#d9b463; --accent-subtle:rgba(200,162,74,.14);
+  --on-accent:#14120e; --ok:#63ae94; --warn:#e0ad4d; --err:#c4685a; --info:#7fa8d8;
+  --st-none:#4a4f56; --radius:6px; --cut:0px; }
+:root:has(#st-mini:checked):has(#tn-light:checked){ --bg:#f7f6f3; --s1:#ffffff; --s2:#f1efea; --s3:#ffffff;
+  --border:#dcd8d0; --border-strong:#c3bdb2; --text:#1c1e22; --text-dim:#5c5f66; --text-faint:#8a8681;
+  --accent:#8a6d1f; --accent-2:#6f5716; --accent-hover:#a2801f; --accent-subtle:rgba(138,109,31,.12);
+  --on-accent:#ffffff; --ok:#2f7d63; --warn:#8a6100; --err:#b23a2e; --info:#2f6299;
+  --st-none:#b8b3aa; }
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:"Microsoft YaHei UI","Microsoft YaHei","Segoe UI",system-ui,sans-serif;
+  font-size:13px;line-height:1.5;color:var(--text);background:var(--bg);overflow:hidden;
+  -webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:5px;border:2px solid var(--bg)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.app{display:flex;flex-direction:column;height:100vh}
+
+/* ================= 顶栏：左 品牌+面包屑 · 右 状态药丸+操作 ================= */
+.topbar{height:54px;flex:0 0 54px;display:flex;align-items:center;gap:12px;padding:0 12px;
+  background:var(--s1);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:9px;min-width:0}
+.logo{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;
+  font-weight:700;font-size:14px;color:var(--on-accent);background:var(--accent);
+  clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
+.brand-name{font-size:13px;font-weight:600;white-space:nowrap}
+.savedot{width:6px;height:6px;border-radius:50%;background:var(--ok);display:inline-block;margin-left:5px;vertical-align:1px}
+.crumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-dim);min-width:0}
+.crumb b{color:var(--text);font-weight:600}
+.crumb .sep{color:var(--text-faint)}
+.spacer{flex:1}
+.actions{display:flex;align-items:center;gap:8px}
+
+/* 状态药丸（单颗） */
+.pill{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;font-size:12px;
+  font-weight:600;border:1px solid transparent;border-radius:var(--radius-pill);white-space:nowrap;
+  transition:filter .12s}
+.pill:hover{filter:brightness(1.15)}
+.pill .d{width:6px;height:6px;border-radius:50%;flex:0 0 6px}
+.pill.ok{color:var(--ok);background:rgba(99,174,148,.12);border-color:rgba(99,174,148,.32)}
+.pill.warn{color:var(--warn);background:rgba(224,173,77,.13);border-color:rgba(224,173,77,.34)}
+.pill.err{color:var(--err);background:rgba(196,104,90,.13);border-color:rgba(196,104,90,.36)}
+.pill.ok .d{background:var(--ok)} .pill.warn .d{background:var(--warn)} .pill.err .d{background:var(--err)}
+.pill.mute{color:var(--text-dim);background:var(--s2);border-color:var(--border)}
+
+.btn{height:28px;padding:0 13px;font-size:13px;font-weight:600;border-radius:var(--radius);
+  background:var(--s2);border:1px solid var(--border);color:var(--text);transition:background .12s,border-color .12s}
+.btn:hover{background:var(--s3);border-color:var(--border-strong)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{background:var(--accent-hover)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--text-dim)}
+.btn.ghost:hover{background:var(--s3);color:var(--text)}
+.btn.icon{width:28px;padding:0;display:grid;place-items:center}
+.btn.sm{height:24px;padding:0 9px;font-size:12px}
+.btn[disabled]{color:var(--text-faint);background:var(--s1);border-color:var(--border);cursor:not-allowed}
+
+/* ================= 主体 ================= */
+.body{flex:1;display:flex;min-height:0;padding:8px;gap:8px}
+.pane{background:var(--s1);border:1px solid var(--border);border-radius:var(--radius);
+  display:flex;flex-direction:column;min-height:0}
+.nav{width:216px;flex:0 0 216px}
+.list{width:360px;flex:0 0 360px}
+.editor{flex:1;min-width:0;overflow:hidden;display:flex;flex-direction:column}
+.pane-head{height:38px;flex:0 0 38px;display:flex;align-items:center;gap:8px;padding:0 11px;
+  border-bottom:1px solid var(--border)}
+.ptitle{font-size:11px;font-weight:700;letter-spacing:.6px;color:var(--text-faint);text-transform:uppercase}
+.pane-body{flex:1;overflow:auto;padding:6px}
+
+/* 导航 */
+.ghead{display:flex;align-items:center;gap:6px;height:26px;padding:0 8px;margin-top:6px;
+  font-size:11px;font-weight:700;letter-spacing:.6px;color:var(--text-faint);text-transform:uppercase}
+.ghead .chev{width:9px;height:9px;transition:transform .2s}
+.ghead.fold .chev{transform:rotate(-90deg)}
+.ni{display:flex;align-items:center;gap:7px;width:100%;height:28px;padding:0 8px;font-size:13px;
+  color:var(--text-dim);text-align:left;border-radius:var(--radius);transition:background .12s,color .12s}
+.ni:hover{background:var(--s3);color:var(--text)}
+.ni.on{background:var(--accent-subtle);color:var(--accent);font-weight:600;box-shadow:inset 2px 0 0 var(--accent)}
+.ni .n{margin-left:auto;font-size:11px;color:var(--text-faint);font-variant-numeric:tabular-nums}
+.ni.on .n{color:var(--accent)}
+.ws{margin-bottom:2px}
+.ws .ni{font-weight:600}
+
+/* 列表 */
+.lhead{flex:0 0 auto;padding:9px 11px 8px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:7px}
+.search{display:flex;align-items:center;gap:7px;height:30px;padding:0 9px;background:var(--s2);
+  border:1px solid var(--border);border-radius:var(--radius)}
+.search:focus-within{border-color:var(--accent)}
+.search input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:13px}
+.search input::placeholder{color:var(--text-faint)}
+kbd{font-family:Consolas,monospace;font-size:10px;padding:1px 4px;background:var(--s3);
+  border:1px solid var(--border);border-radius:3px;color:var(--text-dim)}
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:4px;height:21px;padding:0 8px;font-size:11px;
+  background:var(--s2);border:1px solid var(--border);color:var(--text-dim);border-radius:var(--radius-pill)}
+.chip.on{background:var(--accent-subtle);border-color:var(--accent);color:var(--accent);font-weight:600}
+.chip:hover{border-color:var(--border-strong)}
+.cline{font-size:11px;color:var(--text-faint)}
+.cline b{color:var(--text-dim)}
+.rows{flex:1;overflow:auto;padding:5px}
+.row{position:relative;display:flex;flex-direction:column;gap:2px;padding:7px 9px 7px 11px;
+  cursor:pointer;border-radius:var(--radius);transition:background .12s}
+.row::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:2px;background:var(--st-none)}
+.row[data-st="mod"]::before{background:var(--accent)}
+.row[data-st="pend"]::before{background:var(--warn)}
+.row[data-st="miss"]::before{background:var(--err)}
+.row:hover{background:var(--s3)}
+.row.on{background:var(--accent-subtle)}
+.row.on::before{background:var(--accent)}
+.row .t{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
+.row .t .rl{font-size:10px;font-weight:600;padding:0 5px;height:15px;line-height:15px;
+  background:var(--s3);border:1px solid var(--border);color:var(--text-dim);border-radius:var(--radius-pill)}
+.row .m{font-size:11px;color:var(--text-faint)}
+.row .x{font-size:12px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row mark{background:var(--accent-subtle);color:var(--accent);font-weight:600}
+.gh{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--text-faint);padding:9px 9px 3px}
+
+/* 编辑器 */
+.ehead{flex:0 0 auto;padding:11px 14px 9px;border-bottom:1px solid var(--border)}
+.etitle{font-size:16px;font-weight:600}
+.emeta{font-size:12px;color:var(--text-dim);margin-top:3px}
+.etools{display:flex;align-items:center;gap:5px;margin-top:9px;flex-wrap:wrap}
+.vs{width:1px;height:16px;background:var(--border);margin:0 2px}
+.ebody{flex:1;display:flex;min-height:0}
+.emain{flex:1;display:flex;flex-direction:column;padding:11px 14px;min-width:0}
+.lbl{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.4px;
+  color:var(--text-faint);text-transform:uppercase}
+.lbl .g{flex:1}
+.ta{flex:1;margin-top:7px;padding:10px;resize:none;outline:none;background:var(--s2);
+  border:1px solid var(--border);color:var(--text);border-radius:var(--radius);
+  font-family:inherit;font-size:14px;line-height:1.65}
+.ta:focus{border-color:var(--accent)}
+.ta.ro{background:var(--s1);border-style:dashed;color:var(--text-dim);font-size:13px;
+  font-family:Consolas,monospace}
+/* 参考抽屉 */
+.drawer{width:0;flex:0 0 auto;overflow:hidden;border-left:1px solid transparent;background:var(--s1);
+  transition:width .32s cubic-bezier(.2,.8,.3,1),border-color .32s}
+.drawer.open{width:310px;border-left-color:var(--border)}
+.dinner{width:310px;height:100%;display:flex;flex-direction:column}
+.tabs{display:flex;gap:2px;padding:9px 11px 0;border-bottom:1px solid var(--border)}
+.tabs button{padding:0 10px;height:28px;font-size:12px;color:var(--text-dim);
+  border-bottom:2px solid transparent}
+.tabs button.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tp{flex:1;overflow:auto;padding:11px}
+.tp[hidden]{display:none}
+.rc{font-size:11px;color:var(--text-faint);margin-bottom:5px}
+.rb{padding:9px;background:var(--s2);border:1px dashed var(--border);color:var(--text-dim);
+  font-size:13px;line-height:1.6;border-radius:var(--radius)}
+.rb.en{font-family:Consolas,monospace;font-size:12px}
+.diff{flex:1;overflow:auto;font-family:Consolas,monospace;font-size:12.5px;line-height:1.75}
+.diff[hidden],.hidden{display:none !important}
+.dc{display:block;padding:1px 6px}
+.ddel{background:rgba(217,97,79,.16);color:var(--err)}
+.dins{background:rgba(134,185,143,.16);color:var(--ok)}
+.dsame{color:var(--text-dim)}
+
+/* 图鉴 / 剧本 */
+.page{flex:1;overflow:auto;padding:14px}
+.hero{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+.ava{width:76px;height:76px;flex:0 0 76px;display:grid;place-items:center;font-size:24px;font-weight:700;
+  color:var(--accent);background:var(--s2);border:1px solid var(--border);border-radius:var(--radius)}
+.hero h2{font-size:20px;font-weight:700}
+.hero .sub{font-size:13px;color:var(--text-dim);margin-top:3px}
+.kv{display:flex;gap:14px;margin-top:8px;flex-wrap:wrap;font-size:12px;color:var(--text-dim)}
+.kv b{color:var(--text)}
+.card{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:10px}
+.card h3{font-size:14px;font-weight:600;margin-bottom:7px}
+.sk{display:flex;gap:9px;padding:8px 0;border-top:1px solid var(--border)}
+.sk:first-of-type{border-top:none}
+.tag{flex:0 0 auto;font-size:11px;font-weight:700;padding:0 6px;height:17px;line-height:17px;
+  background:var(--accent-subtle);color:var(--accent);border:1px solid var(--accent);border-radius:var(--radius-pill)}
+.sk .nm{font-size:13px;font-weight:600}
+.sk .ds{font-size:12px;color:var(--text-dim);margin-top:2px}
+.flavor{font-size:12px;color:var(--text-faint);font-style:italic;margin-top:7px;padding-left:9px;border-left:2px solid var(--border)}
+.sline{display:flex;gap:9px;padding:7px 9px;border-radius:var(--radius);cursor:pointer}
+.sline:hover{background:var(--s3)}
+.sline.on{background:var(--accent-subtle)}
+.who{flex:0 0 86px;font-size:12px;font-weight:600;color:var(--accent);text-align:right}
+.who.na{color:var(--text-faint);font-weight:400;font-style:italic}
+.say{flex:1;font-size:13px}
+.say .en{display:block;font-size:11px;color:var(--text-faint);font-family:Consolas,monospace;margin-top:2px}
+.smark{display:flex;align-items:center;gap:8px;margin:12px 0 5px;font-size:11px;font-weight:700;
+  letter-spacing:.5px;color:var(--text-faint);text-transform:uppercase}
+.smark::after{content:"";flex:1;height:1px;background:var(--border)}
+.empty{margin:auto;text-align:center;padding:28px;max-width:320px}
+.empty h4{font-size:14px;font-weight:600;margin-bottom:5px}
+.empty p{font-size:12px;color:var(--text-dim);margin-bottom:13px}
+
+/* ================= 浮层（状态详情 / 风格切换器） ================= */
+.pop{position:absolute;top:50px;right:12px;z-index:120;background:var(--s1);border:1px solid var(--border-strong);
+  border-radius:var(--radius);box-shadow:0 10px 30px rgba(0,0,0,.5);padding:11px;min-width:250px;
+  opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .16s,transform .16s,visibility .16s}
+.pop.open{opacity:1;visibility:visible;transform:none}
+.pop h4{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--text-faint);text-transform:uppercase;margin-bottom:8px}
+.srow{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13px}
+.srow .k{color:var(--text-dim);flex:0 0 62px}
+.srow .v{font-weight:600}
+.srow .d{width:6px;height:6px;border-radius:50%}
+.divl{height:1px;background:var(--border);margin:8px 0}
+
+/* ================= 平滑选项切换器（照搬参考实现） =================
+   radio 顺序必须为：#st-mini → #tn-light → #tn-dark → .switch，否则 ~ 链不成立 */
+.switch input{position:absolute;opacity:0;pointer-events:none}
+.switch{position:relative;width:236px;height:44px;padding:3px;background:var(--s2);
+  border:1px solid var(--border);border-radius:var(--radius-pill)}
+.switch .content{position:absolute;z-index:100;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:flex;width:100%;height:100%;border-radius:var(--radius-pill)}
+.switch .opt-bus{flex:1;display:flex;justify-content:center;align-items:center;cursor:pointer;
+  color:var(--text-dim);border-radius:var(--radius-pill);
+  transition:.1s cubic-bezier(.34,.96,.6,.99)}
+.switch .opt-mini-wrap{position:relative;flex:1;border-radius:var(--radius-pill)}
+.switch .opt-mini{position:relative;z-index:200;height:100%;display:flex;justify-content:center;
+  align-items:center;cursor:pointer;color:var(--text-dim);border-radius:var(--radius-pill);
+  transition:.3s cubic-bezier(.34,.96,.6,.99)}
+.switch .tone-menu{position:absolute;z-index:150;width:100%;height:100%;display:flex;justify-content:center;
+  align-items:center;top:66%;left:50%;transform:translate(-50%,-50%) scale(.6);gap:8px;
+  transition:.5s cubic-bezier(.34,.96,.6,.99)}
+.switch .tn{height:100%;flex:1;display:flex;justify-content:center;align-items:center;position:relative;
+  z-index:1;cursor:pointer;color:var(--text-dim);transition:.5s cubic-bezier(.34,.96,.6,.99)}
+.switch .dot{width:5px;overflow:hidden;transition:.5s cubic-bezier(.34,.96,.6,.99)}
+.switch .tslider{position:absolute;width:48%;height:80%;left:2%;top:10%;background:var(--accent);
+  border-radius:var(--radius-pill);opacity:0;transition:.5s cubic-bezier(.34,.96,.6,.99)}
+.switch .mslider{width:50%;height:100%;transform:translateX(0);background:var(--accent-2);
+  border-radius:var(--radius-pill);transition:.5s cubic-bezier(.34,.96,.6,.99)}
+#st-mini:checked ~ .switch .opt-bus{color:var(--text-dim)}
+#st-mini:checked ~ .switch .opt-mini{z-index:1;opacity:0;transform:translateY(10px) scale(.7)}
+#st-mini:checked ~ .switch .tone-menu{left:0;top:0;transform:translate(0,0);gap:0}
+#st-mini:checked ~ .switch .tone-menu .tn{color:var(--text-dim)}
+#st-mini:checked ~ .switch .tone-menu .dot{width:0;opacity:0}
+#st-mini:checked ~ .switch .tone-menu .tslider{opacity:1}
+#st-mini:checked ~ .switch .mslider{transform:translateX(100%)}
+#st-mini:checked ~ .tone-menu-light:checked ~ .switch .tone-menu .tn-light,
+#st-mini:checked ~ #tn-light:checked ~ .switch .tone-menu .tn-light{color:var(--on-accent)}
+#st-mini:checked ~ #tn-dark:checked ~ .switch .tone-menu .tn-dark{color:var(--on-accent)}
+#tn-light:checked ~ .switch .tslider{left:2%}
+#tn-dark:checked ~ .switch .tslider{left:50%}
+
+/* 重建遮罩 */
+.scrim{position:fixed;inset:0;background:var(--bg);display:grid;place-items:center;z-index:300;
+  animation:fade .18s ease}
+.scrim .rb2{font-size:13px;color:var(--text-dim)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.toasts{position:fixed;right:14px;bottom:14px;display:flex;flex-direction:column;gap:7px;z-index:200}
+.toast{display:flex;align-items:center;gap:9px;min-width:200px;max-width:340px;padding:9px 12px;
+  background:var(--s3);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:0 8px 24px rgba(0,0,0,.36);font-size:13px;animation:sin .28s ease}
+.toast::before{content:"";width:3px;align-self:stretch;background:var(--ok)}
+.toast.err::before{background:var(--err)}
+.toast.info::before{background:var(--info)}
+@keyframes sin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<input type="radio" name="style" id="st-bus" checked>
+<input type="radio" name="style" id="st-mini">
+<input type="radio" name="tone" id="tn-light">
+<input type="radio" name="tone" id="tn-dark" checked>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">邊</div>
+      <div>
+        <div class="brand-name">边狱巴士汉化文本修改器<span class="savedot" id="saveDot" title="已保存"></span></div>
+      </div>
+    </div>
+    <div class="crumb" id="crumb"><b>人格</b><span class="sep">›</span>技能</div>
+    <div class="spacer"></div>
+    <div class="actions">
+      <button class="pill warn" id="statusPill"><span class="d"></span>37 条待确认</button>
+      <button class="btn" id="themeBtn">风格 · 巴士</button>
+      <button class="btn primary" id="applyBtn">应用到游戏</button>
+      <button class="btn ghost icon" id="moreBtn" title="更多操作">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- 状态详情浮层 -->
+  <div class="pop" id="statusPop">
+    <h4>当前状态</h4>
+    <div class="srow"><span class="k">环境</span><span class="d" style="background:var(--ok)"></span><span class="v" style="color:var(--ok)">正常</span></div>
+    <div class="srow"><span class="k">方案</span><span class="d" style="background:var(--ok)"></span><span class="v" style="color:var(--ok)">已保存 · 1,284 条</span></div>
+    <div class="srow"><span class="k">应用</span><span class="d" style="background:var(--warn)"></span><span class="v" style="color:var(--warn)">待重新应用</span></div>
+    <div class="srow"><span class="k">待确认</span><span class="d" style="background:var(--warn)"></span><span class="v" style="color:var(--warn)">37 条</span></div>
+    <div class="srow"><span class="k">补译</span><span class="d" style="background:var(--text-faint)"></span><span class="v" style="color:var(--text-dim)">12 / 12 已启用</span></div>
+  </div>
+
+  <!-- 风格切换器浮层 -->
+  <div class="pop" id="themePop">
+    <h4>界面风格</h4>
+    <div class="switch">
+      <div class="content">
+        <label class="opt-bus" for="st-bus">巴士</label>
+        <div class="opt-mini-wrap">
+          <label class="opt-mini" for="st-mini">简约</label>
+          <div class="tone-menu">
+            <label class="tn tn-light" for="tn-light">亮<span class="dot">&nbsp;</span></label>
+            <label class="tn tn-dark" for="tn-dark">暗</label>
+            <div class="tslider"></div>
+          </div>
+        </div>
+      </div>
+      <div class="mslider"></div>
+    </div>
+    <div class="divl"></div>
+    <div style="font-size:11px;color:var(--text-faint);line-height:1.6">
+      左「巴士」= 原版黑金直角；右「简约」点开可选亮 / 暗。<br>切换后界面会立即重建。
+    </div>
+  </div>
+
+  <div class="body">
+    <!-- 导航：工作台 + 六个原版分区 -->
+    <nav class="pane nav">
+      <div class="pane-head"><span class="ptitle">导航</span></div>
+      <div class="pane-body" id="navBody">
+        <div class="ghead">工作台<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ws" id="ws">
+          <button class="ni on" data-cat="all">全部文本<span class="n">194,948</span></button>
+          <button class="ni" data-cat="mod">已修改<span class="n">1,284</span></button>
+          <button class="ni" data-cat="pend">待确认<span class="n">37</span></button>
+          <button class="ni" data-cat="fav">收藏<span class="n">52</span></button>
+          <button class="ni" data-cat="sup">补译<span class="n">12</span></button>
+        </div>
+        <div class="ghead">剧院<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div>
+          <button class="ni" data-cat="main_story">主线剧情<span class="n">61,204</span></button>
+          <button class="ni" data-cat="misc_story">其他剧情<span class="n">8,120</span></button>
+          <button class="ni" data-cat="identity_story">人格故事<span class="n">14,002</span></button>
+          <button class="ni" data-cat="event">间章与活动<span class="n">12,880</span></button>
+          <button class="ni" data-cat="railway">折射轨道<span class="n">4,012</span></button>
+          <button class="ni" data-cat="dungeon_story">迷宫剧情<span class="n">3,150</span></button>
+        </div>
+        <div class="ghead">镜牢<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div>
+          <button class="ni" data-cat="mirror">镜牢<span class="n">2,204</span></button>
+          <button class="ni" data-cat="mirror_event">镜牢探索事件<span class="n">1,860</span></button>
+          <button class="ni" data-cat="ego_gift">饰品<span class="n">1,043</span></button>
+        </div>
+        <div class="ghead">人格<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div>
+          <button class="ni" data-cat="identity">人格<span class="n">47,102</span></button>
+          <button class="ni" data-cat="skill">技能<span class="n">31,207</span></button>
+          <button class="ni" data-cat="combat">战斗效果<span class="n">9,240</span></button>
+          <button class="ni" data-cat="sinner">罪人<span class="n">1,882</span></button>
+        </div>
+        <div class="ghead">E.G.O<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div><button class="ni" data-cat="ego">E.G.O<span class="n">9,486</span></button></div>
+        <div class="ghead">关卡与敌人<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div>
+          <button class="ni" data-cat="enemy">敌方单位<span class="n">6,118</span></button>
+          <button class="ni" data-cat="abnormality">异想体<span class="n">3,470</span></button>
+          <button class="ni" data-cat="battle_dialog">战斗对话<span class="n">5,901</span></button>
+        </div>
+        <div class="ghead">系统与设置<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div>
+          <button class="ni" data-cat="ui">界面文本<span class="n">1,868</span></button>
+          <button class="ni" data-cat="system">系统提示<span class="n">902</span></button>
+          <button class="ni" data-cat="tutorial">教程<span class="n">1,204</span></button>
+          <button class="ni" data-cat="item">道具与货币<span class="n">2,318</span></button>
+          <button class="ni" data-cat="other">其他<span class="n">640</span></button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 列表 + 编辑器 -->
+    <section class="pane list">
+      <div class="lhead">
+        <div class="search">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--text-faint)"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+          <input id="q" placeholder="搜索原文、译文或 ID…">
+          <kbd>Ctrl F</kbd>
+        </div>
+        <div class="chips" id="chips">
+          <button class="chip on" data-f="all">全部</button>
+          <button class="chip" data-f="mod">已修改</button>
+          <button class="chip" data-f="pend">待确认</button>
+          <button class="chip" data-f="miss">缺失</button>
+        </div>
+        <div class="cline">命中 <b id="hits">6</b> 条 · 索引 194,948 条</div>
+      </div>
+      <div class="rows" id="rows"></div>
+    </section>
+
+    <section class="pane editor">
+      <div class="ehead">
+        <div class="etitle" id="etitle">奥提斯 · 人格 斩击</div>
+        <div class="emeta" id="emeta">Identity/Otis · skill_1_name · 人格 › 技能</div>
+        <div class="etools">
+          <button class="btn ghost icon" title="撤销"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 010 10h-3"/></svg></button>
+          <button class="btn ghost icon" disabled title="重做"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 14l5-5-5-5"/><path d="M20 9H9a5 5 0 000 10h3"/></svg></button>
+          <span class="vs"></span>
+          <button class="btn primary sm" id="saveBtn">保存</button>
+          <span class="vs"></span>
+          <button class="btn ghost sm" id="diffBtn">显示差异</button>
+          <button class="btn ghost sm" id="refBtn">参考 Ctrl+E</button>
+          <button class="btn ghost sm" id="favBtn">☆ 收藏</button>
+          <button class="btn ghost sm" id="histBtn">历史</button>
+        </div>
+      </div>
+      <div class="ebody">
+        <div class="emain">
+          <div id="stack">
+            <div class="lbl"><span>自定义文本</span><span class="g"></span><span id="cc" style="font-weight:400;text-transform:none">0 字</span></div>
+            <textarea class="ta" id="ta" spellcheck="false"></textarea>
+            <div class="lbl" style="margin-top:9px"><span>零协原文（只读）</span></div>
+            <textarea class="ta ro" id="orig" readonly style="flex:0 0 76px"></textarea>
+          </div>
+          <div class="diff hidden" id="diff">
+            <div class="lbl" style="margin-bottom:7px">差异（零协原文 → 自定义）</div>
+            <span class="dc ddel">斩击：对目标造成 4 点斩击伤害。</span>
+            <span class="dc dins">斩击：对目标造成 4 点斩击伤害，并使其在本回合获得 1 层「破裂」。</span>
+            <span class="dc dsame">（其余 1 段未改动）</span>
+          </div>
+        </div>
+        <aside class="drawer open" id="drawer">
+          <div class="dinner">
+            <div class="tabs">
+              <button class="on" data-t="zh">零协原文</button>
+              <button data-t="en">英语原文</button>
+            </div>
+            <div class="tp" id="tp-zh">
+              <div class="rc">零协汉化包 · Identity/Otis.json · records[31]</div>
+              <div class="rb" id="refzh">斩击：对目标造成 4 点斩击伤害。</div>
+              <div class="rc" style="margin-top:12px">字段定位</div>
+              <div class="rb" style="font-family:Consolas,monospace;font-size:12px">rel: Identity/Otis.json<br>idx: 31<br>field: skill_1_name</div>
+            </div>
+            <div class="tp" id="tp-en" hidden>
+              <div class="rc">游戏英文基线 · 只读，工具不写入</div>
+              <div class="rb en">Slash: Deal 4 Slash damage to the target.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script>
+const DATA=[
+ {t:'奥提斯 · 人格 斩击',m:'Identity/Otis · skill_1_name',x:'斩击：对目标造成 4 点斩击伤害，并使其获得 1 层「破裂」。',st:'mod',rl:'技能',g:'技能'},
+ {t:'奥提斯 · 人格 断线一击',m:'Identity/Otis · skill_3_name',x:'断线一击：对目标造成 9 点斩击伤害，并使其获得 2 层「破裂」。',st:'mod',rl:'技能',g:'技能'},
+ {t:'奥提斯 · 支援被动 冷静的观察',m:'Identity/Otis · passive_support',x:'使全体友方对带有「破裂」的目标造成的伤害 +8%。',st:'pend',rl:'被动',g:'技能'},
+ {t:'李箱 · 人格 折线',m:'Identity/LeeSang · skill_2_name',x:'折线：对目标造成 5 点贯穿伤害，自身获得 1 层「呼吸」。',st:'none',rl:'技能',g:'技能'},
+ {t:'唐吉诃德 · E.G.O 冲锋',m:'EGO/DonQuixote · ego_name',x:'冲锋：进入「突进」状态，本回合首次攻击伤害 +30%。',st:'mod',rl:'本体',g:'E.G.O'},
+ {t:'西西弗 · 统制者（形态三）',m:'Enemy/Sisyphus · name_3',x:'崩坏的统制者',st:'miss',rl:'敌人',g:'敌人'},
+ {t:'10-4B · 1F 中庭 旁白',m:'Story/S1060B · idx 14',x:'自动扶梯缓慢地向上运行，金属的摩擦声回荡在空旷的中庭里。',st:'none',rl:'剧情',g:'剧情'},
+ {t:'良秀 · 台词「太吵了」',m:'Story/Ryōshū · idx 7',x:'……不喜欢。太吵了。',st:'pend',rl:'剧情',g:'剧情'}
+];
+const S={f:'all',q:'',sel:0,diff:false};
+const LM={mod:'已修改',pend:'待确认',miss:'缺失',none:'未修改'};
+
+function render(){
+  const box=document.getElementById('rows');
+  const list=DATA.filter(d=>{
+    if(S.f!=='all'&&d.st!==S.f)return false;
+    if(S.q&&!(d.t+d.m+d.x).toLowerCase().includes(S.q.toLowerCase()))return false;
+    return true;
+  });
+  document.getElementById('hits').textContent=list.length;
+  if(!list.length){
+    box.innerHTML=`<div class="empty"><h4>没有匹配的文本</h4><p>试试清除筛选条件，或换一个关键词。</p><button class="btn sm" onclick="clearF()">清除筛选条件</button></div>`;
+    return;
+  }
+  let h='',lg='';
+  list.forEach(d=>{
+    if(d.g!==lg){h+=`<div class="gh">${d.g}</div>`;lg=d.g;}
+    const hl=S.q?d.x.replace(new RegExp('('+S.q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>'):d.x;
+    h+=`<div class="row ${DATA.indexOf(d)===S.sel?'on':''}" data-st="${d.st}" data-i="${DATA.indexOf(d)}">
+      <div class="t">${d.t}<span class="rl">${d.rl}</span></div>
+      <div class="m">${d.m} · ${LM[d.st]}</div><div class="x">${hl}</div></div>`;
+  });
+  box.innerHTML=h;
+  box.querySelectorAll('.row').forEach(r=>r.onclick=()=>{S.sel=+r.dataset.i;load(+r.dataset.i);render();});
+}
+function load(i){
+  const d=DATA[i];
+  document.getElementById('etitle').textContent=d.t;
+  document.getElementById('emeta').textContent=d.m+' · '+LM[d.st];
+  document.getElementById('ta').value=d.x;
+  document.getElementById('orig').value=d.x;
+  document.getElementById('refzh').textContent=d.x;
+  document.getElementById('cc').textContent=d.x.length+' 字';
+}
+function clearF(){
+  S.f='all';S.q='';document.getElementById('q').value='';
+  document.querySelectorAll('#chips .chip').forEach(c=>c.classList.toggle('on',c.dataset.f==='all'));
+  render();toast('已清除筛选条件','info');
+}
+document.getElementById('q').oninput=e=>{S.q=e.target.value.trim();render();};
+document.querySelectorAll('#chips .chip').forEach(c=>c.onclick=()=>{
+  document.querySelectorAll('#chips .chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on');S.f=c.dataset.f;render();
+});
+document.querySelectorAll('.ni').forEach(n=>n.onclick=()=>{
+  document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));
+  n.classList.add('on');
+  const grp=n.closest('.pane-body').querySelectorAll('.ghead');
+  let sec='';grp.forEach(g=>{if(g.compareDocumentPosition(n)&4)sec=g.textContent.trim();});
+  document.getElementById('crumb').innerHTML=`<b>${sec||'工作台'}</b><span class="sep">›</span>${n.textContent.trim().split(/[\s0-9]/)[0]}`;
+});
+document.querySelectorAll('.ghead').forEach(g=>g.onclick=()=>{
+  g.classList.toggle('fold');
+  const s=g.nextElementSibling;if(s)s.classList.toggle('hidden',g.classList.contains('fold'));
+});
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById('tp-zh').hidden=b.dataset.t!=='zh';
+  document.getElementById('tp-en').hidden=b.dataset.t==='zh';
+});
+document.getElementById('refBtn').onclick=()=>{
+  const d=document.getElementById('drawer');
+  d.classList.toggle('open');toast(d.classList.contains('open')?'已展开参考抽屉':'已收起参考抽屉','info',1200);
+};
+document.getElementById('diffBtn').onclick=e=>{
+  S.diff=!S.diff;
+  document.getElementById('diff').classList.toggle('hidden',!S.diff);
+  document.getElementById('stack').classList.toggle('hidden',S.diff);
+  e.target.textContent=S.diff?'返回编辑':'显示差异';
+};
+document.getElementById('saveBtn').onclick=()=>{
+  document.getElementById('saveDot').style.background='var(--ok)';
+  toast('已保存到方案文件');
+};
+document.getElementById('applyBtn').onclick=()=>toast('已应用到游戏：1,284 条修改');
+document.getElementById('favBtn').onclick=e=>{e.target.textContent=e.target.textContent.includes('☆')?'★ 已收藏':'☆ 收藏';};
+document.getElementById('histBtn').onclick=()=>toast('打开历史记录（最近 6 次编辑）','info');
+document.getElementById('moreBtn').onclick=()=>toast('更多：备份 / 导出方案包 / 一键替换 / 设置目录','info');
+document.getElementById('ta').oninput=e=>{
+  document.getElementById('cc').textContent=e.target.value.length+' 字';
+  document.getElementById('saveDot').style.background='var(--warn)';
+};
+
+/* 浮层 */
+function toggle(id,other){
+  const p=document.getElementById(id),was=p.classList.contains('open');
+  document.querySelectorAll('.pop').forEach(x=>x.classList.remove('open'));
+  if(!was)p.classList.add('open');
+  if(other&&was===false)document.getElementById(other).classList.remove('open');
+}
+document.getElementById('statusPill').onclick=e=>{e.stopPropagation();toggle('statusPop');};
+document.getElementById('themeBtn').onclick=e=>{e.stopPropagation();toggle('themePop');};
+document.addEventListener('click',()=>document.querySelectorAll('.pop').forEach(x=>x.classList.remove('open')));
+document.getElementById('statusPop').onclick=e=>e.stopPropagation();
+document.getElementById('themePop').onclick=e=>e.stopPropagation();
+
+/* 主题：命名 + 重建模拟（点风格名只展开，点亮/暗才提交） */
+const NAMES={'st-bus':'巴士','st-mini':'简约'};
+function currentName(){
+  if(document.getElementById('st-mini').checked)
+    return '简约 · '+(document.getElementById('tn-light').checked?'亮':'暗');
+  return '巴士';
+}
+function syncName(){document.getElementById('themeBtn').textContent='风格 · '+currentName();}
+document.querySelectorAll('input[name=style],input[name=tone]').forEach(r=>{
+  r.addEventListener('change',e=>{syncName();});
+});
+/* 只有选中「亮 / 暗」这个叶子才重建 */
+['tn-light','tn-dark'].forEach(id=>{
+  document.getElementById(id).addEventListener('change',()=>rebuild());
+});
+document.getElementById('st-bus').addEventListener('change',()=>rebuild());
+function rebuild(){
+  syncName();
+  const s=document.createElement('div');
+  s.className='scrim';
+  s.innerHTML='<div class="rb2">界面已按「'+currentName()+'」重建…</div>';
+  document.body.appendChild(s);
+  setTimeout(()=>{s.remove();toast('已切换到「'+currentName()+'」');},420);
+}
+
+function toast(msg,kind='',ms=2400){
+  const b=document.getElementById('toasts'),el=document.createElement('div');
+  el.className='toast '+(kind||'');el.textContent=msg;b.appendChild(el);
+  setTimeout(()=>{el.style.transition='opacity .22s';el.style.opacity='0';setTimeout(()=>el.remove(),240);},ms);
+}
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='e'){e.preventDefault();document.getElementById('refBtn').click();}
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();document.getElementById('saveBtn').click();}
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='f'){e.preventDefault();document.getElementById('q').focus();}
+  if(e.key==='Escape')document.querySelectorAll('.pop').forEach(x=>x.classList.remove('open'));
+});
+load(0);render();syncName();
+setTimeout(()=>toast('原型 v2 已就绪：点右上「风格 · 巴士」试试嵌套切换器','info',4200),500);
+</script>
+</body>
+</html>

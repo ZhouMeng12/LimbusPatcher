@@ -90,8 +90,9 @@ def check_stage(code: str, stage: dict, llc_dir: Path | None,
         if not it.get("file") or not isinstance(it.get("record"), int):
             errors.append(f"{code}: 对话行缺少 file/record：{str(it.get('text'))[:20]}")
             break
+    # 任务行（source=quest）本来就该指向 quest 文件，不算「场景行带 file」
     for it in items:
-        if it.get("type") == "scene" and it.get("file"):
+        if it.get("type") == "scene" and it.get("file") and it.get("source") != "quest":
             errors.append(f"{code}: 场景行不该带 file：{str(it.get('text'))[:20]}")
             break
 

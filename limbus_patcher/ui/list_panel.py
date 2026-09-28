@@ -5,10 +5,20 @@ import re
 from dataclasses import dataclass
 
 from PySide6.QtCore import QAbstractListModel, QModelIndex, QPointF, QRect, QSize, Qt, QTimer, Signal
-from PySide6.QtGui import QClipboard, QColor, QFont, QFontMetrics, QPainter, QTextCharFormat, QTextLayout
+from PySide6.QtGui import (
+    QClipboard,
+    QColor,
+    QFont,
+    QFontMetrics,
+    QPainter,
+    QPen,
+    QTextCharFormat,
+    QTextLayout,
+)
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
+    QFrame,
     QHBoxLayout,
     QLabel,
     QLineEdit,
@@ -36,12 +46,21 @@ _STATUS_LABELS = {
     STATUS_PENDING: "待确认",
     STATUS_MISSING: "已失效",
 }
-_STATUS_COLORS = {
-    STATUS_UNMODIFIED: QColor("#4a4f56"),
-    STATUS_MODIFIED: QColor(theme.ACCENT),
-    STATUS_PENDING: QColor(theme.WARNING),
-    STATUS_MISSING: QColor(theme.ERROR),
+_STATUS_TOKENS = {
+    STATUS_UNMODIFIED: "STATUS_NONE",
+    STATUS_MODIFIED: "ACCENT",
+    STATUS_PENDING: "WARNING",
+    STATUS_MISSING: "ERROR",
 }
+
+
+def status_color(status: str) -> QColor:
+    """状态色 = 左侧 2px 色条的颜色。
+
+    必须**按当前主题实时解析**：模块级缓存在换主题后会留下旧主题的颜色
+    （切换主题只重建窗口，不重载模块）。
+    """
+    return QColor(getattr(theme, _STATUS_TOKENS.get(status, "STATUS_NONE")))
 
 # 章节/赛季/种类筛选的显示场景
 _CHAPTER_CATS = {"main_story", "event", "railway", "mirror"}
@@ -153,11 +172,17 @@ class EntryDelegate(QStyledItemDelegate):
             self._paint_header(painter, option, hit)
             return
         rect: QRect = option.rect.adjusted(0, 1, 0, -1)  # 2px 行间隔
-        if option.state & QStyle.StateFlag.State_Selected:
+        selected = bool(option.state & QStyle.StateFlag.State_Selected)
+        if selected:
             painter.fillRect(rect, QColor(theme.SELECTION))
-            painter.fillRect(QRect(rect.left(), rect.top(), 3, rect.height()), QColor(theme.ACCENT))
         elif option.state & QStyle.StateFlag.State_MouseOver:
             painter.fillRect(rect, QColor(theme.HOVER))
+
+        # 左侧 2px 状态色条（原型 .row::before）：上下各内缩 5px。
+        bar = QColor(theme.ACCENT) if selected else status_color(hit.status)
+        if hit.favorite:
+            bar = QColor(theme.ACCENT)
+        painter.fillRect(QRect(rect.left(), rect.top() + 5, 2, max(0, rect.height() - 10)), bar)
 
         text = hit.custom if hit.custom is not None else hit.hit.text
         meta_parts = [category_label(hit.hit.category)]
@@ -172,51 +197,69 @@ class EntryDelegate(QStyledItemDelegate):
             meta_parts.append(s)
         if hit.hit.kind_label:
             meta_parts.append(hit.hit.kind_label)
-        if hit.role_label:
-            meta_parts.append(hit.role_label)
         if getattr(hit.hit, "source", "llc") == "supplement":
             meta_parts.append("补译")
         if hit.english_hit:
             meta_parts.append("英文命中")
         if hit.dup_count > 1:
             meta_parts.append(f"重复 {hit.dup_count} 处")
+        if hit.favorite:
+            meta_parts.append("★ 收藏")
+        # 状态文字并入 meta 行（原型 .row .m 的写法），不再单独占右侧
+        meta_parts.append(_STATUS_LABELS[hit.status])
         meta = " · ".join(meta_parts)
 
-        painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
-        if hit.status != STATUS_UNMODIFIED or hit.favorite:
-            painter.setBrush(_STATUS_COLORS[hit.status])
-            painter.setPen(Qt.PenStyle.NoPen)
-            cy = rect.top() + 11
-            painter.drawEllipse(rect.left() + 12, cy - 4, 8, 8)
-            text_left = rect.left() + 28
-        else:
-            text_left = rect.left() + 14
+        # 文本区：左边距 11px（= 2px 色条 + 9px 间隔，对应原型 padding-left:11px）
+        left = rect.left() + 11
+        right_pad = 10
+        width = rect.width() - 11 - right_pad
 
         name_font = QFont(option.font)
         meta_font = QFont(option.font)
         meta_font.setPointSizeF(max(8.0, option.font.pointSizeF() - 1.5))
+        name_fm = QFontMetrics(name_font)
+
+        # 角色胶囊徽标（原型 .row .t .rl）：先给徽标留位，再把标题按剩余宽度省略
+        role = hit.role_label or ""
+        badge_w = (name_fm.horizontalAdvance(role) + 14) if role else 0
+        title_w = width - (badge_w + 6 if badge_w else 0)
 
         model = index.model()
         hl_word = model.highlight if isinstance(model, EntryListModel) else ""
-        _draw_rich_text(painter, QRect(text_left, rect.top() + 4, rect.width() - text_left - rect.left() - 12, 20), text, name_font, QColor(theme.TEXT), QColor(theme.ACCENT), hl_word)
+        _draw_rich_text(painter, QRect(left, rect.top() + 4, max(10, title_w), 20),
+                        text, name_font, QColor(theme.TEXT), QColor(theme.ACCENT), hl_word)
+
+        if role:
+            plain = name_fm.elidedText(text.replace("\n", " "), Qt.TextElideMode.ElideRight, max(10, title_w))
+            bx = left + name_fm.horizontalAdvance(plain) + 6
+            self._paint_badge(painter, bx, rect.top() + 5, role, name_font)
 
         painter.setFont(meta_font)
         painter.setPen(QColor(theme.TEXT_DIM))
-        meta_rect = QRect(text_left, rect.top() + 25, rect.width() - text_left - rect.left() - 12, 17)
+        meta_rect = QRect(left, rect.top() + 25, width, 17)
         meta_elided = QFontMetrics(meta_font).elidedText(meta, Qt.TextElideMode.ElideRight, meta_rect.width())
         painter.drawText(meta_rect, Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignLeft, meta_elided)
 
-        if hit.status != STATUS_UNMODIFIED or hit.favorite:
-            status_text = _STATUS_LABELS[hit.status]
-            if hit.favorite:
-                status_text = "★ " + status_text
-            painter.setFont(meta_font)
-            painter.setPen(_STATUS_COLORS[hit.status])
-            painter.drawText(
-                QRect(rect.right() - 78, rect.top() + 4, 70, 34),
-                Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter,
-                status_text,
-            )
+    def _paint_badge(self, painter: QPainter, x: int, y: int, text: str, base_font: QFont) -> None:
+        """角色胶囊徽标：s3 底 + 描边 + 全圆头 + 10px 字。"""
+        font = QFont(base_font)
+        font.setPointSizeF(max(7.5, base_font.pointSizeF() - 2.0))
+        font.setBold(True)
+        fm = QFontMetrics(font)
+        w = fm.horizontalAdvance(text) + 10
+        h = 15
+        box = QRect(x, y, w, h)
+        painter.save()
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
+        painter.setPen(QPen(QColor(theme.BORDER), 1))
+        painter.setBrush(QColor(theme.SURFACE_3))
+        radius = int(theme.RADIUS_PILL)
+        radius = h // 2 if radius > h else max(0, radius)
+        painter.drawRoundedRect(box, radius, radius)
+        painter.setFont(font)
+        painter.setPen(QColor(theme.TEXT_DIM))
+        painter.drawText(box, Qt.AlignmentFlag.AlignCenter, text)
+        painter.restore()
 
 
     def _paint_header(self, painter: QPainter, option, hit: HitView) -> None:
@@ -234,7 +277,14 @@ class EntryDelegate(QStyledItemDelegate):
                                                        rect.width() - 26))
 
 
-class ListPanel(QWidget):
+class ListPanel(QFrame):
+    """中间：搜索 / 筛选 / 条目列表。
+
+    继承 ``QFrame``（而不是 ``QWidget``）是有意的：``theme.QSS`` 里面板的样式
+    规则是 ``QFrame#panel``，纯 ``QWidget`` 子类**不会**套用背景/描边/圆角
+    （Qt 的样式表只对会自绘背景的控件生效）。改成 QFrame 后它才真的是一张卡片。
+    """
+
     search_requested = Signal(str)  # text
     filters_changed = Signal()
     hit_activated = Signal(object)  # HitView
@@ -246,6 +296,7 @@ class ListPanel(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setObjectName("panel")
         layout = QVBoxLayout(self)
         layout.setContentsMargins(8, 8, 8, 8)
         layout.setSpacing(6)

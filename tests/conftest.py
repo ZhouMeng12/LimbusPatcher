@@ -1,9 +1,22 @@
 from __future__ import annotations
 
+import os
 import shutil
 from pathlib import Path
 
 import pytest
+
+# 套件一律跑在「免模态 + offscreen」下。
+#
+# 免模态必须在这里兜住：`main._install_excepthook` 注册的 hook 在**非**免模态分支里会调
+# `QMessageBox.critical(...)`，而那是**模态**的 —— 无头/自动化环境下没有用户点确定，
+# `exec()` 会永久阻塞。表现是整套测试**卡死在 60%**（正好是
+# `test_headless_guard.py::test_excepthook_writes_crash_log`），且没有任何失败输出，
+# 很容易被误判成「沙箱把 pytest 杀了」。
+#
+# 用 `setdefault`：显式传入的环境变量优先，`clean_env` 之类的 fixture 仍可用 monkeypatch 覆盖。
+os.environ.setdefault("DSH_NO_MODAL", "1")
+os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 GAME = FIXTURES / "game"

@@ -37,12 +37,50 @@ def win(qapp, tmp_path):
     w.close()
 
 
-def test_topbar_ops_menu(win):
-    assert win.ops_btn.text() == "操作 ▾"
-    texts = [a.text() for a in win.ops_menu.actions() if a.text()]
+def test_topbar_more_menu(win):
+    """顶栏最右是「⋯ 更多操作」，只放工具类动作；整页入口摆在顶栏可见处。"""
+    assert win.more_btn.objectName() == "ghostIcon"
+    assert win.more_btn.menu() is win.more_menu
+    texts = [a.text() for a in win.more_menu.actions() if a.text()]
+    # 原来的「操作」菜单项
     assert "清空全部修改" in texts and "立即备份" in texts and "高级模式" in texts
+    # 整页入口不再塞进「•••」菜单，而是顶栏可见的 tab
+    assert "人格图鉴" not in texts and "敌方图鉴" not in texts and "剧本模式" not in texts
+    tabs = (win.page_codex, win.page_enemy, win.page_script)
+    assert [b.text() for b in tabs] == ["人格图鉴", "敌方图鉴", "剧本模式"]
+    assert all(b.parent() is win.topbar for b in tabs)
+    assert all(b.isCheckable() for b in tabs)
     # 主按钮存在
     assert win.apply_btn.text() == "应用到游戏"
+    # 品牌区（原型 .brand）
+    assert win.brand_name.text() == "边狱巴士汉化文本修改器"
+    assert (win.brand_logo.width(), win.brand_logo.height()) == (28, 28)
+
+
+def test_topbar_page_tabs_toggle(win):
+    """整页 tab：点一次进那一页、再点一次回工作台；选中态与面包屑跟着走。"""
+    win._on_nav_category("main_story")
+    assert win.center_stack.currentIndex() == 0
+
+    win.page_codex.click()
+    assert win.center_stack.currentWidget() is win.codex_page
+    assert win.page_codex.isChecked() and not win.page_enemy.isChecked()
+    assert win._crumb == "图鉴 › 人格图鉴"
+
+    win.page_codex.click()                      # 再点一次 = 回工作台
+    assert win.center_stack.currentIndex() == 0
+    assert not win.page_codex.isChecked()
+    assert win._crumb == "剧院 › 主线剧情"
+
+    win.page_enemy.click()
+    assert win.center_stack.currentWidget() is win.enemy_codex_page
+    assert win.page_enemy.isChecked() and not win.page_codex.isChecked()
+    assert win._crumb == "图鉴 › 敌方图鉴"
+
+    win._on_nav_category("main_story")          # 点导航也回工作台
+    assert win.center_stack.currentIndex() == 0
+    assert not win.page_enemy.isChecked()
+    assert win._crumb == "剧院 › 主线剧情"
 
 
 def test_filter_visibility_by_context(win):

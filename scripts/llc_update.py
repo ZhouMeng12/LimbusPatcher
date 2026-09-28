@@ -96,6 +96,20 @@ def _supplement_pack(data_dir: Path) -> SupplementPack | None:
     return pack
 
 
+def _row_key(rec) -> str | None:
+    """记录标识：老文件用 id，RPG/UI 这类用 key，少数用 code。
+
+    只认 id 会把 key 型文件误判成「零协已完全覆盖」→ 整份补译被静默跳过。
+    """
+    if not isinstance(rec, dict):
+        return None
+    for k in ("id", "key", "code"):
+        v = rec.get(k)
+        if v is not None and str(v).strip():
+            return f"{k}={v}"
+    return None
+
+
 def covers(ours: Path, rel: str) -> tuple[str, int]:
     """我们某个待装文件相对零协包的覆盖情况（none/partial/full）。"""
     llc = LLC / rel
@@ -112,9 +126,12 @@ def covers(ours: Path, rel: str) -> tuple[str, int]:
         return "partial", 1
     if not isinstance(rows_b, list):
         return "full", 0
-    have = {str(r.get("id")) for r in rows_b if isinstance(r, dict) and r.get("id") is not None}
-    missing = [r for r in rows_a
-               if isinstance(r, dict) and r.get("id") is not None and str(r.get("id")) not in have]
+    have = {k for k in (_row_key(r) for r in rows_b) if k}
+    missing = []
+    for r in rows_a:
+        k = _row_key(r)
+        if k is None or k not in have:
+            missing.append(r)   # 没标识 / 零协没有 → 都算「我们要补的」
     return ("partial", len(missing)) if missing else ("full", 0)
 
 
@@ -160,9 +177,36 @@ def cmd_prune(dry: bool = False) -> int:
     return 0
 
 
+#: 这些叶子是程序内部键，不是译文，比对时跳过
+_SKIP_LEAF = {"id", "key", "code", "model", "index", "nameKey", "textKey"}
+
+
+def _leaves(node, prefix: str = "") -> dict[str, str]:
+    """任意 JSON 结构 → {路径: 文本}（路径形如 /dataList/0/name）。"""
+    out: dict[str, str] = {}
+    stack = [(prefix, node)]
+    while stack:
+        path, cur = stack.pop()
+        if isinstance(cur, dict):
+            for k, v in cur.items():
+                stack.append((f"{path}/{k}", v))
+        elif isinstance(cur, list):
+            for i, v in enumerate(cur):
+                stack.append((f"{path}/{i}", v))
+        elif isinstance(cur, str) and cur.strip():
+            out[path] = cur.strip()
+    return out
+
+
 def cmd_terms() -> int:
-    """术语对照：我们的旧第十章译文 vs 零协新译文（同 id/字段），列出高频差异。"""
-    pairs: list[tuple[str, str, str]] = []
+    """术语对照：我们的旧译文 vs 零协新译文（同一条记录、同一字段路径）。
+
+    记录标识用 id/key/code（RPG/UI 这类文件只有 key，老实现按 id 对会全部错位；
+    文本用整棵结构的叶子路径对齐，因为 RPG 的正文在 texts[i].text 里、过场在 content 里）。
+    """
+    pairs: list[tuple[str, str, str, str]] = []          # (rel, 路径, 我们, 零协)
+    gaps: list[tuple[str, str, str, str, str]] = []      # 零协缺记录 → 这几条真会进游戏
+    per_file: dict[str, int] = {}
     for rel in mf.CH10_FILES + mf.RPG_FILES + [f"StoryData/{n}.json" for n in tp.STORY_FILES]:
         ours = (ROOT / "data" / "supplement" / rel)
         if not ours.is_file():
@@ -179,31 +223,52 @@ def cmd_terms() -> int:
         rows_b = b.get("dataList") if isinstance(b, dict) else None
         if not isinstance(rows_a, list) or not isinstance(rows_b, list):
             continue
-        by_id = {str(r.get("id")): r for r in rows_b if isinstance(r, dict)}
+        by_key: dict[str, dict] = {}
+        for r in rows_b:
+            k = _row_key(r)
+            if k:
+                by_key[k] = r
         for ra in rows_a:
-            if not isinstance(ra, dict):
-                continue
-            rb = by_id.get(str(ra.get("id")))
-            if not rb:
-                continue
-            for field, va in ra.items():
-                if not isinstance(va, str) or not va.strip() or field == "id":
-                    continue
-                vb = rb.get(field)
-                if isinstance(vb, str) and vb.strip() and vb.strip() != va.strip():
-                    pairs.append((rel, va.strip(), vb.strip()))
-    print(f"零协译文与我们的译文不同的字段：{len(pairs)} 处")
-    for rel, ours, theirs in pairs[:40]:
-        print(f"  {rel}\n    我们：{ours[:60]}\n    零协：{theirs[:60]}")
-    if pairs:
-        out = ROOT / "data" / "translate" / "out" / "零协第十章-术语对照.md"
-        out.parent.mkdir(parents=True, exist_ok=True)
-        lines = ["# 零协第十章译文 vs 我们的译文（逐字段对照）", "",
-                 "零协官方译文优先；本表用于把**仍在使用的**补译文件/术语表统一到零协口径。", ""]
-        for rel, ours, theirs in pairs:
-            lines += [f"- `{rel}`", f"  - 我们：{ours}", f"  - 零协：{theirs}"]
-        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
-        print(f"完整对照已写入 {out}")
+            k = _row_key(ra)
+            rb = by_key.get(k) if k else None
+            covered = isinstance(rb, dict)
+            if covered:
+                la, lb = _leaves(ra), _leaves(rb)
+                for path, va in la.items():
+                    if path.rsplit("/", 1)[-1] in _SKIP_LEAF:
+                        continue
+                    vb = lb.get(path)
+                    if vb is not None and vb != va:
+                        pairs.append((rel, path, va, vb))
+                        per_file[rel] = per_file.get(rel, 0) + 1
+            elif k:
+                # 零协没有这条记录 → 合并时整条追加进去，我们的译法会真的显示在游戏里
+                for path, va in sorted(_leaves(ra).items()):
+                    if path.rsplit("/", 1)[-1] in _SKIP_LEAF:
+                        continue
+                    gaps.append((rel, k, path, va, "(零协缺此记录)"))
+    print(f"零协译文与我们的译文不同的字段：{len(pairs)} 处（{len(per_file)} 个仍在用的补译文件）")
+    for rel, n in sorted(per_file.items(), key=lambda kv: -kv[1]):
+        print(f"   {rel}: {n} 处")
+    print(f"其中**会进游戏的**（零协缺的记录，共 {len({g[1] for g in gaps})} 条记录 / {len(gaps)} 个字段）：")
+    for rel, k, path, ours, _ in gaps[:20]:
+        print(f"   {rel} {k}{path}\n     我们：{ours[:70]}")
+    for rel, path, ours, theirs in pairs[:20]:
+        print(f"  {rel}{path}\n    我们：{ours[:60]}\n    零协：{theirs[:60]}")
+    out = ROOT / "data" / "translate" / "out" / "零协第十章-术语对照.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    lines = ["# 零协第十章译文 vs 我们的译文（逐字段对照）", "",
+             "零协官方译文优先；本表用于把**仍在使用的**补译文件/术语表统一到零协口径。",
+             f"共 {len(pairs)} 处差异，涉及 {len(per_file)} 个仍在用的补译文件；"
+             f"另有 {len(gaps)} 处属于「零协缺的记录」（这些会真的进游戏，见文末）。", "",
+             "## 一、零协已覆盖的记录（仅存档，游戏中显示零协官方译文）", ""]
+    for rel, path, ours, theirs in pairs:
+        lines += [f"- `{rel}`{path}", f"  - 我们：{ours}", f"  - 零协：{theirs}"]
+    lines += ["", "## 二、零协缺的记录（我们会补进游戏，建议照零协口径改）", ""]
+    for rel, k, path, ours, _ in gaps:
+        lines += [f"- `{rel}` `{k}`{path}", f"  - 我们：{ours}"]
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"完整对照已写入 {out}")
     return 0
 
 

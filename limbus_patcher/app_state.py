@@ -94,6 +94,12 @@ class AppContext:
     def refresh_env(self) -> EnvironmentStatus:
         self.env = check_environment(self.config.game_dir, self.config.patch_pack_name)
         self._text_source = None          # 来源随环境变化，重新探测
+        # 登记游戏侧目录：图鉴/主线剧情预览这些不走 TextSource 的显示路径
+        # 靠它把 model（韩文角色键）翻成显示名（c10p2 起过场文件没有 teller）
+        from .textsource import set_game_dirs
+
+        set_game_dirs(self.env.llc_pack_dir if self.env.llc_ok else None,
+                      self.env.base_dir if self.env.base_ok else None)
         self.storybook.text_source = self.text_source
         return self.env
 
@@ -120,10 +126,11 @@ class AppContext:
 
     @property
     def text_source(self):
-        """当前文本来源（零协优先，没装零协则用英文基线）。
+        """当前文本来源（零协优先，没装零协则用英文基线；缺的文件回退补译目录）。
 
         条目里存的永远是「零协包内相对路径 + 记录下标 + 字段路径」，
         文本本身现从该来源读，不落库、不随包分发。
+        新章节（如 c10p2）零协还没跟时，文件只在补译目录里，靠回退读到自己的译文。
         """
         src = getattr(self, "_text_source", None)
         key = (self.env.llc_pack_dir, self.env.base_dir, self.env.text_source)
@@ -131,7 +138,8 @@ class AppContext:
             from .textsource import TextSource
 
             src = TextSource.detect(self.env.llc_pack_dir if self.env.llc_ok else None,
-                                    self.env.base_dir if self.env.base_ok else None)
+                                    self.env.base_dir if self.env.base_ok else None,
+                                    self.supplement.root)
             src._key = key  # type: ignore[attr-defined]
             self._text_source = src
         return src

@@ -81,6 +81,21 @@ def _find_record(dl: list, ref: EntryRef) -> dict:
     raise KeyError(f"找不到 id={ref.id!r} 的记录")
 
 
+#: 记录标识字段的优先级（老文件用 id，RPG/UI 这类用 key，少数用 code）
+_RECORD_ID_KEYS = ("id", "key", "code")
+
+
+def _record_key(rec) -> str | None:
+    """记录的唯一标识（补译文件做记录级合并时按它比对）；拿不到返回 None。"""
+    if not isinstance(rec, dict):
+        return None
+    for k in _RECORD_ID_KEYS:
+        v = rec.get(k)
+        if v is not None and str(v).strip():
+            return f"{k}={v}"
+    return None
+
+
 def original_text(llc_dir: Path, ref: EntryRef) -> tuple[str | None, str | None]:
     """读取零协包中某条目的当前原文。返回 (文本, 错误)。"""
     data, err = load_json(llc_dir / ref.file)
@@ -251,17 +266,18 @@ class Deployer:
         if not isinstance(records, list):
             report.errors.append(f"{rel}: 补译文件缺少 dataList（{aerr}），未合并")
             return
-        existing = {str(r.get("id")) for r in target["dataList"]
-                    if isinstance(r, dict) and r.get("id") is not None}
+        # 记录标识：老文件用 id，RPG/UI 这类用 key（个别用 code）。
+        # 只认 id 的话，key 型同名文件会整份被跳过——那批补译永远进不了游戏。
+        existing = {k for k in (_record_key(r) for r in target["dataList"]) if k}
         appended = 0
         for r in records:
             if not isinstance(r, dict):
                 continue
-            rid = str(r.get("id"))
-            if r.get("id") is None or rid in existing:
-                continue          # 零协已有同 id 记录 → 官方译文优先，不覆盖
+            rk = _record_key(r)
+            if rk is None or rk in existing:
+                continue          # 零协已有同 id/key 记录 → 官方译文优先，不覆盖
             target["dataList"].append(r)
-            existing.add(rid)
+            existing.add(rk)
             appended += 1
         if not appended:
             report.files_skipped += 1

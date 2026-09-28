@@ -28,6 +28,7 @@ import sys
 from pathlib import Path
 
 from .season import package_data_dir
+from .textsource import speaker_of
 
 SEGMENT_ORDER = {"战前": 0, "战中": 1, "战后": 2, "前段": 0, "后段": 2}
 
@@ -264,14 +265,11 @@ class Storybook:
                 content = rec.get("content")
                 if not isinstance(content, str) or not content.strip():
                     continue
-                teller = rec.get("teller")
-                if not isinstance(teller, str) or not teller.strip():
-                    teller = None
                 rows.append({
                     "page": pg.get("title"),
                     "segment": pg.get("segment"),
                     "record": i,
-                    "speaker": teller,
+                    "speaker": speaker_of(rec),
                     "text": content,
                 })
         return rows

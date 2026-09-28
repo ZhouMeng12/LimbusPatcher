@@ -13,7 +13,8 @@ from PySide6.QtWidgets import QApplication, QMessageBox
 
 from limbus_patcher import APP_NAME, __version__
 from limbus_patcher.app_state import AppContext
-from limbus_patcher.config import AppPaths
+from limbus_patcher.config import AppPaths, ConfigStore
+from limbus_patcher.ui import theme
 from limbus_patcher.ui.main_window import MainWindow
 from limbus_patcher.ui.theme import apply_theme
 
@@ -98,12 +99,18 @@ def main() -> int:
     app.setApplicationName(APP_NAME)
     app.setApplicationVersion(__version__)
     app.setOrganizationName("LimbusPatcher")
-    apply_theme(app)
 
     app_paths = AppPaths.from_root()
     app_paths.ensure_dirs()
     _install_excepthook(app_paths.data_dir)
     _install_native_crash_log(app_paths.data_dir)
+
+    # 主题必须在建界面之前生效：控件在构造时读取颜色 token。
+    try:
+        _start_theme = ConfigStore(app_paths).load().ui.theme
+    except Exception:
+        _start_theme = theme.DEFAULT_THEME
+    apply_theme(app, _start_theme)
 
     shared = QSharedMemory(_SINGLETON_KEY)
     if not shared.create(1):

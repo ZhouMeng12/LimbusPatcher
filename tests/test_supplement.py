@@ -201,3 +201,33 @@ def test_supplement_text_is_editable_in_app(env, tmp_path):
     clone = ctx.game_paths.patch_pack_dir(ctx.config.patch_pack_name)
     rows = json.loads((clone / "StoryData/S1001B.json").read_text(encoding="utf-8-sig"))["dataList"]
     assert rows[0]["content"] == "改过的补译"
+
+
+def test_covers_recognizes_key_records(tmp_path):
+    """零协覆盖度判断要认 key（RPG/UI 文件用 key）——只认 id 会把整份补译误判成「已覆盖」跳过。
+
+    回归：rpg-loc-ui-common-a1c10p1.json 的 14 条新 UI 文案曾因此从未安装。
+    """
+    import sys
+    from pathlib import Path as _P
+
+    sys.path.insert(0, str(_P(__file__).resolve().parent.parent / "scripts"))
+    import llc_update
+
+    ours_dir = tmp_path / "ours"
+    llc_dir = tmp_path / "llc"
+    ours_dir.mkdir()
+    llc_dir.mkdir()
+    ours = ours_dir / "rel.json"
+    llc = llc_dir / "rel.json"
+    ours.write_text('{"dataList":[{"key":"Old","text":"旧"},{"key":"New","text":"新"}]}', encoding="utf-8")
+    llc.write_text('{"dataList":[{"key":"Old","text":"零协"}]}', encoding="utf-8")
+    old_llc = llc_update.LLC
+    llc_update.LLC = llc_dir          # 零协包里只有 Old
+    try:
+        assert llc_update.covers(ours, "rel.json") == ("partial", 1)
+        llc.write_text('{"dataList":[{"key":"Old","text":"零协"},{"key":"New","text":"零协"}]}',
+                       encoding="utf-8")
+        assert llc_update.covers(ours, "rel.json") == ("full", 0)
+    finally:
+        llc_update.LLC = old_llc

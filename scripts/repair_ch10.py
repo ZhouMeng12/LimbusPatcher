@@ -167,14 +167,18 @@ def walk(node, path_: tuple = ()) -> None:
 
 
 def _resolve(rel: str):
-    """数据文件（data/translate/files/…）或剧情文件（data/translate/zh/<名>.json）都能处理。"""
+    """数据文件（data/translate/files/…）或剧情文件（data/translate/zh/<名>.json）都能处理。
+
+    c10p2 起的剧情译稿直接落在 ``data/translate/out/zh/``（合并产物目录），
+    这里也要认，否则体检会把这些文件误报成「缺文件」而整批跳过。
+    """
     p = mf.OUT / rel
     if p.is_file():
         return p, mf.en_path(rel)
     name = rel[:-5] if rel.endswith(".json") else rel
-    p2 = mt.tp.ZH_DIR / f"{name}.json"
-    if p2.is_file():
-        return p2, mt.tp.en_file(name)
+    for cand in (mt.tp.ZH_DIR / f"{name}.json", mf.OUT.parent / "out" / "zh" / f"{name}.json"):
+        if cand.is_file():
+            return cand, mt.tp.en_file(name)
     return None, None
 
 

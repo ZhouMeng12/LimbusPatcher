@@ -1,4 +1,4 @@
-"""敌方图鉴页（UI 完全仿照人格图鉴 CodexPage）。
+﻿"""敌方图鉴页（UI 完全仿照人格图鉴 CodexPage）。
 
 三级导航：一级分组（异想体 / 敌方单位 / 阵营）→ 二级实体卡片（可按
 chapter_type / enemy_type / danger_level 筛选）→ 三级详情（技能 / 被动页签）。
@@ -67,7 +67,7 @@ FLAVOR_STYLE = 'color: #8a9bb5; font-size: 11px; font-style: italic;'
 ENTITY_CHUNK = 45
 
 
-class EnemyCodexPage(QWidget):
+class EnemyCodexPage(QFrame):
     """敌方图鉴主页面。"""
 
     close_requested = Signal()
@@ -89,6 +89,8 @@ class EnemyCodexPage(QWidget):
         self._hover_timer.setInterval(KEYWORD_HOVER_DELAY_MS)
         self._hover_timer.timeout.connect(self._show_hover_tip)
         self._stage_stack: list[tuple[str, object]] = []
+        # 从关卡/迷宫/活动详情点进敌人详情时记录来源，返回时回到该页面
+        self._stage_return: tuple[str, object] | None = None
 
         root = QVBoxLayout(self)
         root.setContentsMargins(10, 8, 10, 8)
@@ -153,11 +155,29 @@ class EnemyCodexPage(QWidget):
             else:
                 self._show_groups()
         elif self.level == 3:
-            self._show_entities(self.group)
+            if self._stage_return is not None:
+                # 从关卡 / 迷宫 / 活动列表点进来的：返回到来源那一页，而不是分组实体列表
+                kind, ident = self._stage_return
+                self._stage_return = None
+                if kind == "stage":
+                    self._show_stage_detail(ident)
+                elif kind == "dungeon":
+                    self._show_stage_dungeon(ident)
+                elif kind == "extra":
+                    self._show_stage_extra(ident)
+                else:
+                    self._show_entities(self.group)
+            else:
+                self._show_entities(self.group)
         elif self.level == 2:
             self._show_groups()
         else:
             self.close_requested.emit()
+
+    def _push_stage_view(self, item: tuple) -> None:
+        """关卡系页面的返回栈入栈；栈顶相同时不重复压（返回后重进不叠加）。"""
+        if not self._stage_stack or self._stage_stack[-1] != item:
+            self._stage_stack.append(item)
 
     def refresh(self) -> None:
         """索引重建 / 方案变化后按当前层级重新渲染（不会丢用户所在的位置）。"""
@@ -356,6 +376,8 @@ class EnemyCodexPage(QWidget):
     def _show_groups(self) -> None:
         self.level = 1
         self.entity = None
+        self._stage_return = None      # 离开关卡系：清掉「从关卡进来的」来源与返回栈
+        self._stage_stack.clear()
         self.crumb.setText("敌方图鉴 · 选择分组")
 
         counts = self._group_counts()
@@ -384,7 +406,7 @@ class EnemyCodexPage(QWidget):
         lay.addLayout(grid)
 
         # 按关卡查询入口
-        stage_btn = QPushButton("按关卡查询敌人 ▸")
+        stage_btn = QPushButton("按关卡查询敌人 ▼")
         stage_btn.setToolTip(
             "按关卡（1-1 … 9-51）查看出现的敌人。\n"
             "主线关卡为章节级数据（LLC_zh-CN/Enemies-*.json），非主线活动已聚合本地活动文件。"
@@ -402,6 +424,7 @@ class EnemyCodexPage(QWidget):
         self.level = 4
         self.entity = None
         self._stage_stack.clear()
+        self._stage_return = None
         self.crumb.setText("敌方图鉴 · 按关卡查询")
 
         page = QWidget()
@@ -437,6 +460,24 @@ class EnemyCodexPage(QWidget):
             grid.addWidget(card, i // 3, i % 3)
         lay.addLayout(grid)
 
+        dungeons = stage_enemies.dungeon_items()
+        if dungeons:
+            dlab = QLabel("主线迷宫（各章 DungeonNode 关卡，按迷宫分组）")
+            dlab.setObjectName("dim")
+            lay.addWidget(dlab)
+            dun_cards = []
+            for it in dungeons:
+                sub = f"{len(it.get('enemies', []))} 敌"
+                card = _Card(it.get("label", it.get("tag", "")), sub, badge="迷宫")
+                card.setToolTip(f"{it.get('label')}：{sub}，点击查看该迷宫敌人")
+                card.clicked.connect(lambda _c=False, t=it.get("tag"): self._show_stage_dungeon(t))
+                dun_cards.append(card)
+            dgrid = QGridLayout()
+            dgrid.setSpacing(8)
+            for i, card in enumerate(dun_cards):
+                dgrid.addWidget(card, i // 4, i % 4)
+            lay.addLayout(dgrid)
+
         extra = stage_enemies.extra_items()
         if extra:
             elab = QLabel("活动 / 特殊（镜牢 · 瓦夜 · 间章等）")
@@ -458,6 +499,18 @@ class EnemyCodexPage(QWidget):
         lay.addStretch(1)
         self._set_body(page)
 
+    def _show_stage_dungeon(self, tag: str) -> None:
+        """主线迷宫条目敌人列表。"""
+        self.level = 4
+        it = next((d for d in stage_enemies.dungeon_items() if d.get("tag") == tag), None)
+        if it is None:
+            info(self, "找不到迷宫", tag)
+            return
+        self._push_stage_view(("query", None))
+        self.crumb.setText(f"敌方图鉴 · 按关卡查询 · {it.get('label')}")
+        note = it.get("note") or "主线迷宫（DungeonNode）敌人构成"
+        self._render_stage_enemies(it.get("label", tag), it.get("enemies", []), note, return_ctx=("dungeon", tag))
+
     def _show_stage_chapter(self, chapter_id: str) -> None:
         """关卡查询二级：某章节的关卡按钮网格。"""
         self.level = 4
@@ -465,7 +518,7 @@ class EnemyCodexPage(QWidget):
         if ch is None:
             info(self, "找不到章节", chapter_id)
             return
-        self._stage_stack.append(("query", None))
+        self._push_stage_view(("query", None))
         cname = ch.get("chapter_name")
         title = ch.get("chapter_label", chapter_id)
         if cname:
@@ -513,10 +566,11 @@ class EnemyCodexPage(QWidget):
         if it is None:
             info(self, "找不到条目", tag)
             return
-        self._stage_stack.append(("query", None))
+        self._push_stage_view(("query", None))
         self.crumb.setText(f"敌方图鉴 · 按关卡查询 · {it.get('label')}")
         self._render_stage_enemies(it.get("label", tag), it.get("enemies", []),
-                                   "本地章节级数据（LLC_zh-CN Enemies 文件）")
+                                   "本地章节级数据（LLC_zh-CN Enemies 文件）",
+                                   return_ctx=("extra", tag))
 
     def _show_stage_detail(self, stage_code: str) -> None:
         """关卡查询三级：某关敌人列表。"""
@@ -525,7 +579,7 @@ class EnemyCodexPage(QWidget):
         if st is None:
             info(self, "找不到关卡", stage_code)
             return
-        self._stage_stack.append(("chapter", st.get("chapter_id")))
+        self._push_stage_view(("chapter", st.get("chapter_id")))
         cname = st.get("chapter_name")
         title = st.get("chapter_label", "")
         if cname:
@@ -539,7 +593,7 @@ class EnemyCodexPage(QWidget):
             head = f"{head} · {sname}"
 
         if st.get("no_battle"):
-            self._render_stage_enemies(head, [], "", no_battle=True, stage=st)
+            self._render_stage_enemies(head, [], "", no_battle=True, stage=st, return_ctx=("stage", stage_code))
             return
 
         enemies = st.get("enemies") or []
@@ -551,10 +605,11 @@ class EnemyCodexPage(QWidget):
         else:
             enemies = []
             note = "本地无该章节敌人数据"
-        self._render_stage_enemies(head, enemies, note, stage=st)
+        self._render_stage_enemies(head, enemies, note, stage=st, return_ctx=("stage", stage_code))
 
     def _render_stage_enemies(self, title: str, enemies: list, note: str,
-                              no_battle: bool = False, stage: dict | None = None) -> None:
+                              no_battle: bool = False, stage: dict | None = None,
+                              return_ctx: tuple[str, object] | None = None) -> None:
         """关卡 / 活动敌人卡片网格（点击进入敌人详情）。"""
         page = QWidget()
         lay = QVBoxLayout(page)
@@ -598,39 +653,39 @@ class EnemyCodexPage(QWidget):
         seen_ids: set = set()
         for e in enemies:
             eid = e.get("id")
-            # 多阶段敌人（如 9-50 里恩 1347/1348）：把同一敌人的各形态都列出来，
-            # 否则关卡里只会看到其中一阶段的技能 / 被动。
+            # 多阶段敌人（如 9-50 里恩 1347/1348、7-36 堂吉诃德 8390/8410）：
+            # 形态组只渲染一张卡，点击进入详情后用顶部形态按钮切换。
             variants = ([{"id": None, "label": ""}] if eid is None else
                         phase_variants(Path(self.ctx.env.llc_pack_dir), eid,
                                        extra_dirs=[self.ctx.supplement.root]))
+            v = variants[0]
+            vid = v["id"]
+            if vid is not None:
+                if vid in seen_ids:
+                    continue
+                seen_ids.add(vid)
+            name = e.get("name") or f"敌方 {vid}"
+            meta = self._meta_of(vid) if vid is not None else None
+            dims = dict(meta.get("dimensions") or {}) if meta else {}
+            subtitle = ""
+            if dims.get("danger_level"):
+                subtitle = str(dims.get("danger_level"))
+            if dims.get("chapter_type"):
+                subtitle = (subtitle + " · " if subtitle else "") + \
+                           CHAPTER_TYPE_LABELS.get(dims.get("chapter_type"), dims.get("chapter_type"))
             multi = len(variants) > 1
-            for vi, v in enumerate(variants):
-                vid = v["id"]
-                if vid is not None:
-                    if vid in seen_ids:
-                        continue
-                    seen_ids.add(vid)
-                name = e.get("name") or f"敌方 {vid}"
-                meta = self._meta_of(vid) if vid is not None else None
-                dims = dict(meta.get("dimensions") or {}) if meta else {}
-                subtitle = ""
-                if dims.get("danger_level"):
-                    subtitle = str(dims.get("danger_level"))
-                if dims.get("chapter_type"):
-                    subtitle = (subtitle + " · " if subtitle else "") + \
-                               CHAPTER_TYPE_LABELS.get(dims.get("chapter_type"), dims.get("chapter_type"))
-                if multi and vid is not None:
-                    subtitle = (subtitle + " · " if subtitle else "") + f"{v.get('label') or ''} {vid}".strip()
-                card = _Card(name, subtitle, badge="")
-                if vid is None:
-                    card.setToolTip(f"{name}（暂无本地详情数据）")
-                else:
-                    tip = f"{name}（敌方 {vid}）点击查看详情"
-                    if multi:
-                        tip += f"\n这是该敌人的第 {vi + 1}/{len(variants)} 个形态，技能与被动不同。"
-                    card.setToolTip(tip)
-                    card.clicked.connect(lambda _c=False, k=f"N:{vid}": self._show_entity(k))
-                cards.append(card)
+            if multi:
+                subtitle = (subtitle + " · " if subtitle else "") + f"{len(variants)} 形态"
+            card = _Card(name, subtitle, badge="")
+            if vid is None:
+                card.setToolTip(f"{name}（暂无本地详情数据）")
+            else:
+                tip = f"{name}（敌方 {vid}）点击查看详情"
+                if multi:
+                    tip += f"\n该敌人共 {len(variants)} 个形态，可在详情页顶部切换（技能与被动不同）。"
+                card.setToolTip(tip)
+                card.clicked.connect(lambda _c=False, k=f"N:{vid}": (setattr(self, "_stage_return", return_ctx), self._show_entity(k)))
+            cards.append(card)
         host = QWidget()
         host.setLayout(self._grid(cards, columns=ENEMY_COLUMNS))
         lay.addWidget(host)
@@ -666,6 +721,7 @@ class EnemyCodexPage(QWidget):
         self.level = 2
         self.group = group
         self.entity = None
+        self._stage_return = None      # 分组实体列表不是关卡来源：清掉残留，返回按普通路径走
         group_label = GROUP_LABELS.get(group, group)
         self.crumb.setText(f"敌方图鉴 · {group_label}")
 
@@ -730,7 +786,7 @@ class EnemyCodexPage(QWidget):
         specs: list[dict] = []
         for e in self.ctx.search.list_entities("enemy"):
             meta = self._meta_of(e.get("entity_id")) or {}
-            # ⚠ group 在元数据**顶层**（dimensions 里只有 chapter_type / enemy_type / danger_level）；
+            # ※ group 在元数据**顶层**（dimensions 里只有 chapter_type / enemy_type / danger_level）；
             # 以前读 dims["group"] 拿到的一直是 None，于是每个分组都把 638 个敌人全列出来。
             if (meta.get("group") or self.group) != self.group:
                 continue
@@ -858,7 +914,7 @@ class EnemyCodexPage(QWidget):
         lay.setSpacing(8)
 
         tools = QHBoxLayout()
-        self.name_btn = QPushButton("改名称 ▾")
+        self.name_btn = QPushButton("改名称 ▼")
         self.name_btn.setToolTip("修改这个敌人的名称、简介（写进方案，零协原文不动；阵营条目只读）")
         menu = QMenu(self.name_btn)
         for item in ent.self_texts:
@@ -968,7 +1024,17 @@ class EnemyCodexPage(QWidget):
             head = QPushButton(f"{i}. {skill.label}    · {len(skill.levels)} 级 · {skill.coin_count} 硬币")
             head.setCheckable(True)
             head.setStyleSheet("text-align: left; font-weight: 600;")
-            cl.addWidget(head)
+            head_row = QHBoxLayout()
+            head_row.addWidget(head, 1)
+            if skill.name_fp:
+                edit_btn = QPushButton("改技能名")
+                edit_btn.setToolTip("修改技能名称（写入方案，零协原文不动；同技能名可在全局一键替换）")
+                edit_btn.clicked.connect(
+                    lambda _c=False, s=skill: self._edit(s.file, s.record_index, s.skill_id,
+                                                         s.name_fp, f"{skill.label} · 技能名")
+                )
+                head_row.addWidget(edit_btn)
+            cl.addLayout(head_row)
             detail = QWidget()
             dl = QVBoxLayout(detail)
             dl.setSpacing(4)

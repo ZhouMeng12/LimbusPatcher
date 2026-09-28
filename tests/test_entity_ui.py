@@ -70,13 +70,38 @@ def nav_keys(win: MainWindow) -> set[str]:
 
 
 def test_nav_has_codex_and_script_entries(win):
-    """导航现在的契约：图鉴与战斗组只放两个图鉴入口，剧情组只放剧本模式。
+    """导航改版后的契约（见 DESIGN_SYSTEM.md §5）。
 
-    （罪人树 / 人格·E.G.O 角色聚合入口已从导航移除，改由图鉴页与顶部按钮进入，
-    对应的 _add_sinner_tree / _add_entity_entries 目前没有调用方。）
+    改动点：
+    * 「剧本模式」仍在导航里（剧院分区第一项）；
+    * 「人格图鉴 / 敌方图鉴」**移出导航**，由顶栏按钮独占入口 —— 两处都能进属于
+      等价重复入口，与「主行动唯一」原则冲突；
+    * 人格技能 / 人格语音 / E.G.O 技能 / E.G.O 语音 / 人格一览 / E.G.O 一览
+      重新回到导航（放进「人格」「E.G.O」两个分区）—— 与游戏原版
+      「人格 / E.G.O 菜单 → 角色 → 技能·剧情·语音」的结构一致。
     """
     keys = nav_keys(win)
-    assert {"codex", "enemy_codex", "script"} <= keys
+    assert "script" in keys
+    # 图鉴不在导航里，但顶栏有独占入口
+    assert "codex" not in keys and "enemy_codex" not in keys
+    assert win.codex_btn_top.text() == "人格图鉴"
+    assert win.enemy_btn_top.text() == "敌方图鉴"
+    # 角色聚合入口重新可达
+    assert {"role:identity_skill", "role:identity_voice", "entities:personality",
+            "role:ego_skill", "role:ego_voice", "entities:ego"} <= keys
+    # 走一遍确认真的能切过去（不是只挂了个空节点）
+    win._on_nav_category("role:ego_voice")
+    assert win._category == "role:ego_voice"
+    win._on_nav_category("entities:ego")
+    assert win._category == "entities:ego"
+
+
+def test_nav_codex_entries_open_topbar_pages(win):
+    """图鉴入口虽然移出导航，但 _on_nav_category 的兼容分支仍要能打开页面。"""
+    win._on_nav_category("codex")
+    assert win.center_stack.currentWidget() is win.codex_page
+    win._on_nav_category("enemy_codex")
+    assert win.center_stack.currentWidget() is win.enemy_codex_page
 
 
 def test_entity_overview_shows_combo_and_counts(win):

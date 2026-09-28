@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime
 import hashlib
 import shutil
 import sys
@@ -58,12 +59,33 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def _clear_staging(path: Path) -> None:
+    """清掉同名暂存目录；删不掉就挪到一边，**绝不因此让发布失败**。
+
+    受限环境（受限沙箱、杀软锁定、目录被占用）里 ``rmtree`` 可能被拒绝。
+    打包这件事已经做完了，清理失败不该把成功的发布判为失败 —— 但也不能让
+    旧内容混进新包，所以退而求其次「改名归档」。
+    """
+    if not path.exists():
+        return
+    try:
+        shutil.rmtree(path)
+        return
+    except OSError:
+        pass
+    aside = path.with_name(path.name + f".old-{datetime.datetime.now():%H%M%S}")
+    try:
+        path.rename(aside)
+        print(f"  [warn] 暂存目录删不掉，已挪开 → {aside.name}")
+    except OSError as exc:  # noqa: BLE001
+        print(f"  [warn] 暂存目录既删不掉也挪不动（{exc}），可能复用到旧内容")
+
+
 def stage(target: Path, payload: Path, onefile: bool) -> None:
-    if target.exists():
-        shutil.rmtree(target)
-    target.mkdir(parents=True)
+    _clear_staging(target)
+    target.mkdir(parents=True, exist_ok=True)
     if payload.is_dir():
-        shutil.copytree(payload, target / payload.name)
+        shutil.copytree(payload, target / payload.name, dirs_exist_ok=True)
     else:
         shutil.copy2(payload, target / payload.name)
     cache = target / "data" / "cache"
@@ -117,7 +139,7 @@ def main() -> int:
         out = RELEASE / f"{name}.zip"
         zip_dir(staging, out)
         sums.append(f"{sha256(out)}  {out.name}")
-        shutil.rmtree(staging)
+        _clear_staging(staging)
 
     (RELEASE / "SHA256SUMS.txt").write_text("\n".join(sums) + "\n", encoding="utf-8", newline="\r\n")
     print("\n".join(sums))

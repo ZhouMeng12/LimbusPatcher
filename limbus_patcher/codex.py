@@ -36,6 +36,7 @@ from .entities import (
 )
 from .patch import walk_leaves
 from .season import MetaMaps
+from .textsource import speaker_of
 
 # 语音类别里挑出来做常用排序（其余按出现顺序）
 VOICE_ORDER = ["获得人格", "人格出战", "进入战斗", "战斗胜利", "EX CLEAR战斗胜利", "战斗失败",
@@ -71,6 +72,7 @@ class CodexSkill:
     seq: int                  # 该人格下的技能序号（id % 100）
     file: str = ""            # 所在文件（相对零协包）
     name: str = ""
+    name_fp: list = field(default_factory=list)  # 技能名字段的路径（可编辑）
     levels: list[CodexSkillLevel] = field(default_factory=list)
     # 只读数值（来自 wiki / 数据表，缺失时为空）
     stats: dict = field(default_factory=dict)
@@ -359,7 +361,7 @@ def build_entity(llc_dir: Path, summary: dict, maps: MetaMaps | None = None) -> 
                 if isinstance(rec, dict):
                     ent.story_lines.append(CodexStoryLine(
                         record_index=i, record_id=rec.get("id"), file=rel, fp=[{"k": "content"}],
-                        teller=str(rec.get("teller") or rec.get("model") or ""),
+                        teller=speaker_of(rec, [llc]) or "",
                         title=str(rec.get("title") or ""), place=str(rec.get("place") or ""),
                         text=str(rec.get("content") or "")))
         elif info.role == ROLE_IDENTITY_VOICE:

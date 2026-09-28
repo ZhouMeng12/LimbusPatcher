@@ -9,6 +9,7 @@ from pathlib import Path
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction
 from PySide6.QtWidgets import (
+    QApplication,
     QCheckBox,
     QFileDialog,
     QFrame,
@@ -36,7 +37,9 @@ from ..patch import EntryRef, ref_label
 from ..search import SearchHit
 from ..season import acq_display, kind_display, season_display, season_key
 from ..story import story_of
+from ..textsource import speaker_of
 from . import theme
+from .brand import LogoMark, MoreButton, SaveDot
 from .dialogs import BackupDialog, HistoryDialog, confirm, error, info, safe_exec, warn
 from .codex_page import CodexPage
 from .enemy_codex_page import EnemyCodexPage
@@ -54,6 +57,8 @@ from .onboarding import OnboardingPage
 from .replace_dialog import open_replace_dialog
 from .supplement_dialog import open_supplement_dialog
 from .script_panel import ScriptPanel
+from .status_pill import StatusPill, StatusRow
+from .theme_switch import ThemeSwitcher
 from .workers import Runner
 
 
@@ -81,15 +86,20 @@ def _season_group_rank(label: str) -> tuple:
     return (9, 0)
 
 
-def _chip(text: str, color: str) -> QLabel:
-    lbl = QLabel(text)
-    lbl.setObjectName("chip")
-    lbl.setStyleSheet(theme.CHIP_QSS.format(color=color))
-    return lbl
+def _vsep() -> QFrame:
+    """竖分隔线。
+
+    v3 起顶栏不再用它（原型的顶栏用间距而不是分隔线分组），
+    但图鉴 / 剧本模式等整页仍可用；样式见 ``QFrame#vsep``。
+    """
+    f = QFrame()
+    f.setObjectName("vsep")
+    f.setFixedSize(1, 18)
+    return f
 
 
 class MainWindow(QMainWindow):
-    def __init__(self, ctx: AppContext):
+    def __init__(self, ctx: AppContext, startup_backup: bool = True):
         super().__init__()
         self.ctx = ctx
         self.runner = Runner()
@@ -98,77 +108,13 @@ class MainWindow(QMainWindow):
         self._current_hit: SearchHit | None = None
         self._story_ctx: tuple[str, str] | None = None
         self._session_restored = False  # 会话记忆只在索引就绪后恢复一次
+        self._switching_theme = False   # 正在因换主题而重建窗口
+        self._crumb = ""                # 顶栏面包屑文案
         self.setWindowTitle("边狱巴士汉化文本修改器")
         self.resize(1400, 900)
 
         # ---------- 顶部栏 ----------
-        topbar = QFrame()
-        topbar.setObjectName("topbar")
-        top_layout = QHBoxLayout(topbar)
-        top_layout.setContentsMargins(14, 8, 14, 8)
-        top_layout.setSpacing(10)
-
-        self.profile_chip = QLabel("")
-        self.profile_chip.setObjectName("title")
-        self.save_chip = _chip("—", theme.TEXT_DIM)
-        self.apply_chip = _chip("—", theme.TEXT_DIM)
-        self.env_chip = _chip("—", theme.TEXT_DIM)
-        self.pending_chip = _chip("—", theme.TEXT_DIM)
-        self.supplement_chip = _chip("补译 —", theme.TEXT_DIM)
-
-        self.apply_btn = QPushButton("应用到游戏")
-        self.apply_btn.setObjectName("primary")
-        self.script_btn_top = QPushButton("剧本模式")
-        self.codex_btn_top = QPushButton("人格图鉴")
-        self.enemy_btn_top = QPushButton("敌方图鉴")
-        self.llc_btn = QPushButton("装零协汉化")
-        self.llc_btn.setToolTip("用零协工具箱一键安装中文汉化；装好后点「重新检测」即可切回中文底本")
-        self.llc_btn.clicked.connect(lambda _c=False: open_llc_toolbox(self, "安装零协汉化", True))
-        self.llc_btn.setVisible(False)
-        self.ops_btn = QPushButton("操作 ▾")
-        self.ops_menu = QMenu(self)
-        self.act_clear = QAction("清空全部修改", self)
-        self.act_disable = QAction("停用修改", self)
-        self.act_backup = QAction("立即备份", self)
-        self.act_suggest = QAction("自动建议剧本对应…", self)
-        self.act_supplement = QAction("补译文件…", self)
-        self.act_supplement.setToolTip("管理零协包里没有、由本工具生成的文件（如新章节剧情）")
-        self.act_replace = QAction("一键替换…", self)
-        self.act_replace.setToolTip("在当前列表筛选结果里批量查找替换（列表为空时按全库处理）")
-        self.act_baseline = QAction("英文基线状态…", self)
-        self.act_export = QAction("导出方案包…", self)
-        self.act_import = QAction("导入方案包…", self)
-        self.act_dir = QAction("设置游戏目录…", self)
-        self.act_advanced = QAction("高级模式", self, checkable=True, checked=self.ctx.config.advanced_mode)
-        self.ops_menu.addAction(self.act_clear)
-        self.ops_menu.addAction(self.act_disable)
-        self.ops_menu.addSeparator()
-        self.ops_menu.addAction(self.act_supplement)
-        self.ops_menu.addAction(self.act_replace)
-        self.ops_menu.addAction(self.act_backup)
-        self.ops_menu.addAction(self.act_suggest)
-        self.ops_menu.addAction(self.act_baseline)
-        self.ops_menu.addSeparator()
-        self.ops_menu.addAction(self.act_export)
-        self.ops_menu.addAction(self.act_import)
-        self.ops_menu.addAction(self.act_dir)
-        self.ops_menu.addSeparator()
-        self.ops_menu.addAction(self.act_advanced)
-        self.ops_btn.setMenu(self.ops_menu)
-
-        top_layout.addWidget(self.profile_chip)
-        top_layout.addStretch(1)
-        top_layout.addWidget(self.env_chip)
-        top_layout.addWidget(self.llc_btn)
-        top_layout.addWidget(self.save_chip)
-        top_layout.addWidget(self.apply_chip)
-        top_layout.addWidget(self.pending_chip)
-        top_layout.addWidget(self.supplement_chip)
-        top_layout.addSpacing(6)
-        top_layout.addWidget(self.codex_btn_top)
-        top_layout.addWidget(self.script_btn_top)
-        top_layout.addWidget(self.apply_btn)
-        top_layout.addWidget(self.ops_btn)
+        topbar = self._build_topbar()
 
         # ---------- 页面切换 ----------
         self.stack = QStackedWidget()
@@ -178,6 +124,9 @@ class MainWindow(QMainWindow):
         self.stack.addWidget(self.workspace)
 
         root = QWidget()
+        # 根容器显式铺窗口底色：卡片之间的 8px 缝隙要透出 BG（比面板更暗一层）。
+        # 不依赖 QMainWindow 自身背景 —— 离屏 grab 时顶层窗口背景不会被绘制。
+        root.setObjectName("appRoot")
         root_layout = QVBoxLayout(root)
         root_layout.setContentsMargins(0, 0, 0, 0)
         root_layout.setSpacing(0)
@@ -186,7 +135,10 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(root)
 
         # ---------- 菜单 ----------
-        menu = self.menuBar().addMenu("工具")
+        # 关掉原生菜单栏：Windows 上原生菜单栏不吃 QSS，会和自绘顶栏割裂成两种观感。
+        mbar = self.menuBar()
+        mbar.setNativeMenuBar(False)
+        menu = mbar.addMenu("工具")
         act_rescan = QAction("重新检测环境", self)
         act_reindex = QAction("重建文本索引", self)
         act_backups = QAction("备份管理…", self)
@@ -246,9 +198,12 @@ class MainWindow(QMainWindow):
         self.script_panel.suggest_requested.connect(self._on_script_suggest)
         self.script_panel.batch_requested.connect(self._on_script_batch)
         self.script_panel.chapter_selected.connect(self._on_script_chapter)
-        self.script_btn_top.clicked.connect(self.open_script_mode)
-        self.codex_btn_top.clicked.connect(self.open_codex)
-        self.enemy_btn_top.clicked.connect(self.open_enemy_codex)
+        # 顶栏三颗整页入口的向后兼容别名（旧测试/脚本按 *_btn_top 取；
+        # 它们现在是真按钮，所以 .text() / .click() 都能用）
+        self.script_btn_top = self.page_script
+        self.codex_btn_top = self.page_codex
+        self.enemy_btn_top = self.page_enemy
+        self.theme_switch.theme_selected.connect(self.set_theme)
         self.apply_btn.clicked.connect(self.apply_patch)
         self.act_clear.triggered.connect(self.clear_all)
         self.act_disable.triggered.connect(self.disable_patch)
@@ -267,7 +222,9 @@ class MainWindow(QMainWindow):
         act_datadir.triggered.connect(lambda: self._open_dir(self.ctx.app_paths.data_dir))
 
         # ---------- 启动 ----------
-        self.ctx.backup.backup("startup")
+        if startup_backup:
+            # 切换主题会重建窗口，重建时不再重复做启动备份
+            self.ctx.backup.backup("startup")
         self.refresh_topbar()
         self._restore_window_state()  # 窗口/分栏先恢复（不依赖索引）
         self._show_page()
@@ -276,10 +233,191 @@ class MainWindow(QMainWindow):
 
     # ---------- 构建 ----------
 
+    def _build_topbar(self) -> QFrame:
+        """顶栏：左「品牌 + 面包屑 + 整页入口」，右「状态 + 操作」。
+
+        结构：
+
+            [logo 邊] 边狱巴士汉化文本修改器 ●   人格 › 技能 │ [人格图鉴][敌方图鉴][剧本模式]   ……   [37 条待确认] [风格 · 巴士] [应用到游戏] [•••]
+
+        「人格图鉴 / 敌方图鉴 / 剧本模式」是**整页入口**，直接摆在顶栏可见
+        （它们是「去哪」，跟面包屑同一组语义）；选中态表示当前就在那一页，
+        再点一次回工作台。最右那颗「••• 更多操作」只放工具类动作
+        （备份 / 导入导出 / 高级模式…），不放整页入口。
+        「当前方案 / N 条修改」不占顶栏横向空间，挂在品牌名下方做副标题。
+        """
+        bar = QFrame()
+        bar.setObjectName("topbar")
+        self.topbar = bar
+        lay = QHBoxLayout(bar)
+        lay.setContentsMargins(12, 7, 12, 7)
+        lay.setSpacing(12)
+
+        # ---- 品牌区：金色 logo + 应用名 + 保存点 / 副标题给方案信息 ----
+        self.brand_logo = LogoMark("邊", 28)
+        self.brand_name = QLabel("边狱巴士汉化文本修改器")
+        self.brand_name.setObjectName("brandName")
+        self.save_dot = SaveDot()
+        self.profile_chip = QLabel("")
+        self.profile_chip.setObjectName("faint")
+
+        name_row = QHBoxLayout()
+        name_row.setContentsMargins(0, 0, 0, 0)
+        name_row.setSpacing(5)
+        name_row.addWidget(self.brand_name)
+        name_row.addWidget(self.save_dot)
+        name_row.addStretch(1)
+
+        text_col = QVBoxLayout()
+        text_col.setContentsMargins(0, 0, 0, 0)
+        text_col.setSpacing(1)
+        text_col.addLayout(name_row)
+        text_col.addWidget(self.profile_chip)
+
+        brand = QFrame()
+        brand.setObjectName("brand")
+        brand_lay = QHBoxLayout(brand)
+        brand_lay.setContentsMargins(0, 0, 0, 0)
+        brand_lay.setSpacing(9)
+        brand_lay.addWidget(self.brand_logo)
+        brand_lay.addLayout(text_col)
+
+        self.crumb = QLabel("")
+        self.crumb.setObjectName("crumb")
+
+        # ---- 右侧操作区 ----
+        self.status_pill = StatusPill()
+
+        self.apply_btn = QPushButton("应用到游戏")
+        self.apply_btn.setObjectName("primary")
+        self.apply_btn.setFixedHeight(28)
+
+        self.theme_switch = ThemeSwitcher(theme.current_mode())
+
+        self.more_btn = MoreButton()
+        self.more_menu = QMenu(self)
+
+        # —— 整页入口：三颗 tab 直接摆在顶栏（可见，不塞进「•••」）——
+        self.page_codex = self._page_tab("人格图鉴", "codex")
+        self.page_enemy = self._page_tab("敌方图鉴", "enemy")
+        self.page_script = self._page_tab("剧本模式", "script")
+
+        self.act_llc = QAction("装零协汉化", self)
+        self.act_llc.setToolTip("用零协工具箱一键安装中文汉化；装好后点「重新检测」即可切回中文底本")
+        self.act_llc.triggered.connect(lambda _c=False: open_llc_toolbox(self, "安装零协汉化", True))
+        self.act_llc.setVisible(False)
+        self.more_menu.addAction(self.act_llc)
+        self.more_menu.addSeparator()
+
+        # —— 原来的「操作 ▼」菜单项 ——
+        self.act_clear = QAction("清空全部修改", self)
+        self.act_disable = QAction("停用修改", self)
+        self.act_backup = QAction("立即备份", self)
+        self.act_suggest = QAction("自动建议剧本对应…", self)
+        self.act_supplement = QAction("补译文件…", self)
+        self.act_supplement.setToolTip("管理零协包里没有、由本工具生成的文件（如新章节剧情）")
+        self.act_replace = QAction("一键替换…", self)
+        self.act_replace.setToolTip("在当前列表筛选结果里批量查找替换（列表为空时按全库处理）")
+        self.act_baseline = QAction("英文基线状态…", self)
+        self.act_export = QAction("导出方案包…", self)
+        self.act_import = QAction("导入方案包…", self)
+        self.act_dir = QAction("设置游戏目录…", self)
+        self.act_advanced = QAction("高级模式", self, checkable=True, checked=self.ctx.config.advanced_mode)
+        self.more_menu.addAction(self.act_clear)
+        self.more_menu.addAction(self.act_disable)
+        self.more_menu.addSeparator()
+        self.more_menu.addAction(self.act_supplement)
+        self.more_menu.addAction(self.act_replace)
+        self.more_menu.addAction(self.act_backup)
+        self.more_menu.addAction(self.act_suggest)
+        self.more_menu.addAction(self.act_baseline)
+        self.more_menu.addSeparator()
+        self.more_menu.addAction(self.act_export)
+        self.more_menu.addAction(self.act_import)
+        self.more_menu.addAction(self.act_dir)
+        self.more_menu.addSeparator()
+        self.more_menu.addAction(self.act_advanced)
+        self.more_btn.setMenu(self.more_menu)
+
+        lay.addWidget(brand)
+        lay.addWidget(self.crumb)
+        # 整页入口跟在面包屑后面：它们和「我在哪」属于同一组「位置 / 去哪」语义，
+        # 放左边也就把右侧留给「状态 + 操作」，保住「应用到游戏」唯一 primary 的地位。
+        lay.addWidget(_vsep())
+        lay.addWidget(self.page_codex)
+        lay.addWidget(self.page_enemy)
+        lay.addWidget(self.page_script)
+        lay.addStretch(1)
+        lay.addWidget(self.status_pill)
+        lay.addWidget(self.theme_switch)
+        lay.addWidget(self.apply_btn)
+        lay.addWidget(self.more_btn)
+        return bar
+
+    def _page_tab(self, text: str, key: str) -> QPushButton:
+        """顶栏的整页入口按钮：可选中，选中 = 当前正在那一页；再点一次回工作台。"""
+        btn = QPushButton(text)
+        btn.setObjectName("pageTab")
+        btn.setCheckable(True)
+        btn.setFixedHeight(28)
+        btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn.clicked.connect(lambda checked=False, k=key: self._on_page_tab(k, checked))
+        return btn
+
+    def _on_page_tab(self, key: str, checked: bool) -> None:
+        """点顶栏整页入口。
+
+        选中 → 进那一页；**取消选中（再点一次）→ 回工作台**（tab 的常规语义）。
+        进剧本模式要先回工作台：剧本面板是替换工作台里的列表面板，不在 center_stack 上。
+        """
+        if not checked:
+            self._exit_script_mode()
+            self.center_stack.setCurrentIndex(0)
+        elif key == "codex":
+            self.open_codex()
+        elif key == "enemy":
+            self.open_enemy_codex()
+        else:
+            self.center_stack.setCurrentIndex(0)
+            self.open_script_mode()
+        # 以「实际状态」为准回写选中态：open_* 可能因为环境不满足而提前返回。
+        self._sync_page_tabs()
+
+    def _sync_page_tabs(self) -> None:
+        """把三颗整页入口的选中态、以及顶栏面包屑，对齐到真实所在页。
+
+        这是「我在哪」的唯一回写点：切图鉴页、进出剧本模式、点顶栏 tab、
+        点导航（含图鉴页里的「返回」）、切主题重建窗口，最后都收敛到这里。
+        """
+        if not hasattr(self, "page_codex") or not hasattr(self, "center_stack"):
+            return
+        try:
+            cur = self.center_stack.currentWidget()
+        except RuntimeError:      # 控件已销毁（切主题重建窗口的瞬间）
+            return
+        on_codex = cur is self.codex_page
+        on_enemy = cur is self.enemy_codex_page
+        script = bool(getattr(self, "_script_active", False))
+        self.page_codex.setChecked(on_codex)
+        self.page_enemy.setChecked(on_enemy)
+        self.page_script.setChecked(script)
+        # 面包屑跟着走：进整页显示页名，回工作台回到当前分类
+        if on_codex:
+            self._set_crumb("codex")
+        elif on_enemy:
+            self._set_crumb("enemy_codex")
+        elif script:
+            self._set_crumb("script")
+        else:
+            self._set_crumb(getattr(self, "_category", "") or "")
+
     def _build_workspace(self) -> QWidget:
         w = QWidget()
         layout = QHBoxLayout(w)
-        layout.setContentsMargins(0, 0, 0, 0)
+        # 照原型 .body{padding:8px}：四周留 8px，让卡片「浮」在更暗的窗口底色上。
+        # 卡片之间的缝由 QSplitter 的 8px 透明 handle 提供（见 theme.py 的 QSS）。
+        layout.setContentsMargins(8, 8, 8, 8)
+        layout.setSpacing(0)
         splitter = QSplitter(Qt.Orientation.Horizontal)
         self.nav = NavPanel()
         self.list_panel = ListPanel()
@@ -306,6 +444,8 @@ class MainWindow(QMainWindow):
         self.enemy_codex_page = EnemyCodexPage(self.ctx)
         self.enemy_codex_page.close_requested.connect(lambda: self.center_stack.setCurrentIndex(0))
         self.center_stack.addWidget(self.enemy_codex_page)
+        # 页面切换（含图鉴页自己的「返回」）后回写顶栏整页入口的选中态
+        self.center_stack.currentChanged.connect(lambda _i: self._sync_page_tabs())
 
         splitter.addWidget(self.nav)
         splitter.addWidget(self.center_stack)
@@ -330,64 +470,105 @@ class MainWindow(QMainWindow):
             self.stack.setCurrentWidget(self.onboarding)
 
     def refresh_topbar(self) -> None:
-        self.profile_chip.setText(f"当前方案：{self.ctx.profile.name}（{self.ctx.profile.count()} 条修改）")
+        self.profile_chip.setText(f"{self.ctx.profile.name} · {self.ctx.profile.count()} 条修改")
+        self.save_dot.set_state(not self.ctx.profile_dirty)
+        rows: list[StatusRow] = []
 
+        # ---- 保存 ----
         if self.ctx.profile_dirty:
-            self._rechip(self.save_chip, "有未保存修改", theme.WARNING)
+            rows.append(StatusRow("save", "保存", "有未保存修改", "warn", "改动还在内存里，按 Ctrl+S 落盘"))
         else:
-            self._rechip(self.save_chip, "已保存", theme.SUCCESS)
+            rows.append(StatusRow("save", "保存", "已保存", "ok"))
 
+        # ---- 环境 ----
         env = self.ctx.env
         if env.game_dir_ok and env.llc_ok:
-            self._rechip(self.env_chip, "环境正常", theme.SUCCESS)
+            rows.append(StatusRow("env", "环境", "环境正常", "ok"))
         elif env.healthy():
             # 没装零协但游戏英文基线在：用英文原文当文本来源，功能照常（除了写回游戏）
-            self._rechip(self.env_chip, "英文原文模式（未装零协）", theme.WARNING)
+            rows.append(StatusRow("env", "环境", "英文原文模式（未装零协）", "warn",
+                                  "可用英文原文当底本编辑，但无法写回游戏"))
         elif env.game_dir:
-            self._rechip(self.env_chip, env.brief(), theme.ERROR)
+            detail = "；".join(i.message for i in env.issues) or "请检查游戏目录"
+            rows.append(StatusRow("env", "环境", env.brief(), "err", detail))
         else:
-            self._rechip(self.env_chip, "未选目录", theme.ERROR)
+            rows.append(StatusRow("env", "环境", "未选目录", "err",
+                                  "用「更多操作 → 设置游戏目录…」选择游戏目录"))
+        self.act_llc.setVisible(self.ctx.env.text_source == "en")
 
-        self.llc_btn.setVisible(self.ctx.env.text_source == "en")
-
+        # ---- 应用 ----
         sup_total, sup_on = self.ctx.supplement.count()
         if not self.ctx.env.llc_ok or (self.ctx.profile.count() == 0 and not sup_on):
-            self._rechip(self.apply_chip, "无修改" if not sup_on else "无修改", theme.TEXT_DIM)
-            self.apply_btn.setEnabled(bool(self.ctx.env.llc_ok and (self.ctx.profile.count() or sup_on)))
+            rows.append(StatusRow("apply", "应用", "无修改", "none"))
+            self.apply_btn.setEnabled(False)
         else:
             view = self.ctx.apply_view()
             if view is None:
-                self._rechip(self.apply_chip, "环境异常", theme.ERROR)
+                rows.append(StatusRow("apply", "应用", "环境异常", "err"))
             elif view.applied:
-                self._rechip(self.apply_chip, "已应用", theme.SUCCESS)
+                rows.append(StatusRow("apply", "应用", "已应用", "ok"))
             elif view.enabled:
-                self._rechip(self.apply_chip, "待重新应用", theme.WARNING)
+                rows.append(StatusRow("apply", "应用", "待重新应用", "warn", "改动之后还没重新写回游戏"))
             else:
-                self._rechip(self.apply_chip, "未启用", theme.WARNING)
+                rows.append(StatusRow("apply", "应用", "未启用", "warn", "点「应用到游戏」让改动生效"))
             self.apply_btn.setEnabled(True)
 
+        # ---- 补译 ----
         total, on = self.ctx.supplement.count()
         if not total:
-            self._rechip(self.supplement_chip, "无补译", theme.TEXT_DIM)
+            rows.append(StatusRow("supplement", "补译", "无补译", "none"))
         elif on:
-            self._rechip(self.supplement_chip, f"补译 {on}/{total}", theme.ACCENT)
+            rows.append(StatusRow("supplement", "补译", f"补译 {on}/{total}", "info",
+                                  "零协包里没有、由本工具补上的文件"))
         else:
-            self._rechip(self.supplement_chip, f"补译已停用（{total}）", theme.WARNING)
+            rows.append(StatusRow("supplement", "补译", f"补译已停用（{total}）", "warn"))
 
+        # ---- 待确认（兼容性）----
         if self.ctx.profile.count() == 0:
-            self._rechip(self.pending_chip, "无待确认", theme.TEXT_DIM)
+            rows.append(StatusRow("pending", "待确认", "无待确认", "none"))
         else:
             compat = self.ctx.compat_status()
             n = sum(1 for s, _ in compat.values() if s in ("changed", "missing"))
             if n:
-                self._rechip(self.pending_chip, f"{n} 条待确认", theme.WARNING)
+                rows.append(StatusRow("pending", "待确认", f"{n} 条待确认", "warn",
+                                      "底本发生了变化，建议逐条复核"))
             else:
-                self._rechip(self.pending_chip, "兼容正常", theme.SUCCESS)
+                rows.append(StatusRow("pending", "待确认", "兼容正常", "ok"))
 
-    @staticmethod
-    def _rechip(lbl: QLabel, text: str, color: str) -> None:
-        lbl.setStyleSheet(theme.CHIP_QSS.format(color=color))
-        lbl.setText(text)
+        self.status_pill.set_rows(rows)
+        self.theme_switch.set_current(theme.current_mode())
+
+    # ---------- 主题 ----------
+
+    def set_theme(self, theme_id: str) -> MainWindow | None:
+        """切换界面主题。
+
+        控件在构造时读取颜色 token，所以换主题必须重建界面。这里选择
+        **重建整个主窗口**（而不是就地刷新控件）——因为除了颜色，主题还会改变
+        形状/描边，并且菜单、快捷键、图鉴页都持有具体控件引用；重建窗口是唯一
+        能保证不留悬空引用与陈旧样式的做法。
+
+        返回新窗口（主题未变化时返回 ``None``），便于测试与调用方接管。
+        """
+        tid = theme.resolve_theme(theme_id)
+        if tid == theme.current_mode():
+            self.theme_switch.set_current(tid)
+            return None
+        self.ctx.config.ui.theme = tid
+        # 先把当前界面状态落盘（几何/分栏/搜索/条目/剧本位置），新窗口据此还原
+        self._capture_session()
+        app = QApplication.instance()
+        if app is not None:
+            theme.apply_theme(app, tid)
+        return self._reopen_for_theme()
+
+    def _reopen_for_theme(self) -> MainWindow:
+        new = MainWindow(self.ctx, startup_backup=False)
+        # 先显示新窗口再关旧窗口，避免「最后一个窗口关闭 → 应用退出」
+        new.show()
+        self._switching_theme = True  # closeEvent 会跳过重复的状态落盘
+        self.close()
+        return new
 
     # ---------- 环境 / 索引 ----------
 
@@ -603,7 +784,9 @@ class MainWindow(QMainWindow):
             pass  # 记忆保存失败不影响退出
 
     def closeEvent(self, event) -> None:
-        self._capture_session()
+        if not self._switching_theme:
+            # 换主题重建时状态已在 set_theme 里落过盘，无需重复写
+            self._capture_session()
         super().closeEvent(event)
 
     def _populate_filters(self) -> None:
@@ -623,17 +806,48 @@ class MainWindow(QMainWindow):
 
     # ---------- 列表 / 搜索 ----------
 
+    def _set_crumb(self, key: str) -> None:
+        """顶栏面包屑：「分区 › 条目」，让用户随时知道自己在哪。
+
+        照原型 ``.crumb`` 的两级配色：分区名用正文色加粗，条目用暗色，
+        分隔符用最暗色。QLabel 走富文本，纯文本原文另存 :attr:`_crumb`
+        （会话记忆与测试用）。
+        """
+        if key == "codex":
+            self._set_crumb_parts("图鉴", "人格图鉴")
+            return
+        if key == "enemy_codex":
+            self._set_crumb_parts("图鉴", "敌方图鉴")
+            return
+        found = _categories.nav_zone_of(key)
+        if found:
+            self._set_crumb_parts(found[0], found[1])
+        else:
+            self.crumb.clear()
+            self._crumb = ""
+
+    def _set_crumb_parts(self, section: str, item: str) -> None:
+        self._crumb = f"{section} › {item}"
+        self.crumb.setText(
+            f'<span style="color:{theme.TEXT};font-weight:600">{section}</span>'
+            f'<span style="color:{theme.TEXT_FAINT}"> › </span>'
+            f'<span style="color:{theme.TEXT_DIM}">{item}</span>'
+        )
+
     def _on_nav_category(self, key: str) -> None:
         if key == "script":
             self.nav.set_current(key)
+            self._set_crumb(key)
             self.open_script_mode()
             return
         if key == "codex":
             self.nav.set_current(key)
+            self._set_crumb(key)
             self.open_codex()
             return
         if key == "enemy_codex":
             self.nav.set_current(key)
+            self._set_crumb(key)
             self.open_enemy_codex()
             return
         if key in _categories.CATEGORIES:
@@ -643,6 +857,12 @@ class MainWindow(QMainWindow):
             self.list_panel.category_combo.blockSignals(False)
         self._category = key
         self.nav.set_current(key)
+        # 点导航 = 回工作台：图鉴页 / 剧本模式都退出，避免「面包屑变了、中间还停在图鉴页」
+        if self._script_active:
+            self._exit_script_mode()
+        if self.center_stack.currentIndex() != 0:
+            self.center_stack.setCurrentIndex(0)
+        self._set_crumb(key)
         self.refresh_list()
 
     def _on_search_requested(self, text: str) -> None:
@@ -1077,9 +1297,9 @@ class MainWindow(QMainWindow):
         key = hit.ref.key()
         compat = self.ctx.compat_status().get(key)
         if compat and compat[0] == "changed":
-            self.editor.set_status(f"⚠ 原文已变化：{compat[1]}。请核对后再保存。", ok=False)
+            self.editor.set_status(f"※ 原文已变化：{compat[1]}。请核对后再保存。", ok=False)
         elif compat and compat[0] == "missing":
-            self.editor.set_status(f"⚠ {compat[1]}。重新保存可尝试修复。", ok=False)
+            self.editor.set_status(f"※ {compat[1]}。重新保存可尝试修复。", ok=False)
 
         # 剧本模式可用性（条目所在文件能对应到 wiki 关卡页时显示按钮）
         self._story_ctx = None
@@ -1122,6 +1342,7 @@ class MainWindow(QMainWindow):
             self._chapter_label(cid), book.stages_of(cid), code, items,
             chapters=book.chapter_list(), chapter_id=cid, branch_id=self._script_branch,
         )
+        self._sync_page_tabs()
 
     def _on_script_chapter(self, cid: str) -> None:
         """剧本模式内切换章节：跳到该章第一个关卡。"""
@@ -1136,26 +1357,30 @@ class MainWindow(QMainWindow):
         self._enter_script_mode(cid, code)
 
     def open_codex(self) -> None:
-        """顶部栏「人格图鉴」：切到图鉴页。"""
+        """顶栏「人格图鉴」：切到图鉴页。"""
         if not self.ctx.env.text_ok:
             warn(self, "人格图鉴", "尚未找到可用的文本。", "先设置游戏目录并建立索引；或安装零协汉化。")
+            self._sync_page_tabs()
             return
         self.center_stack.setCurrentWidget(self.codex_page)
         if self.codex_page.level == 1 and self.codex_page.entity is None \
                 and not self.ctx.search.count_entities(KIND_PERSONALITY):
             # 索引还没建好时构造出来的图鉴页是空的：进页面时补渲染一次
             self.codex_page.refresh()
+        self._sync_page_tabs()
 
     def open_enemy_codex(self) -> None:
-        """顶部栏/导航「敌方图鉴」：切到敌方图鉴页。"""
+        """顶栏/导航「敌方图鉴」：切到敌方图鉴页。"""
         if not self.ctx.env.text_ok:
             warn(self, "敌方图鉴", "尚未找到可用的文本。", "先设置游戏目录并建立索引；或安装零协汉化。")
+            self._sync_page_tabs()
             return
         self.center_stack.setCurrentWidget(self.enemy_codex_page)
         if self.enemy_codex_page.level == 1 and self.enemy_codex_page.entity is None \
                 and not self.ctx.search.count_entities(KIND_ENEMY):
             # 索引还没建好时构造出来的图鉴页是空的：进页面时补渲染一次
             self.enemy_codex_page.refresh()
+        self._sync_page_tabs()
 
     def open_identity_story(self, entity_key: str) -> None:
         """在剧本面板里逐行阅读某人格的剧情（本地文本，无 wiki 对照）。"""
@@ -1185,7 +1410,7 @@ class MainWindow(QMainWindow):
             if not isinstance(rec, dict):
                 continue
             items.append({
-                "type": "line", "speaker": rec.get("teller") or rec.get("model") or "",
+                "type": "line", "speaker": speaker_of(rec) or "",
                 "title": rec.get("title") or "", "text": rec.get("content") or "",
                 "file": rel, "page": rel, "record": i, "wiki_only": False,
                 "place": rec.get("place") or "",
@@ -1212,13 +1437,15 @@ class MainWindow(QMainWindow):
         self.open_script_mode()
 
     def open_script_mode(self) -> None:
-        """顶部栏入口：进入剧本模式（默认当前章节，否则第一章第一个关卡）。"""
+        """顶栏入口：进入剧本模式（默认当前章节，否则第一章第一个关卡）。"""
         if not self.ctx.env.text_ok:
             warn(self, "剧本模式", "尚未找到可用的文本，无法打开剧本。", "先设置游戏目录并建立索引；或安装零协汉化。")
+            self._sync_page_tabs()
             return
         chapters = self.ctx.storybook.chapter_list()
         if not chapters:
             warn(self, "剧本模式", "暂无剧本对照数据。")
+            self._sync_page_tabs()
             return
         cid = self._script_cid or (self._story_ctx[0] if self._story_ctx else chapters[0].get("chapter_id"))
         stages = self.ctx.storybook.stages_of(cid or "")
@@ -1228,6 +1455,7 @@ class MainWindow(QMainWindow):
         code = self._story_ctx[1] if self._story_ctx and self._story_ctx[0] == cid else (stages[0].get("stage_code") if stages else None)
         if cid and code:
             self._enter_script_mode(cid, code)
+        self._sync_page_tabs()
 
     def _reload_script_panel(self, cid: str, code: str, focus_key: str | None = None) -> None:
         items = self.ctx.storybook.stage_items(cid, code, self._script_branch)
@@ -1245,6 +1473,7 @@ class MainWindow(QMainWindow):
             self._script_code = None
             self._script_branch = None
             self.refresh_list()
+        self._sync_page_tabs()
 
     def _script_stage_changed(self, data) -> None:
         """顶栏切换关卡或关卡下的分支（RPG 关卡）。"""
@@ -1812,6 +2041,7 @@ class MainWindow(QMainWindow):
             "· 仅写入独立的副本语言包，不修改零协原始汉化与游戏英文基线\n"
             "· 修改保存在应用 data/ 目录，可随文件夹迁移\n"
             "· 汉化更新后自动检查兼容性，不会删除你的修改\n"
+            "· 人格/E.G.O 卡面来源：灰机 wiki（huijiwiki.com）\n"
             "· 发布包内不含任何译文与游戏素材\n\n"
             "本工具与 Project Moon、零协会汉化组均无隶属关系；仅供个人汉化对照使用。\n"
             "第三方组件许可见发布包内 THIRD_PARTY_LICENSES.md。",

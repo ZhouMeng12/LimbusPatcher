@@ -132,6 +132,59 @@ def test_detail_page_has_phase_switch(page: EnemyCodexPage):
     assert page.entity.entity_id == 91001
 
 
+def test_back_from_entity_returns_to_stage(page: EnemyCodexPage, monkeypatch):
+    """从关卡点进敌人详情，「返回」应回到那个关卡，而不是分组实体列表。"""
+    from limbus_patcher import stage_enemies as se
+    from limbus_patcher.ui.codex_page import _Card
+
+    data = {"chapters": [{"chapter_id": "T", "chapter_label": "第 T 章", "chapter_name": "",
+                          "stages": [{"stage_code": "T-01", "stage_name": "测试关",
+                                      "enemies": [{"id": 91000}, {"id": 92000}]}]}],
+            "dungeons": [], "extra": []}
+    monkeypatch.setattr(se, "load_stage_enemies", lambda: data)
+
+    # —— 关卡路径：关卡详情 → 敌人详情 → 返回 → 回到该关卡 ——
+    page._show_stage_detail("T-01")
+    assert page.level == 4
+    cards = page.findChildren(_Card)
+    assert len(cards) == 2            # 91000（含 91001 形态，合并一张）+ 92000
+    cards[0].clicked.emit()
+    assert page.level == 3
+    assert page._stage_return == ("stage", "T-01")
+    page._go_back()
+    assert page.level == 4
+    assert "T-01" in page.crumb.text()
+    # 返回后重进同一关卡：返回栈不得叠加重复条目（无防重复会变成两条 chapter）
+    assert page._stage_stack == [("chapter", "T")]
+    page._go_back()                   # 关卡 → 章节（章节页会补 push query）
+    assert page.level == 4
+    assert page._stage_stack == [("query", None)]
+    page._go_back()                   # 章节 → 关卡查询主页
+    assert page.level == 4
+
+    # —— 迷宫 / 活动：同样回到来源 ——
+    data["dungeons"] = [{"tag": "d1", "label": "测试迷宫", "enemies": [{"id": 91000}]}]
+    data["extra"] = [{"tag": "x1", "label": "测试活动", "enemies": [{"id": 91000}]}]
+    page._show_stage_dungeon("d1")
+    page.findChildren(_Card)[0].clicked.emit()
+    assert page._stage_return == ("dungeon", "d1")
+    page._go_back()
+    assert page.level == 4 and "测试迷宫" in page.crumb.text()
+    page._show_stage_extra("x1")
+    page.findChildren(_Card)[0].clicked.emit()
+    assert page._stage_return == ("extra", "x1")
+    page._go_back()
+    assert page.level == 4 and "测试活动" in page.crumb.text()
+
+    # —— 普通分组路径不受影响：分组列表 → 详情 → 返回 → 分组列表 ——
+    page._show_groups()
+    page._show_entities("unit")
+    page._show_entity("N:91000")
+    assert page.level == 3 and page._stage_return is None
+    page._go_back()
+    assert page.level == 2
+
+
 def test_flavor_small_text_is_shown_and_clickable(page: EnemyCodexPage):
     """第 9 章起的风味小字（技能 levelList[].flavor / 被动 flavor）要显示且可点击编辑。"""
     from PySide6.QtCore import QPoint, Qt

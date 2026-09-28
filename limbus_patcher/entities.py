@@ -291,6 +291,9 @@ def _enemy_entity_of(info: FileEntity, record: dict | None) -> tuple[str | None,
     if info.role == ROLE_ENEMY:
         # 本体 id 本身在 enemy_map 登记过 → 独立实体（含个别 desc='部位' 但被单列为实体的记录）
         if is_enemy_id(rid):
+            # 6 位部位 id（如折射应龙 956801 逆鳞）虽登记在 enemy_map，仍并入本体详情
+            if 100000 <= rid <= 999999 and is_enemy_id(rid // 100):
+                return entity_key(KIND_ENEMY, rid // 100), ROLE_ENEMY_PART
             return entity_key(KIND_ENEMY, rid), ROLE_ENEMY
         desc = str(record.get("desc") or "")
         if desc == "部位" or (100000 <= rid <= 999999 and is_enemy_id(rid // 100)):
@@ -301,6 +304,9 @@ def _enemy_entity_of(info: FileEntity, record: dict | None) -> tuple[str | None,
         return None, info.role
     if info.role in (ROLE_ENEMY_SKILL, ROLE_ENEMY_PASSIVE):
         if info.role == ROLE_ENEMY_PASSIVE and is_enemy_id(rid):
+            # 部位 id 上的被动（如 956801 一楔之命）并入本体，而非挂到部位伪实体
+            if 100000 <= rid <= 999999 and is_enemy_id(rid // 100):
+                return entity_key(KIND_ENEMY, rid // 100), ROLE_ENEMY_PASSIVE
             return entity_key(KIND_ENEMY, rid), ROLE_ENEMY_PASSIVE
         parent = _enemy_parent_id(rid)
         if parent is not None:

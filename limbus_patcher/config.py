@@ -97,6 +97,7 @@ class UiState:
     script_unaligned_only: bool = False
     show_baseline: bool = False   # 编辑器是否显示「英语原文」第三栏
     search_scope: str = "original"  # 搜索范围：original / baseline / custom / all
+    theme: str = "mini-dark"      # 界面主题：mini-dark(默认，第一版暗金) / mini-light / bus
 
     def to_dict(self) -> dict:
         return {
@@ -118,6 +119,7 @@ class UiState:
             "script_unaligned_only": self.script_unaligned_only,
             "show_baseline": self.show_baseline,
             "search_scope": self.search_scope,
+            "theme": self.theme,
         }
 
     @classmethod
@@ -136,6 +138,14 @@ class UiState:
             state.category = "all"
         if state.search_scope not in ("original", "baseline", "custom", "all"):
             state.search_scope = "original"
+        # 主题白名单（与 ui.theme.THEME_IDS 保持一致；此处不 import Qt，避免拖入 GUI 依赖）
+        # 同时接受旧名 dark / light，避免老配置被静默重置回默认主题。
+        theme = d.get("theme")
+        if isinstance(theme, str):
+            theme = theme.strip().lower()
+            theme = {"dark": "mini-dark", "light": "mini-light"}.get(theme, theme)
+            if theme in ("bus", "mini-dark", "mini-light"):
+                state.theme = theme
         return state
 
 

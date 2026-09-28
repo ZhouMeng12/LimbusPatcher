@@ -22,6 +22,7 @@ from PySide6.QtWidgets import (
     QPlainTextEdit,
     QPushButton,
     QSplitter,
+    QStackedWidget,
     QTextEdit,
     QVBoxLayout,
     QWidget,
@@ -177,13 +178,7 @@ class EditorPanel(QFrame):
         self.advanced_label.setWordWrap(True)
         self.advanced_label.hide()
 
-        orig_caption = QLabel("零协原文（只读）")
-        orig_caption.setObjectName("dim")
-        self.original_edit = QPlainTextEdit()
-        self.original_edit.setObjectName("original")
-        self.original_edit.setReadOnly(True)
-        self.original_edit.setPlaceholderText("（原文为空）")
-
+        # ---- 主列：自定义文本（原型 .emain） ----
         custom_caption_row = QHBoxLayout()
         custom_caption = QLabel("自定义文本")
         custom_caption.setObjectName("dim")
@@ -198,13 +193,52 @@ class EditorPanel(QFrame):
         # 关掉 Qt 自带撤销栈，避免与面板的 QUndoStack 两套栈打架
         self.custom_edit.setUndoRedoEnabled(False)
 
-        # 零协原文 / 英语原文（只读参考）/ 自定义文本 三栏并排对照
-        self.compare_splitter = QSplitter(Qt.Orientation.Horizontal)
-        left = QWidget()
-        left_layout = QVBoxLayout(left)
-        left_layout.setContentsMargins(0, 0, 4, 0)
-        left_layout.addWidget(orig_caption)
-        left_layout.addWidget(self.original_edit, 1)
+        emain = QWidget()
+        emain_layout = QVBoxLayout(emain)
+        emain_layout.setContentsMargins(0, 0, 0, 0)
+        emain_layout.setSpacing(6)
+        emain_layout.addLayout(custom_caption_row)
+        emain_layout.addWidget(self.custom_edit, 1)
+
+        # ---- 右侧常驻「参考」栏（原型 .drawer）：零协原文 / 英语原文 两个页签 ----
+        self.ref_tab_zh = QPushButton("零协原文")
+        self.ref_tab_zh.setObjectName("refTab")
+        self.ref_tab_zh.setCheckable(True)
+        self.ref_tab_zh.setChecked(True)
+        self.ref_tab_zh.setFixedHeight(28)
+        self.ref_tab_zh.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.ref_tab_en = QPushButton("英语原文")
+        self.ref_tab_en.setObjectName("refTab")
+        self.ref_tab_en.setCheckable(True)
+        self.ref_tab_en.setFixedHeight(28)
+        self.ref_tab_en.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.ref_tab_zh.clicked.connect(lambda _c=False: self.set_baseline_visible(False))
+        self.ref_tab_en.clicked.connect(lambda _c=False: self.set_baseline_visible(True))
+
+        tab_row = QHBoxLayout()
+        tab_row.setContentsMargins(0, 0, 0, 0)
+        tab_row.setSpacing(2)
+        tab_row.addWidget(self.ref_tab_zh)
+        tab_row.addWidget(self.ref_tab_en)
+        tab_row.addStretch(1)
+
+        # 字段定位：相对路径 / 序号 / 字段名（原型右侧参考栏顶部的三行元信息）
+        self.ref_meta = QLabel("")
+        self.ref_meta.setObjectName("faint")
+        self.ref_meta.setWordWrap(True)
+
+        orig_caption = QLabel("零协原文（只读）")
+        orig_caption.setObjectName("dim")
+        self.original_edit = QPlainTextEdit()
+        self.original_edit.setObjectName("original")
+        self.original_edit.setReadOnly(True)
+        self.original_edit.setPlaceholderText("（原文为空）")
+        zh_page = QWidget()
+        zh_lay = QVBoxLayout(zh_page)
+        zh_lay.setContentsMargins(0, 0, 0, 0)
+        zh_lay.setSpacing(6)
+        zh_lay.addWidget(orig_caption)
+        zh_lay.addWidget(self.original_edit, 1)
 
         self.baseline_caption = QLabel("英语原文（只读）")
         self.baseline_caption.setObjectName("dim")
@@ -212,34 +246,46 @@ class EditorPanel(QFrame):
         self.baseline_edit.setObjectName("baseline")
         self.baseline_edit.setReadOnly(True)
         self.baseline_edit.setPlaceholderText("（未取到英文原文）")
-        middle = QWidget()
-        middle_layout = QVBoxLayout(middle)
-        middle_layout.setContentsMargins(4, 0, 4, 0)
-        middle_layout.addWidget(self.baseline_caption)
-        middle_layout.addWidget(self.baseline_edit, 1)
-        self.baseline_pane = middle
-        self.baseline_pane.hide()  # 默认隐藏，Ctrl+E / 按钮切换（会话里记住）
+        en_page = QWidget()
+        en_lay = QVBoxLayout(en_page)
+        en_lay.setContentsMargins(0, 0, 0, 0)
+        en_lay.setSpacing(6)
+        en_lay.addWidget(self.baseline_caption)
+        en_lay.addWidget(self.baseline_edit, 1)
 
-        right = QWidget()
-        right_layout = QVBoxLayout(right)
-        right_layout.setContentsMargins(4, 0, 0, 0)
-        right_layout.addLayout(custom_caption_row)
-        right_layout.addWidget(self.custom_edit, 1)
-        self.compare_splitter.addWidget(left)
-        self.compare_splitter.addWidget(middle)
-        self.compare_splitter.addWidget(right)
-        self.compare_splitter.setSizes([300, 300, 300])
-        for i in range(3):
-            self.compare_splitter.setStretchFactor(i, 1)
+        self.ref_stack = QStackedWidget()
+        self.ref_stack.addWidget(zh_page)
+        self.ref_stack.addWidget(en_page)
+        self.baseline_pane = en_page  # 兼容旧名：英语原文那一页
+
+        self.drawer = QFrame()
+        self.drawer.setObjectName("drawer")
+        self.drawer.setFixedWidth(310)
+        drawer_lay = QVBoxLayout(self.drawer)
+        drawer_lay.setContentsMargins(11, 9, 11, 11)
+        drawer_lay.setSpacing(6)
+        drawer_lay.addLayout(tab_row)
+        drawer_lay.addWidget(self.ref_meta)
+        drawer_lay.addWidget(self.ref_stack, 1)
+
+        # 主列 + 参考栏并排（原型 .ebody）
+        self.compare_splitter = QSplitter(Qt.Orientation.Horizontal)
+        self.compare_splitter.addWidget(emain)
+        self.compare_splitter.addWidget(self.drawer)
+        self.compare_splitter.setStretchFactor(0, 1)
+        self.compare_splitter.setStretchFactor(1, 0)
+        self.compare_splitter.setSizes([560, 310])
 
         self.diff_view = QTextEdit()
         self.diff_view.setReadOnly(True)
         self.diff_view.hide()
 
         btn_row = QHBoxLayout()
-        self.undo_btn = QPushButton("↶ 撤销")
+        # 不加弯箭头字形：U+21B6 / U+21B7（撤销/重做箭头）在 YaHei / Segoe UI /
+        # SimHei 里**都没有字形**，会画成豆腐块（见 scripts/scan_glyphs.py）。
+        self.undo_btn = QPushButton("撤销")
         self.undo_btn.setEnabled(False)
-        self.redo_btn = QPushButton("↷ 重做")
+        self.redo_btn = QPushButton("重做")
         self.redo_btn.setEnabled(False)
         self.save_btn = QPushButton("保存")
         self.save_btn.setObjectName("primary")
@@ -251,9 +297,11 @@ class EditorPanel(QFrame):
         self.fav_btn.setCheckable(True)
         self.diff_btn = QPushButton("显示差异")
         self.diff_btn.setCheckable(True)
-        self.baseline_btn = QPushButton("英语原文")
+        self.baseline_btn = QPushButton("参考 Ctrl+E")
         self.baseline_btn.setCheckable(True)
-        self.baseline_btn.setToolTip("并排显示游戏英文基线原文（只读参考，Ctrl+E）。工具不会写入英文文件。")
+        self.baseline_btn.setToolTip(
+            "右侧常驻参考栏：在「零协原文 / 英语原文」之间切换（Ctrl+E）。"
+            "工具不会写入英文文件。")
         self.save_btn.setToolTip("保存到方案文件（Ctrl+S）。保存不清空撤销记录："
                                  "撤销只改编辑框内容，要再按一次 Ctrl+S 才会写回方案。")
         self.restore_btn.setToolTip(f"{_LABEL_RESTORE}：把自定义文本恢复为零协原文（Ctrl+Z 可撤销）。")
@@ -273,7 +321,6 @@ class EditorPanel(QFrame):
 
         layout.addWidget(self.title_label)
         layout.addWidget(self.meta_label)
-        layout.addWidget(self.advanced_label)
         layout.addWidget(self.compare_splitter, 1)
         layout.addWidget(self.diff_view, 1)
         layout.addLayout(btn_row)
@@ -345,10 +392,10 @@ class EditorPanel(QFrame):
         if advanced:
             fp = " / ".join(seg.get("k", f"[{seg.get('i')}]") for seg in ref.field_path)
             self.advanced_label.setText(f"来源：{ref.file}\nKeyID：{ref_label(ref)}   字段：{fp}")
-            self.advanced_label.show()
-        else:
-            self.advanced_label.hide()
+        # 字段定位统一放在右侧常驻参考栏（ref_meta），标题区不再重复一份
+        self.advanced_label.hide()
         self.original_edit.setPlainText(original_text)
+        self._set_ref_meta(ref)
         self._load_baseline(baseline_text, baseline_note)
         # 载入新条目：写入文本并清空撤销栈（不同条目的编辑不能互相撤销，载入本身不可撤销）
         self._reset_history(custom if custom is not None else "")
@@ -362,31 +409,57 @@ class EditorPanel(QFrame):
         self.undo_btn.setEnabled(bool(available))
         label = self.undo_label()
         self.undo_btn.setToolTip(f"撤销「{label}」（Ctrl+Z）—— 只改编辑框，保存后才写回方案")
-        self.undo_btn.setText(f"↶ 撤销 {label}" if available else "↶ 撤销")
+        self.undo_btn.setText(f"撤销 {label}" if available else "撤销")
 
     def _on_redo_available(self, available: bool) -> None:
         self.redo_btn.setEnabled(bool(available))
         label = self.redo_label()
         self.redo_btn.setToolTip(f"重做「{label}」（Ctrl+Y）")
-        self.redo_btn.setText(f"↷ 重做 {label}" if available else "↷ 重做")
+        self.redo_btn.setText(f"重做 {label}" if available else "重做")
 
-    # ---- 英语原文（只读参考） ----
+    # ---- 右侧参考栏：零协原文 / 英语原文 两个页签 ----
 
     def set_baseline_visible(self, on: bool) -> None:
-        """显示/隐藏英语原文栏（按钮与 Ctrl+E 共用；状态由主窗口存进会话记忆）。"""
+        """切到英语原文页（True）或零协原文页（False）。
+
+        按钮与 Ctrl+E 共用；状态由主窗口存进会话记忆。参考栏本身常驻，
+        所以这里切的是**页签**而不是整栏的显隐。
+        """
         on = bool(on)
-        self.baseline_pane.setVisible(on)
+        self.ref_stack.setCurrentIndex(1 if on else 0)
+        self.ref_tab_en.setChecked(on)
+        self.ref_tab_zh.setChecked(not on)
         if self.baseline_btn.isChecked() != on:
             self.baseline_btn.blockSignals(True)
             self.baseline_btn.setChecked(on)
             self.baseline_btn.blockSignals(False)
 
     def baseline_visible(self) -> bool:
-        return self.baseline_pane.isVisible()
+        """当前是否停在「英语原文」页签。"""
+        return self.ref_stack.currentIndex() == 1
 
     def toggle_baseline(self) -> None:
         self.set_baseline_visible(not self.baseline_visible())
         self.baseline_btn.toggled.emit(self.baseline_visible())
+
+    def _set_ref_meta(self, ref) -> None:
+        """参考栏顶部的字段定位：KeyID / idx / field（原型右侧参考栏的元信息）。"""
+        if ref is None:
+            self.ref_meta.setText("")
+            return
+        bits = []
+        if getattr(ref, "file", ""):
+            bits.append(f"file: {ref.file}")
+        if getattr(ref, "id", None) is not None:
+            bits.append(f"KeyID: {ref.id}")
+        idx = getattr(ref, "record_index", None)
+        if idx is not None:
+            bits.append(f"idx: {idx}")
+        path = getattr(ref, "field_path", None) or []
+        fp = " / ".join(seg.get("k", f"[{seg.get('i')}]") for seg in path)
+        if fp:
+            bits.append(f"field: {fp}")
+        self.ref_meta.setText(" · ".join(bits))
 
     def _load_baseline(self, text: str | None, note: str | None) -> None:
         """写入英文栏：有文本就显示，没有就用 placeholder 说明原因（如「英文无此字段」）。"""

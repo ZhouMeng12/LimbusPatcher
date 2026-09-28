@@ -1,4 +1,4 @@
-"""RPG 关卡剧本数据（第十章 10-04）的结构、生成与定位测试。"""
+"""RPG 关卡剧本数据（第十章 10-4A）的结构、生成与定位测试。"""
 from __future__ import annotations
 
 import json
@@ -204,9 +204,9 @@ def test_plan_covers_shipped_branches(story):
 
 
 def test_rpg_stage_structure(story):
-    stage = find_stage(story, "10-04")
+    stage = find_stage(story, "10-4A")
     if stage is None or not stage.get("branches"):
-        pytest.skip("本仓库数据里没有 10-04 分支")
+        pytest.skip("本仓库数据里没有 10-4A 分支")
     branches = stage["branches"]
     ids = [b["branch_id"] for b in branches]
     assert ids == sorted(ids, key=lambda x: int(x[1:]))  # 分支按 ID 递增 = 游玩顺序
@@ -241,18 +241,18 @@ def test_storybook_branch_api(story, tmp_path):
         json.dumps(story, ensure_ascii=False), encoding="utf-8")
     book = Storybook(data_dir=data_dir)
     assert book.problems == [], book.problems[:3]
-    branches = book.branches_of("c10", "10-04")
+    branches = book.branches_of("c10", "10-4A")
     if not branches:
         pytest.skip("没有分支数据")
-    all_items = book.stage_items("c10", "10-04")
-    one = book.stage_items("c10", "10-04", branches[0]["branch_id"])
+    all_items = book.stage_items("c10", "10-4A")
+    one = book.stage_items("c10", "10-4A", branches[0]["branch_id"])
     assert one and len(one) < len(all_items)
     assert all(i["branch"] == branches[0]["branch_id"] for i in one)
     # 分支声明的每个文件都能反查回该关卡（含多文件分支）
     for br in branches:
         for rel in br.get("files") or []:
             hits = book.file_stages(rel)
-            assert any(cid == "c10" and code == "10-04" for cid, code, _pg in hits), rel
+            assert any(cid == "c10" and code == "10-4A" for cid, code, _pg in hits), rel
 
 
 # ---------- 剧本面板：分支挂在关卡下面 ----------
@@ -273,7 +273,7 @@ def test_script_panel_stage_combo_lists_branches(qapp):
     panel = ScriptPanel()
     stages = [
         {"stage_code": "10-03", "pages": [{"segment": "战前", "title": "10-03战前"}]},
-        {"stage_code": "10-04",
+        {"stage_code": "10-4A",
          "branches": [{"branch_id": "b01", "label": "01 进店广播", "kind": "story"},
                       {"branch_id": "b02", "label": "02 1F·坠落与苏醒", "kind": "story"}],
          "pages": [{"segment": "过场", "title": "01 进店广播",
@@ -281,17 +281,17 @@ def test_script_panel_stage_combo_lists_branches(qapp):
     ]
     got: list = []
     panel.stage_selected.connect(lambda d: got.append(d))
-    panel.load_stage("第10章", stages, "10-04", [{"type": "line", "text": "t", "speaker": "A"}],
+    panel.load_stage("第10章", stages, "10-4A", [{"type": "line", "text": "t", "speaker": "A"}],
                      branch_id="b02")
     labels = [panel.stage_combo.itemText(i) for i in range(panel.stage_combo.count())]
-    assert any(l.startswith("10-04") for l in labels)
+    assert any(l.startswith("10-4A") for l in labels)
     assert any("└ 01 进店广播" in l for l in labels)
     assert any("└ 02 1F·坠落与苏醒" in l for l in labels)
     # 选中的是「关卡 → 分支」而不是整关
-    assert panel.stage_combo.currentData() == {"stage": "10-04", "branch": "b02"}
+    assert panel.stage_combo.currentData() == {"stage": "10-4A", "branch": "b02"}
     # 切到整关（不带分支）也要能选回去
-    panel.load_stage("第10章", stages, "10-04", [{"type": "line", "text": "t"}], branch_id=None)
-    assert panel.stage_combo.currentData() == {"stage": "10-04", "branch": None}
+    panel.load_stage("第10章", stages, "10-4A", [{"type": "line", "text": "t"}], branch_id=None)
+    assert panel.stage_combo.currentData() == {"stage": "10-4A", "branch": None}
 
 
 def test_script_panel_renders_in_chunks(qapp):

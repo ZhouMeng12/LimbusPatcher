@@ -412,6 +412,9 @@ class Indexer:
                 if info.role == ROLE_ENEMY:
                     if str(record.get("desc") or "") == "部位" and not is_enemy_id(rid):
                         continue  # 真·部位（无实体登记）并入本体详情，不单独建实体
+                    # 6 位部位 id（折射部位 956801 等）虽登记在 enemy_map，仍并入本体，不单独建实体
+                    if isinstance(rid, int) and 100000 <= rid <= 999999 and is_enemy_id(rid // 100):
+                        continue
                     if not is_enemy_id(rid):
                         continue
                     kind = KIND_ENEMY

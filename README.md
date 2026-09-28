@@ -2,14 +2,14 @@
 
 > 边狱巴士 / Limbus Company 零协汉化文本修改器：逐条对照零协原文编辑自定义译文，按楼层浏览 RPG 剧情，
 > 查看人格 / 敌方 / 技能 / 被动 / 战中气泡图鉴，只写独立副本语言包，不修改原始汉化。
-> Limbus Company LLC localization text patcher (PySide6, Windows) · v0.9.0 公测
+> Limbus Company LLC localization text patcher (PySide6, Windows) · v0.9.1 公测
 
 面向《边狱巴士》零协汉化用户的绿色、可视化文本补丁管理工具。
 搜索即可定位游戏文本，原文与自定义内容可视化对照；**只读取零协汉化，
 仅写入独立的副本语言包**，不修改原始汉化文件，支持备份与恢复。
 **没装零协也能用**：自动改用游戏自带的英文原文，浏览 / 搜索 / 对照 / 翻译照常。
 
-## 下载与安装（v0.9.0 公测）
+## 下载与安装（v0.9.1 公测）
 
 发布包在 GitHub Releases，两种任选其一：
 

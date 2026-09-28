@@ -1,5 +1,339 @@
 # 更新日志
 
+## 未发布 · 零协第十章（c10p2）更新适配
+
+零协汉化补全了第十章后半（新增 96 个文件，其中 93 个第十章相关；另有 101 个文件有改动）。
+
+### 修复
+- **剧本模式错位（用户可见）**：`RPGSystem/rpg-loc-dialogue-floor-b2.json` 我们这版比零协多
+  19 条记录（官方 Localize 已删的未使用台词），顺序也不同；剧本数据里存的是**记录下标**，
+  于是 10-4A「B2F」分支 433 条里 347 条读串行、86 条空白。现在 `TextSource` 定位
+  **优先按记录的 `key`（id/key/code）**，下标只作兜底（`tests/test_textsource_merge.py`）。
+- **同名文件两处都有时按部署器同一套规则合并**：零协优先 + 追加零协缺的记录。
+  以前只有「零协整份没有该文件」才回退补译目录，补译里零协缺的那几条在软件里读不到。
+
+### 数据
+- 补译文件：**撤销 110 个**（零协已完全覆盖），**保留 5 个**（零协仍缺 27 条记录），
+  `data/supplement` 与 `dist/data/supplement` 均已重装（5/5 启用；零协已覆盖 191 个不再安装）。
+- 零协术语并入 `审定新词.json` 6 条：油灰、修改、手工缝制、缝纫开始、感谢倾听、离我…远点…。
+- 仍在用的补译记录按零协口径统一 66 处（`scripts/ch10p2_gap_fixups.py`）：
+  帕莱特→**调色板**、劳作的针怪→**针族工人**、排队的顾客→**正在排队的客人**、普蒂→**油灰**，
+  并清掉 `（临时）` 状态标记、`！` 后多余空格、单词省略号 `…`→`……`（断裂招牌那行除外）。
+- 零协包基线重新快照（`data/llc_baseline.json`，2274 个文件；旧基线留档
+  `data/llc_baseline_20260920_pre-c10p2.json`）。
+
+### 工具
+- `scripts/llc_update.py terms`：改为按 **id/key/code + 叶子路径**逐字段对照。
+  以前只认 `id`，RPG/UI 这类只有 `key` 的文件整批错位（把 key 当成译文比对，
+  983 处"差异"全是假的）；现在区分「零协已覆盖（仅存档）」与「零协缺的记录（会进游戏）」。
+- `scripts/llc_update.py sync` 的体检能覆盖到 `data/translate/out/zh/`（c10p2 剧情译稿），
+  以前这 13 个文件被误报「缺文件」而整批跳过。
+- `scripts/verify_ch10.py`：`model`（韩文角色键）不再算韩文残留。体检结果：
+  brackets 25（全是名字类字段该翻的，如 `[Season 8]`→`[第8赛季]`）· hangul 0 ·
+  risky 0 · placeholders 0 · untranslated 1（`Maison du Noir` 法文店名，零协同样保留）。
+
+### 测试
+- 全量 **695 通过 / 16 跳过 / 0 失败**；新增 `tests/test_textsource_merge.py`（6 项）。
+
+## 未发布 · 界面改版（四）：整页入口上顶栏
+
+用户要求「**人格图鉴、敌方图鉴、剧本模式应该在顶栏，不是在三点菜单里**」——这三个页面
+是「去哪」（导航语义），不是「做什么」（操作语义），不该藏进 `•••`。
+
+### 改动
+- **敌方图鉴：从关卡进敌人，「返回」回到那个关卡**（不再是分组实体列表）。
+  之前从关卡 / 迷宫 / 活动列表点进敌人详情后，左上「← 返回」一律回到分组实体列表，
+  来路信息（`_stage_return`）记了但从未被消费 —— 现在返回按来源分发：
+  `stage` → 关卡详情、`dungeon` → 迷宫列表、`extra` → 活动列表；
+  来源只由关卡系卡片点击设置，走分组列表进入时照旧回分组。
+  顺带把关卡系的返回栈改为**防重复入栈**（返回后重进同一页不再叠加同一条）。
+- **顶栏新增三颗整页 tab**（`QPushButton#pageTab`，可选中）：`人格图鉴` / `敌方图鉴` /
+  `剧本模式`，摆在面包屑右侧（同组「位置 / 去哪」语义），与右侧操作区之间用竖分隔线隔开；
+  `•••` 从此只收工具类动作（装零协汉化 + 原「操作」菜单项）。
+- **tab 语义**：选中 = 当前就在那一页；**再点一次 = 回工作台**。
+  选中态由 `_sync_page_tabs()` 以真实所在页回写（唯一回写点），`open_*` 因环境不满足
+  提前返回时不会出现"假选中"。
+- **面包屑跟随整页 tab**：进图鉴页显示 `图鉴 › 人格图鉴`、剧本模式显示 `剧院 › 剧本模式`，
+  回工作台回到当前分类 —— 与 tab 选中态由同一处驱动，不再出现"tab 亮着、面包屑还是旧分类"。
+- **顺手修了一个旧问题**：停在图鉴页时点左侧导航，以前只会刷新面包屑和列表、
+  中间仍停在图鉴页（状态不自洽）；现在点导航 = 回工作台（退出剧本模式 + 切回内容栈第 0 页）。
+- `scripts/probe_click_real.py` 适配：`trigger()`（QAction 专用）换成 `goto_page()`
+  （未选中才点 tab、已选中直接调 `open_*`），卡片循环改为每轮重新 `findChildren`
+  （点卡片会触发页面重建，旧引用会 `already deleted`）。
+
+### 测试
+- `test_ui.py`：`test_topbar_more_menu` 改为断言三入口**不在** `•••` 里、而是顶栏可选中 tab；
+  新增 `test_topbar_page_tabs_toggle`（点进 → 再点回工作台 → 导航点击回工作台，含面包屑断言）。
+- `test_enemy_codex_ui.py`：新增 `test_back_from_entity_returns_to_stage`
+  （关卡 / 迷宫 / 活动三条来源的返回路径 + 返回栈防重复 + 分组路径不受影响）。
+- 全量 **688 通过、16 跳过、零失败**（`--basetemp` 放 `%TEMP%`）。
+  > 坑：`--basetemp` 指到 D 盘会让 14 个 deploy 增量测试假失败 —— D 盘卷的 mtime 精度
+  > 粗于 NTFS，`copy2` 保留的 `st_mtime_ns` 读回对不上，`_same_size_mtime` 每次都判"源变了"。
+  > 同样测试换 C 盘 basetemp 1.7s 全绿。诊断脚本：`scripts/diag_deploy_incremental.py`。
+
+### 文档
+- `DESIGN_SYSTEM.md`：P6 对照行、§5.1（顶栏布局图 + 整页入口语义）、§6 模块表、
+  收尾清单同步更新为「整页入口在顶栏可见处」。
+
+## 未发布 · 界面改版（三）全量对齐原型
+
+用户要求「**全套照原型**」：以 `docs/ui-redesign/prototype.html` 为唯一验收基准，
+把上一轮改版（二）里所有"形似神不似"的地方逐条拉平。规范同步更新到
+`docs/ui-redesign/DESIGN_SYSTEM.md` 的 **v3** 小节（含 P1–P6 差异对照表）。
+
+### 改进（六组「照原型」差异）
+- **P1 卡片化 + 8px 缝**：三栏（导航 / 列表 / 编辑器）各自的容器改成独立卡片，
+  彼此留 **8px** 缝，缝里露出更暗的窗口底色（`bg`），做出原型那种"浮在底上"的层次。
+- **P2 顶栏品牌区**：最左改为「金色 logo（`LogoMark`，按主题有 `--cut` 斜切角）
+  + 应用名 + 保存小圆点（`SaveDot`）」，面包屑紧随其后；**去掉了 ☰ 菜单按钮**
+  （原型没有）。原「当前方案：…（N 条修改）」长 chip 降级为品牌名下的副标题。
+- **P3 编辑器常驻参考列**：右侧改为**常驻**参考抽屉（`QFrame#drawer`，固定宽 **310**），
+  用 `QStackedWidget` 在「零协原文 / 英语原文」间切换，列头两个 `#refTab` tab 切换，
+  底部 `ref_meta` 显示 `file / KeyID / idx / field`。原来的"参考"按钮文案改为
+  **「参考 Ctrl+E」**，只负责显隐整列。
+- **P4 列表行重绘**：每行左侧画 **2px 状态条**（上下各留 5px），标题后跟
+  **角色胶囊徽标**（自绘 `_paint_badge`，`surface-3` 底 + 全圆角 + 10px 粗体）；
+  状态文字并入 meta 行，去掉原来右对齐的状态文字与状态圆点。
+- **P5 风格切换器收敛为单按钮**：顶栏只留**一颗**「风格 · XX」按钮（原型 `#themeBtn`），
+  点开才弹出 `#themePop`：标题「界面风格」+ `1 + (1+1)` 分段控件
+  （左「巴士」直接选中；右「简约」点一下原地展开成「亮 / 暗」，点亮暗才提交）。
+  分段比例照原型 **50% / 25% / 25%**。
+- **P6 形状 token 修正**：`RADIUS_PILL` 三主题**统一为 999**（原型 `--radius-pill:999px`
+  与主题无关）；新增 `LOGO_CUT`（原型 `--cut`）——`bus` = 10px 斜切、`mini-*` = 0。
+
+### 修复
+- **卡片缝渲染成纯黑**：offscreen 下 `QMainWindow.grab()` **不绘制顶层窗口背景**，
+  8px 缝于是被填成 `#000000`。修法：在具名根容器上显式铺
+  `QWidget#appRoot{background:BG}`（`root.setObjectName("appRoot")`）。
+- **顶栏上方多出一条黑带**：Windows 原生 `QMenuBar` 不认 QSS，映屏抓图里是黑的。
+  `mbar.setNativeMenuBar(False)` + 补 `QMenuBar` QSS，与顶栏同色。
+- **又扫出 5 个豆腐块字形（其中 3 个是历史遗留）**：新增全量扫描脚本
+  `scripts/scan_glyphs.py`（把每个符号渲染成图、数非背景像素，与豆腐常数比对），
+  一次性揪出 `↶`(U+21B6) / `↷`(U+21B7)（编辑器撤销/重做）、`▸`(U+25B8)（敌方图鉴）、
+  `⟵`(U+27F5)（剧本面板）、`⋯`(U+22EF)（更多按钮）。分别改为纯文字「撤销 / 重做」、
+  `▼`、`←`，以及自绘三点的 `MoreButton`。`tests/test_ui_glyphs.py` 的禁用码位扩到 **15** 个。
+
+### 新增
+- `ui/brand.py`：`LogoMark`（金色斜切 logo，画「邊」字）、`SaveDot`（保存状态小圆点）、
+  `MoreButton`（自绘三点「更多操作」）。
+- `ui/theme_switch.py` 重写：单按钮 + 浮层，浮层内嵌套分段切换器。
+- 诊断脚本：`scripts/scan_glyphs.py`（全量豆腐扫描）、`scripts/verify_cards.py`
+  （卡片缝底色核对）、`scripts/probe_top.py`/`diag_bg*.py`（顶栏与背景取样）、
+  `scripts/probe_switch_geom.py`（直接向 Qt 要分段控件几何，比抠像素可靠）。
+
+### 测试
+- 同步更新：`test_ui.py`（品牌区 / MoreButton）、`test_theme_switch.py`（单按钮语义）、
+  `test_ui_glyphs.py`（禁用码位扩到 15）、`test_theme_contrast.py`
+  （`RADIUS_PILL` 三主题 == 999、`LOGO_CUT` bus=10 / mini=0）。
+- 全量 **687 通过、16 跳过、零失败**（`pytest --basetemp=<新目录>`）。
+
+### 说明（三处待确认项的结论）
+- **导航仍为 7 个分区，不回退到原型的 6 个**（用户确认「不用」）：
+  `test_nav_zones.py` 用 27 个分类的"叶子恰好覆盖全部分类"作硬守卫，合并分区会破坏该不变量。
+- **`role:` / `entities:` 聚合项保留在导航里**（用户确认）：`人格` 分区含
+  人格技能 / 人格语音 / 人格一览，`E.G.O` 分区含 E.G.O 技能 / E.G.O 语音 / E.G.O 一览。
+  这些虚拟入口一直由 `NAV_ZONES` 渲染，`test_nav_zones.py` 已覆盖（点击信号契约不变）。
+- **「双箭头」是虚惊，实测不存在**：`scripts/probe_menu_indicator.py` 三种场景实测 ——
+  裸 Fusion 下带菜单的 `QPushButton` 会画一个 `PM_MenuButtonIndicator=12` 的箭头；
+  但**只要套上本应用 QSS，`QStyleSheetStyle` 就不再画它**（右侧无箭头墨迹，
+  有无那条规则都一样）。为把意图钉死、并把该 metric 归 0，仍在 QSS 里加了
+  `QPushButton::menu-indicator { image: none; width: 0px; height: 0px; }`（渲染无差异）。
+
+## 未发布 · 打包：补上图标与版本信息 + 构建脚本加固
+
+打出来的 exe 一直没有图标、右键属性里也没有版本信息 —— 查到根因并修好，顺带把
+构建流程里几个「在受限环境下会假失败」的点加固了一遍。
+
+### 修复
+- **exe 一直没有图标/版本信息（根因是资源放在会被删掉的目录里）**：
+  `limbus_patcher.spec` 引用 `build/app.ico` 与 `build/version_info.txt`，
+  而 `build/` 正是 PyInstaller 的 workpath，`scripts/build.ps1` 又用了 `--clean`
+  —— **`--clean` 会把 workpath 整个删掉**，资源在打包前就没了，
+  于是 `os.path.exists(...)` 恒为 False，静默降级成无图标、无版本资源。
+  现在资源改放**版本库内的** `assets/`（`app.ico` / `app.png` / `version_info.txt`），
+  由新增的 `scripts/make_icon.py` 生成，并接进 `build.ps1` 的第 2 步。
+  打包日志里现在能看到 `Copying icon to EXE` / `Copying version information to EXE`。
+- **受限环境里「删除被拒」会被误判成构建失败**：PyInstaller 的 `COLLECT`
+  与 `make_release` 的暂存清理都是 `rmtree`，在禁止批量删除的环境里会失败。
+  `make_release.py` 现在把暂存清理做成**非致命**（删不掉就改名归档并告警，
+  不让一次清理失败把已完成的发布判为失败）；`build.ps1` 的测试步骤改用
+  **一次性 `--basetemp`**，避开默认 `%TEMP%\pytest-of-<user>` 跨次累积导致的
+  清理拦截（症状是 pytest 已跑完 100%、却在收尾时报非零退出，**看起来像测试失败**）。
+
+### 新增
+- `scripts/make_icon.py`：按界面里的品牌标记（`ui/brand.py` 的 `LogoMark` ——
+  品牌金方块 + 对角斜切 + 单字「邊」）渲染多尺寸图标，输出
+  `assets/app.ico`（16/20/24/32/40/48/64/128/256 共 9 档）、`assets/app.png`
+  与 `assets/version_info.txt`。小尺寸（<32px）不画字，避免糊成一团。
+- `scripts/check_icon.py` / `scripts/check_release.py`：核对图标像素与发布包
+  （zip 完整性、条目清单、包内 exe 与构建产物哈希是否一致）。
+
+### 产物（v0.9.1）
+| 产物 | 大小 | SHA256 前 16 位 |
+|---|---|---|
+| `dist/边狱巴士汉化文本修改器.exe`（已部署，用户双击那份） | 62.8 MB | `1e7aa6ce9a97af0a` |
+| `dist/release/LimbusPatcher-v0.9.1-portable.zip` | 62.7 MB | `ce88714592e1056d` |
+| `dist/release/LimbusPatcher-v0.9.1-onedir.zip` | 124.7 MB | `3d9d0dd0283cd175` |
+
+exe 属性：`ProductName/FileDescription = 边狱巴士汉化文本修改器`、`FileVersion/ProductVersion = 0.9.1`、
+`CompanyName = LimbusPatcher contributors`、`LegalCopyright = MIT License (c) 2025 …`。
+
+### 验证
+- 全量测试 **687 passed / 16 skipped / 0 failed**（在 `build.ps1` 的测试门里跑的）。
+- `scripts/verify_packaged.py` 冷启动两次：**进程存活、索引未被重建（manifest 未变）、无新崩溃日志**。
+- 发布包 `zipfile.testzip()` 均 OK；包内 exe 的 sha256 与构建产物一致。
+
+## 未发布 · 界面改版（二）三主题 + 单颗状态药丸 + 导航重排
+
+在第一阶段（暗金 AURUM 设计系统）之上做结构性调整：新增贴原版的**「巴士」主题**
+与**亮色主题**（两者均为**可选**），顶栏从 5 颗状态 chip **收敛成一颗状态药丸**，
+导航按游戏原版分区**重排并补齐可达性**。
+
+> **默认主题 = 第一版 AURUM 暗金（`mini-dark`）**。曾一度把「巴士」设为默认，
+> 但它是纯黑底 + 近白字（`#0b0b0d` / `#eae7e0`），观感偏"黑白"，已改回。
+> 详见下方「说明」。
+
+完整规范见 `docs/ui-redesign/DESIGN_SYSTEM.md`，可交互高保真原型见
+`docs/ui-redesign/prototype.html`。
+
+### 新增
+- **三主题体系**（`ui/theme.py`）：
+  - `mini-dark` **简约·暗（默认）** —— 第一版的 AURUM 暗金风格（旧名 `dark` 仍可用）。
+  - `mini-light` **简约·亮** —— 亮色主题（旧名 `light` 仍可用）。
+  - `bus` **巴士**（可选）—— 按《边狱巴士》原版配色与形状：纯黑底、
+    品牌金 `#F1BF02`(Corn) / `#B48600`(Pirate Gold)、**直角 + 细金边**（圆角一律 0）。
+  - 几何 token 改为**分主题**（`_GEOMETRY_BY_THEME`），所以「配色 + 形状」一起换。
+- **单颗状态药丸**（`ui/status_pill.py`）：默认只显示**最需要注意的那一条**
+  （`err > warn > info > ok > none`，同级取靠前），点击弹出完整 5 条清单，
+  悬停有汇总 tooltip。圆点随主题变圆/变方。
+- **嵌套式主题切换器**（`ui/theme_switch.py`）：`1 + (1+1)` ——
+  `[巴士][简约 ▾]`，点风格名只**展开**，点亮/暗叶子才真正换主题。
+  展开层是弹出覆盖层（顶栏高度不变），带透明度淡入。
+- **导航重排**（`categories.NAV_WORKBENCH` / `NAV_ZONES`、`ui/nav.py`）：
+  「工作台」置顶（全部文本 / 最近修改 / 待确认 / 我的收藏 / 补译文本）+
+  七个原版分区（剧院 / 镜牢 / 人格 / E.G.O / RPG 剧情 / 关卡与敌人 / 系统与设置）。
+- **顶栏面包屑**：显示「分区 › 条目」，随时知道自己在哪。
+- 主题持久化：`config.json` 的 `ui.theme`，启动即生效。
+
+### 修复
+- **错误状态色在卡片底上仍不达标**：第一阶段把 `ERROR` 修到背景上 4.89，
+  但在**卡片底**（`surface-2`）上只有 4.12 —— 状态色大量压在卡片上，属于漏查的一层。
+  现值 `#d16f60`（背景 5.50 / 卡片 **4.63**）。
+- **界面里当图标用的符号渲染成豆腐块**：顶栏状态药丸、主题切换器的折叠指示符，
+  以及 `操作` / `改名称` 按钮用的是 `▾`(U+25BE) / `▴`(U+25B4)，
+  而这两个码位在 `Microsoft YaHei UI` / `Microsoft YaHei` / `Segoe UI`
+  以及 Qt 在无头环境下的兜底字体里**都没有字形** —— 实测被画成空心方框。
+  统一改用各字体都有的实心三角 `▼`(U+25BC) / `▲`(U+25B2)；
+  同类问题一并修掉编辑器状态行的 `⚠` → `※`、剧本模式「全部对应」的 `✔` → `√`。
+  新增 `tests/test_ui_glyphs.py` 守卫：界面源码里出现已知缺字形的符号即失败。
+- **亮色主题两个色在卡片底上不达标**：`ACCENT` 4.26 → `#83681e`（**4.61**）；
+  `SUCCESS` 4.32 → `#2d785f`（**4.61**）。对比度校验现已覆盖 `surface-2`。
+- **整套测试会卡死在 60%（不是"沙箱杀进程"）**：`main._install_excepthook` 注册的 hook
+  在**非**免模态分支里会调 `QMessageBox.critical(...)`，那是**模态**的 ——
+  无头环境下没人点确定，`exec()` 永久阻塞。卡点正好是
+  `test_headless_guard.py::test_excepthook_writes_crash_log`。
+  现在 `tests/conftest.py` 用 `os.environ.setdefault` 兜住 `DSH_NO_MODAL=1` 与
+  `QT_QPA_PLATFORM=offscreen`（显式传入的值优先，`clean_env` fixture 仍可覆盖），
+  直接 `pytest tests` 即可跑完。
+
+### 改进
+- **导航补齐可达性（本轮最大实际收益）**：改版前导航只露出
+  人格图鉴 / 敌方图鉴 / 剧本模式 与「系统与界面」五项，
+  **人格、E.G.O、技能、战斗效果、镜牢、异想体、主线剧情等 20 类在导航里点不到**，
+  只能去列表顶部的分类下拉里翻。现在叶子**恰好覆盖全部 27 个分类**。
+- **去掉等价重复入口**：人格图鉴 / 敌方图鉴 移出导航，由顶栏按钮独占入口。
+- **分区默认收起**，只展开「工作台」；选中条目时自动展开其分区。
+- **换主题改为重建界面**：颜色之外形状/描边也随主题变，且菜单、快捷键、图鉴页
+  都持有具体控件引用 —— 重建窗口才能保证不留悬空引用与陈旧样式。
+  切换前会把会话状态（几何/分栏/分类/搜索/条目/剧本位置）落盘，新窗口自动还原。
+
+### 测试
+- `tests/test_theme_contrast.py`：三主题 × 三背景（含 `surface-2`），24 个用例；
+  含一条「巴士是纯黑黑白观感，所以不做默认」的回归守卫。
+- `tests/test_nav_zones.py`（9 个）：守卫「导航叶子恰好覆盖全部分类」。
+- `tests/test_theme_switch.py`（15 个）：药丸优先级、切换器展开/选中语义、
+  重建后状态还原与落盘、配置白名单；`win` fixture 用**默认主题**建窗口。
+- `tests/test_ui_glyphs.py`（20 个）：逐文件扫描 `limbus_patcher/ui/*.py`，
+  禁止出现已知缺字形的符号（`▾ ▴ ✕ ✓ ✔ ⚠ ⏺ ↵ ⌫`），并断言折叠指示符实际用的是 `▼ / ▲`。
+- 全量 **702 项**：686 通过、16 跳过，零失败。
+
+### 说明
+- **默认主题为什么改回第一版**：「巴士」是纯黑底 `#0b0b0d` + 近白字 `#eae7e0`，
+  只靠少量品牌金点缀，整体观感偏"黑白"；亮色又是白底，两者来回切很像在黑白之间跳。
+  用户明确要第一版那套**暖调暗金**，因此 `DEFAULT_THEME` 由 `bus` 改回 `mini-dark`。
+  `bus` 与 `mini-light` 仍然保留、在切换器里随时可选，只是不再默认。
+  切换器的左右顺序（左「巴士」右「简约」）只影响控件排布，与默认值无关。
+- `bus` 主题的圆角 token 全为 0；QSS 无法做真正的斜切角（无 `clip-path`），
+  所以「原版感」用**直角 + 细金边**表达，而不是斜切。
+- 旧主题名与旧 token 名全部保留，既有 UI 代码与测试无需改动。
+- `CHIP_QSS` 仍被 `onboarding.py` 使用，签名不变。
+- 老配置里的 `"dark"` / `"light"` 会被正确映射成 `mini-dark` / `mini-light`，
+  不会被静默重置。
+
+## 未发布 · 界面改版（一）暗金 AURUM 设计系统
+
+按「美观且易用」重做视觉与信息层级。完整规范见 `docs/ui-redesign/DESIGN_SYSTEM.md`，
+可交互高保真原型见 `docs/ui-redesign/prototype.html`。
+
+### 修复
+- **错误状态色不达标（可用性硬伤）**：`ERROR #b45f4d` 在背景上对比度仅 **4.12**、
+  面板上 **3.69**，均未达 WCAG AA 4.5 —— 而它正用于「环境异常 / 未选目录 / 缺失」这类
+  最要紧的状态。改为 `#c4685a`（**4.89**）。
+  （后续在改版（二）里发现它在卡片底上仍只有 4.12，已进一步改为 `#d16f60`。）
+- **导航树一直没有样式**：导航用的是 `QTreeWidget`，而旧样式表完全没有覆盖它，
+  等于默认外观。已补 hover / 选中 / 分支样式。
+
+### 改进
+- **建立 token 体系**：四层表面（bg → surface-1/2/3）、三档文字、语义色
+  （success/warning/error/**info**，info 为新增）、强调色三态、圆角 / 间距 / 字号 / 动效 token。
+- **强调色语义收敛**：暗金只用于「主行动 / 选中 / 进度」，不再到处出现，让「有颜色 = 有含义」重新成立。
+- **文字对比度整体提升**：正文 12.45 → **14.23**，次级文字在面板上 4.57 → **5.85**。
+- **顶栏分层**：改为「左 = 我是谁 + 当前状态，右 = 我能做什么」，中间加竖分隔线；
+  主行动「应用到游戏」保持唯一 primary。
+- **补齐缺失的控件样式**：`QTreeWidget` / `QHeaderView` / `QTabBar` / `QGroupBox` /
+  `QCheckBox` / `QRadioButton` / `QSplitter:hover` / 焦点态。
+
+### 新增
+- `docs/ui-redesign/DESIGN_SYSTEM.md`：设计系统规范（含实测对比度校验表）。
+- `docs/ui-redesign/prototype.html`：单文件高保真可交互原型（暗/亮主题、图鉴、剧本、
+  参考抽屉、差异视图、骨架屏、对话框、toast）。
+- `tests/test_theme_contrast.py`（11 个用例）：把「文字与状态色 ≥ WCAG AA」变成自动守卫，
+  并锁住 `CHIP_QSS` 的 `.format(color=...)` 契约与向后兼容别名。
+
+### 说明
+- 主题 token 通过模块级 `__getattr__`（PEP 562）动态解析，`apply_theme(app, "light")`
+  可切亮色；因控件在构造时读取颜色，**切换主题需重建界面**才完全生效
+  （改版（二）已实现自动重建，并扩成三主题）。
+- 旧 token 名（`PANEL` / `PANEL_LIGHT` / `ACCENT_DARK` / `SELECTION` / `CHIP_QSS`…）全部保留，
+  UI 各处与既有测试无需改动。
+
+## v0.9.1
+
+修第十章第二部分（10-4A / 10-4B）剧情「全是旁白」的问题，并把剧情内容与术语对齐到权威来源。
+
+### 修复
+- **新章节对话全显示为「旁白」**（两个独立原因，都修了）：
+  1. **文本来源不回退补译目录**：零协包还没跟上 10-4A / 10-4B 的文件，以前只读零协与英文基线，
+     读到空文本。现在零协包缺哪个文件，就回退到 `data/supplement/` 里的同名文件。
+  2. **过场文件不再填 `teller`**：c10p2 起游戏把说话人挪到了 `model` 字段，
+     而且存的是**韩文角色键**（如 `오티스`）。以前只认 `teller`，取不到就落到「旁白」。
+     现在按游戏自带的 `ScenarioModelCodes-AutoCreated.json` 反查显示名
+     （零协版是中文名），零协对照表里没有的新角色写在
+     `limbus_patcher/data/scenario_model_names.json` 里兜底。
+     图鉴的「剧情」页、主线剧情预览、剧本模式一并生效。
+- **导出的中英对照里出现空的 `**` 行**：任务结点这类没有正文的场景行会被当成正文输出，现已跳过。
+
+### 内容更新
+- **第十章第二部分剧情**：`10-4A`（11 段）/ `10-4B`（18 段），分段按灰机 wiki「放映室」的
+  玩家游玩顺序重排（切点依据：过场 `place` 字段 > 任务链 > 对话折返标记）。
+  低置信切点已在段落的「依据」里标注，待进游戏确认。
+- **术语按零协统一**：`Le Rouge`=红派、`Le Noir`=黑派、`Le Kaki`=褐派；
+  敌人名反向同步 `stage_enemies.json`，使软件里的名字与游戏内显示一致。
+
+### 已知问题
+- 路线 B 的 `1F②` 切点与 `B1F②` 的位置是推断的，待进游戏确认。
+- 没过场记录处（`model` 为空）仍是「旁白」，这是叙述句，属正常。
+
 ## v0.9.0（公测）
 
 第一个公开测试版。相比内部 0.2 版，主要变化：

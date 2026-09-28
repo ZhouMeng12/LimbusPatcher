@@ -69,6 +69,102 @@ PSEUDO_CATEGORIES: dict[str, str] = {
     "supplement": "补译文本",
 }
 
+# --------------------------------------------------------------------------
+# 导航分区（改版：按《边狱巴士》原版的界面分区重排）
+# --------------------------------------------------------------------------
+# 说明
+# ----
+# `CATEGORY_GROUPS` 是**分类规则**意义上的分组（battle / story / system），
+# 分类器 `group_of()` 依赖它，不要动。下面这套 `NAV_ZONES` 是**导航呈现**意义上的
+# 分区，参考游戏原版的界面结构：剧院 / 镜牢 / 人格 / E.G.O / 关卡与敌人 / 系统与设置。
+#
+# 两者的关系：NAV_ZONES 的叶子必须**恰好覆盖** CATEGORIES 的全部键（各一次），
+# 另加若干「虚拟入口」——role:*（跨罪人的角色聚合）与 entities:*（实体一览）。
+# 键沿用既有语义，因此后端（_category_targets / _entity_context）零改动。
+# 守卫见 tests/test_nav_zones.py。
+
+#: 工作台：跨分区的任务入口，永远排在导航最上面
+NAV_WORKBENCH: list[tuple[str, str]] = [
+    ("all", "全部文本"),
+    ("recent", "最近修改"),
+    ("pending", "待确认"),
+    ("favorites", "我的收藏"),
+    ("supplement", "补译文本"),
+]
+
+#: 六个原版分区 + RPG 剧情（RPG 是游戏里独立的探索关卡模式，单独成区更清楚）。
+#: 结构：(分区 id, 分区名, [(导航键, 显示名), ...])
+NAV_ZONES: list[tuple[str, str, list[tuple[str, str]]]] = [
+    ("theater", "剧院", [
+        ("script", "剧本模式"),
+        ("main_story", "主线剧情"),
+        ("identity_story", "人格剧情"),
+        ("dungeon_story", "迷宫剧情"),
+        ("misc_story", "其他剧情"),
+        ("battle_story", "战斗剧情"),
+        ("event", "间章与活动"),
+        ("railway", "折射轨道"),
+    ]),
+    ("mirror", "镜牢", [
+        ("mirror", "镜牢"),
+        ("mirror_event", "镜牢探索事件"),
+        ("ego_gift", "饰品"),
+    ]),
+    ("identity", "人格", [
+        ("identity", "人格"),
+        ("role:identity_skill", "人格技能"),
+        ("role:identity_voice", "人格语音"),
+        ("entities:personality", "人格一览"),
+    ]),
+    ("ego", "E.G.O", [
+        ("ego", "E.G.O"),
+        ("role:ego_skill", "E.G.O 技能"),
+        ("role:ego_voice", "E.G.O 语音"),
+        ("entities:ego", "E.G.O 一览"),
+    ]),
+    ("rpg", "RPG 剧情", [
+        ("rpg", "RPG 剧情"),
+        ("rpg_dialogue", "RPG 对话"),
+        ("rpg_npc", "RPG NPC"),
+        ("rpg_quest", "RPG 任务"),
+    ]),
+    ("battle", "关卡与敌人", [
+        ("enemy", "敌方单位"),
+        ("abnormality", "异想体"),
+        ("battle_dialog", "战斗对话"),
+        ("combat", "战斗效果"),
+        ("skill", "技能"),
+    ]),
+    ("system", "系统与设置", [
+        ("ui", "界面文本"),
+        ("system", "系统提示"),
+        ("tutorial", "教程"),
+        ("item", "道具与货币"),
+        ("sinner", "罪人资料"),
+        ("other", "其他"),
+    ]),
+]
+#: 默认展开的分区（其余收起，先让用户扫分区名）
+NAV_DEFAULT_EXPANDED: frozenset[str] = frozenset({"workbench"})
+
+#: 「剧本模式」的计数 = 分区里所有剧情类分类之和（不含虚拟入口）
+STORY_MEMBER_KEYS: list[str] = [
+    k for _z, _l, leaves in NAV_ZONES if _z == "theater"
+    for k, _n in leaves if k in CATEGORIES
+]
+
+
+def nav_zone_of(key: str) -> tuple[str, str] | None:
+    """返回导航键所在的分区与叶子名，用于顶栏面包屑。找不到返回 None。"""
+    for _k, label in NAV_WORKBENCH:
+        if _k == key:
+            return "工作台", label
+    for _zid, zlabel, leaves in NAV_ZONES:
+        for k, label in leaves:
+            if k == key:
+                return zlabel, label
+    return None
+
 _R = re.compile  # noqa: N816
 
 _RULES: list[tuple[re.Pattern, str]] = [

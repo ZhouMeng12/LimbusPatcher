@@ -60,7 +60,8 @@ def check(rel: str) -> dict:
         have = [b for b in BRACKET.findall(text) if not HANGUL.search(b) and "未使用" not in b]
         if want != have:
             bad_bracket.append((p, want, have))
-        if HANGUL.search(text):
+        if HANGUL.search(text) and not _skip_path(p):
+            # ``model`` 是韩文角色键（原始数据，不是译文），不算韩文残留
             hangul.append((p, text[:60]))
         hit = RISKY.intersection(text)
         if hit:

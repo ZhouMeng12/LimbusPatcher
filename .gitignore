@@ -34,6 +34,8 @@ data/config.json
 
 # ---- 公开仓库不收录的第三方内容（游戏素材 / 译文 / wiki 抓取；本地保留，脚本可重建）----
 data/portraits/
+# 游戏立绘/图标（scripts/extract_portraits.py 可重新提取；同样不随仓库分发）
+limbus_patcher/data/portraits/
 data/translate/
 data/duiying/
 data/misc_story/
@@ -44,3 +46,5 @@ data/supplement/
 temp/
 _chk.py
 *.bundle
+*.bak
+*.bak_*

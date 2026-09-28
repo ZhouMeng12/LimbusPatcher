@@ -84,6 +84,12 @@ def main() -> int:
     paths = resolve_game_paths(gd) if gd else None
     en_dir = paths.en_base_dir() if paths else None
     llc_dir = paths.llc_pack_dir if paths else None
+    # 补译目录：零协没有的新章节文件（c10p2）在这里，缺了它导出来全是空行 + 旁白
+    sup_dir = None
+    for cand in (ROOT / "data" / "supplement", ROOT / "dist" / "data" / "supplement"):
+        if cand.is_dir():
+            sup_dir = cand
+            break
 
     items = stage.get("items") or []
     branches = stage.get("branches") or []
@@ -92,11 +98,11 @@ def main() -> int:
     md_path = out / f"第十章-{args.stage}剧情-中英对照.md"
     csv_path = out / f"第十章-{args.stage}剧情-中英对照.csv"
 
-    src = TextSource.detect(llc_dir, en_dir)
+    src = TextSource.detect(llc_dir, en_dir, sup_dir)
     if not src.ok:
         print("找不到可用的文本来源（零协包 / 英文基线都没有）")
         return 1
-    print(f"文本来源：{src.label}")
+    print(f"文本来源：{src.label}" + (f"（缺的文件回退 {sup_dir.name}）" if sup_dir else ""))
 
     en_cache: dict[str, dict] = {}
     rows: list[list[str]] = []
@@ -118,7 +124,9 @@ def main() -> int:
             if it.get("branch") != bid:
                 continue
             if it.get("type") == "scene":
-                text = it.get("text") or ""
+                text = (it.get("text") or "").strip()
+                if not text:
+                    continue  # 任务结点等占位场景没有正文，别写成空的 ** 行
                 if it.get("source") == "plan" and text == br["label"]:
                     continue  # 分支标题已经写成 ## 了
                 if it.get("source") == "plan":

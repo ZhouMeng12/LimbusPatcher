@@ -19,15 +19,18 @@ def run_once(tag: str, wait: int) -> dict:
     manifest_before = MANIFEST.stat().st_mtime if MANIFEST.exists() else 0
     proc = subprocess.Popen([str(EXE)], cwd=str(ROOT / "dist"))
     time.sleep(wait)
-    subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"],
-                   capture_output=True, text=True)
+    # 存活判定必须在 taskkill 之前读：kill 之后 poll() 必然非 None，字段会恒为 False。
+    alive = proc.poll() is None
+    # 不要 text=True：taskkill 输出是系统 ANSI 代码页（中文 Windows 为 GBK），
+    # 在某些环境（PYTHONUTF8=1）按 UTF-8 解码会在读线程里抛 UnicodeDecodeError。
+    subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"], capture_output=True)
     time.sleep(2)
     info = {
         "tag": tag,
         "manifest_changed": (MANIFEST.stat().st_mtime if MANIFEST.exists() else 0) != manifest_before,
         "manifest_at": MANIFEST.stat().st_mtime if MANIFEST.exists() else 0,
         "crash_new": (CRASH.stat().st_mtime if CRASH.exists() else 0) > crash_before,
-        "alive": proc.poll() is None,
+        "alive": alive,
     }
     return info
 
@@ -50,10 +53,10 @@ def db_state() -> str:
 
 
 print("索引:", db_state())
-first = run_once("第一次（应重建到 schema 12）", 55)
+first = run_once("第一次（首启，索引若过期则重建）", 55)
 print("第一次:", first)
 print("索引:", db_state())
-second = run_once("第二次（不应重建）", 30)
+second = run_once("第二次（索引已就绪，不应再重建）", 30)
 print("第二次:", second)
 print("索引:", db_state())
 print("manifest 未被第二次改写:", first["manifest_at"] == second["manifest_at"])

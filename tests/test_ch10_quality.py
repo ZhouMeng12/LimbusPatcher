@@ -63,11 +63,32 @@ def test_没有空字段(rel: str) -> None:
     assert not empty, f"{rel} 有 {len(empty)} 处空译文，例如 {empty[:5]}"
 
 
+def _aligned_maps(rel: str):
+    """按记录 id/key 配对后展平成 {（记录标识, 记录内路径）: 文本}。"""
+    zh, en = _pairs(rel)
+
+    def flat(data):
+        out = {}
+        rows = data.get("dataList") if isinstance(data, dict) else None
+        if not isinstance(rows, list):
+            return {("", p): t for p, t in rc.en_strings(data, {}).items()}
+        for i, rec in enumerate(rows):
+            if not isinstance(rec, dict):
+                continue
+            rid = rec.get("id", rec.get("key", rec.get("code", i)))
+            for p, t in rc.en_strings({"dataList": [rec]}, {}).items():
+                out[(str(rid), p[2:])] = t
+        return out
+
+    return flat(zh), flat(en)
+
+
 @pytest.mark.parametrize("rel", DATA_FILES)
 def test_说明字段里的方括号按英文原样(rel: str) -> None:
     """desc 等字段里的 [X] 是游戏内部效果 id：翻成中文游戏里会显示 UNKNOWN/口口。"""
-    zh_map = rc.en_strings(_pairs(rel)[0], {})
-    en_map = rc.en_strings(_pairs(rel)[1], {})
+    # 按记录 id/key 对齐后再比：同一文件两边记录集可能不同（我们比基线多一条之类），
+    # 纯按下标比会把不同记录凑到一起，报出一堆假问题。
+    zh_map, en_map = _aligned_maps(rel)
     bad: list = []
     for path, text in zh_map.items():
         src = en_map.get(path)

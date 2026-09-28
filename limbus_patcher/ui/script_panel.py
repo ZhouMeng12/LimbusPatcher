@@ -348,7 +348,7 @@ class ScriptSceneRow(QWidget):
         lay.addStretch(1)
 
 
-class ScriptPanel(QWidget):
+class ScriptPanel(QFrame):
     """剧本模式：顶栏（标题/关卡切换/切回）+ 可滚动剧本行（支持键盘流）。
 
     大关卡（RPG 整关近 4000 行）按 ``_CHUNK`` 行分批渲染：切换/切分支时先出第一屏，
@@ -388,7 +388,7 @@ class ScriptPanel(QWidget):
         self.unaligned_only_cb.setToolTip("只显示未对齐（wiki 独有、无本地对应）的对话行，方便集中处理")
         self.show_deleted_cb = QCheckBox("显示已删除")
         self.show_deleted_cb.setToolTip("勾选后显示已删除的行（灰字删除线），可右键「恢复该行」")
-        back_btn = QLabel("⟵ 切回条目模式")
+        back_btn = QLabel("← 切回条目模式")
         back_btn.setStyleSheet(f"color: {theme.ACCENT}; background: transparent;")
         back_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         back_btn.mousePressEvent = lambda _e: self.back_requested.emit()
@@ -583,7 +583,7 @@ class ScriptPanel(QWidget):
         manual_txt = f" · 手动 {manual}" if manual else ""
         skip_txt = f" · 跳过 {skipped}" if skipped else ""
         del_txt = f" · 删除 {deleted}" if deleted else ""
-        done_txt = " · 全部对应 ✔" if lines and unaligned == 0 else ""
+        done_txt = " · 全部对应 √" if lines and unaligned == 0 else ""
         self.info_label.setText(
             f"本关 {done}/{lines}（{pct}%）· 未对齐 {unaligned}"
             f"{manual_txt}{skip_txt}{del_txt}{done_txt}"

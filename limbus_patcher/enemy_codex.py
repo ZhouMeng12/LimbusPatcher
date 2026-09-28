@@ -1,4 +1,4 @@
-"""敌方图鉴的数据层：把散落的敌人本体、部位、技能、被动、元数据组装成实体卡片。
+﻿"""敌方图鉴的数据层：把散落的敌人本体、部位、技能、被动、元数据组装成实体卡片。
 
 数据来源（全部只读）：
   · entities 表（敌方本体 name/desc、计数；faction 仅英文名录）
@@ -180,6 +180,7 @@ def _enemy_skill_of_record(record: dict, record_index: int, rel: str = "") -> Co
             level.flavor, level.flavor_fp = text, fp
         if level.name and not skill.name:
             skill.name = level.name
+            skill.name_fp = fp
     skill.levels = [levels[i] for i in sorted(levels)]
     return skill
 
@@ -242,6 +243,23 @@ def _variant_index(dirs: list[Path]) -> dict:
     return table
 
 
+#: 已知多阶段 BOSS：同文件同名同 desc 但 id 不连续，连续规则识别不到，
+#: 这里显式声明形态组（键 = (文件名, 名字, desc)，值 = 按战斗顺序的 id 列表）。
+MULTI_PHASE_OVERRIDES: dict[tuple[str, str, str], list[int]] = {
+    # c7-36 堂吉诃德：8390 摩天轮形态（部位 839001 大摩天轮、技能 838005-838010）→ 8410 最终形态
+    ("Enemies-a1c7p3.json", "堂吉诃德", "头目"): [8390, 8410],
+    # c8 贾丘：1137 第一形态 → 1141 第二形态（咒杀）
+    ("Enemies-a1c8p2.json", "贾丘", ""): [1137, 1141],
+}
+
+#: 技能归属覆盖：部分 BOSS 的技能 id 用了其它敌人的 id 段（//100 规则会挂错父）。
+#: 如堂吉诃德 8390 的摩天轮技能 838005-838010 实际是 8380 桑丘的 id 段。
+_SKILL_PARENT_OVERRIDES: dict[int, int] = {
+    838005: 8390, 838006: 8390, 838007: 8390,
+    838008: 8390, 838009: 8390, 838010: 8390,
+}
+
+
 def phase_variants(llc_dir: Path, entity_id: int, extra_dirs: list | None = None) -> list[dict]:
     """同一敌人的多个形态（含自身）；只有一个形态时返回单个元素。
 
@@ -249,6 +267,8 @@ def phase_variants(llc_dir: Path, entity_id: int, extra_dirs: list | None = None
     例：里恩 1347/1348（9-50 打的是第二阶段 1348）、折射里恩 9551/9552。
     只按名字分组会把「不识数的流氓 90004/99005/…」这类跨难度同名的 12 个 id 也算进来，
     所以要求 id 连续——游戏里 BOSS 的多阶段就是这么编号的。
+    个别 BOSS 形态 id 不连续（堂吉诃德 8390/8410、贾丘 1137/1141），
+    由 :data:`MULTI_PHASE_OVERRIDES` 显式声明。
     """
     dirs = [Path(llc_dir)] + [Path(d) for d in (extra_dirs or [])]
     table = _variant_index(dirs)
@@ -256,6 +276,11 @@ def phase_variants(llc_dir: Path, entity_id: int, extra_dirs: list | None = None
         for fname, ids in by_file.items():
             if entity_id not in ids:
                 continue
+            override = MULTI_PHASE_OVERRIDES.get((fname, name, desc))
+            if override and entity_id in override:
+                return [{"id": i, "name": name, "desc": desc, "file": fname,
+                         "label": f"形态 {n + 1}" if len(override) > 1 else "形态 1"}
+                        for n, i in enumerate(override)]
             run = sorted(ids)
             # 只取包含自身的那段连续 id
             start = run.index(entity_id)
@@ -344,7 +369,10 @@ def build_enemy(llc_dir: Path, summary: dict, maps: MetaMaps | None = None,
                     if not isinstance(rec, dict):
                         continue
                     rid = rec.get("id")
-                    if not isinstance(rid, int) or _enemy_parent_id(rid) != entity_id:
+                    if not isinstance(rid, int):
+                        continue
+                    parent = _SKILL_PARENT_OVERRIDES.get(rid, _enemy_parent_id(rid))
+                    if parent != entity_id:
                         continue
                     skill = _enemy_skill_of_record(rec, i, rel)
                     if skill:
