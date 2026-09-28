@@ -21,10 +21,18 @@
 - 剧本数据文件（`data/cache/story_stages.json`）只保存**位置信息**
   （相对路径 + 记录下标 + 字段路径），文本在运行时从上述本机文件读取。
 
-## 3. 游戏素材（**不随本发布包分发**）
+## 3. 卡面头像（**随发布包分发**，仅非商业用途）
 
-- 人格 / E.G.O 头像等美术资源不在发布包内。程序可选地从**你本机**游戏资源中抽取头像缓存
-  （`scripts/extract_portraits.py`，离线只读），版权归 Project Moon。
+- 发布包内含 **310 张**人格 / E.G.O 卡面缩略图（`limbus_patcher/data/portraits/`，约 18 MB，
+  webp，最长边 640px），用于「人格图鉴 / 敌方图鉴」的卡片显示。
+- 来源：一部分从**你本机**游戏资源中离线只读抽取（`scripts/extract_portraits.py`），
+  一部分由灰机 wiki / Fandom 的卡图直链下载（`scripts/import_portrait_urls.py`、
+  `scripts/fetch_portraits_fandom.py`），再统一压缩（`scripts/shrink_portraits.py`）。
+- 授权：原始美术资源版权归 **Project Moon**；来自 wiki 的页面与卡图依
+  **CC BY-NC-SA 4.0** 授权 —— 灰机 wiki「边狱公司」中文维基
+  （<https://limbuscompany.huijiwiki.com>）与 Limbus Company Wiki (Fandom)。
+- 这些图片**不属于**本仓库 MIT 许可的覆盖范围，仅供在已购买正版游戏的前提下做
+  非商业的汉化对照使用。若你是权利人并希望移除，请提 issue，会立即从发布包与仓库中删除。
 
 ## 4. 其他运行期依赖
 

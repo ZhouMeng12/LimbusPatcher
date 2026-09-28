@@ -26,9 +26,11 @@ from limbus_patcher import __version__  # noqa: E402
 
 RELEASE = ROOT / "dist" / "release"
 #: 发布包里绝不允许出现的东西（文件名片段）
+#: 注：`portraits/`（人格/E.G.O 卡面）**允许**随包分发 —— 用户 2026-09 决定保留，
+#: 归属与授权写在 THIRD_PARTY_LICENSES.md §3（Project Moon / 灰机 wiki，CC BY-NC-SA，非商业）。
 FORBIDDEN = ("index.sqlite", "manifest.json", "story_overrides.json", ".bak", "crash.log",
              "crash_native.log", "qt_messages.log", "profiles/", "backups/", "history/",
-             "portraits/", "config.json")
+             "config.json")
 REQUIRED = ("data/cache/story_stages.json", "README.md", "LICENSE",
             "THIRD_PARTY_LICENSES.md", "使用说明.txt")
 
